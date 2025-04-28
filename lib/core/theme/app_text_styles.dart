@@ -1,14 +1,7 @@
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyles {
-  // Font weight constants
-  static const FontWeight bold = FontWeight.w700;
-  static const FontWeight semiBold = FontWeight.w600;
-  static const FontWeight medium = FontWeight.w500;
-  static const FontWeight regular = FontWeight.w400;
-  static const FontWeight light = FontWeight.w300;
-
-  // Text styles - [weight][size]
   // Bold
   static const TextStyle bold28 = TextStyle(fontSize: 28, fontWeight: bold);
   static const TextStyle bold24 = TextStyle(fontSize: 24, fontWeight: bold);
