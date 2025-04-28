@@ -9,7 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.4.6
-  flutter_splash_screen: ^3.0.0
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
@@ -21,4 +20,4 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
