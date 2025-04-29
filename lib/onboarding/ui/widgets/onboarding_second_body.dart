@@ -4,8 +4,8 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class OnboardingFirstBody extends StatelessWidget {
-  const OnboardingFirstBody({super.key});
+class OnboardingSecondBody extends StatelessWidget {
+  const OnboardingSecondBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,11 @@ class OnboardingFirstBody extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: 4,
       children: [
-        SvgPicture.asset(Assets.imagesOnboarding1),
+        SvgPicture.asset(Assets.imagesOnboarding2),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            AppStrings.onboardingText1,
+            AppStrings.onboardingText2,
             style: AppTextStyles.bold28,
             textAlign: TextAlign.center,
           ),
@@ -25,7 +25,7 @@ class OnboardingFirstBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            AppStrings.onboardingSubtext1,
+            AppStrings.onboardingSubtext2,
             style: AppTextStyles.regular16,
             textAlign: TextAlign.center,
           ),

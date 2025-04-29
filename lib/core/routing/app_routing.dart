@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouting {
- static final GoRouter router = GoRouter(
+  static final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
         path: Routes.onboarding,
@@ -12,6 +12,8 @@ class AppRouting {
           return const OnboardingView();
         },
       ),
+      
     ],
+    initialLocation: ''
   );
 }
