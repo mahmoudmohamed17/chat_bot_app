@@ -1,3 +1,4 @@
+import 'package:chat_bot_app/core/routing/app_routing.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -5,12 +6,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Chat Bot App')),
-        body: const Center(child: Text('Hello, World!')),
-      ),
+      routerConfig: AppRouting.router,
     );
   }
 }
