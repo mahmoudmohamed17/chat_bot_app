@@ -1,5 +1,5 @@
 import 'package:chat_bot_app/app.dart';
-import 'package:chat_bot_app/core/utils/shared_pref.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

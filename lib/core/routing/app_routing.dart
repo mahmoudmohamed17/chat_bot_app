@@ -1,6 +1,6 @@
 import 'package:chat_bot_app/auth/ui/views/init_auth_view.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
-import 'package:chat_bot_app/core/utils/shared_pref.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:flutter/material.dart';

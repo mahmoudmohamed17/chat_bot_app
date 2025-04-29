@@ -1,7 +1,7 @@
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
-import 'package:chat_bot_app/core/utils/shared_pref.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/onboarding/ui/widgets/onboarding_third_body.dart';
 import 'package:chat_bot_app/onboarding/ui/widgets/onboarding_first_body.dart';
