@@ -1,5 +1,6 @@
 import 'package:chat_bot_app/auth/ui/views/init_auth_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signin_view.dart';
+import 'package:chat_bot_app/auth/ui/views/signup_view.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
@@ -30,6 +31,12 @@ class AppRouting {
         path: Routes.signinView,
         builder: (BuildContext context, GoRouterState state) {
           return const SigninView();
+        },
+      ),
+      GoRoute(
+        path: Routes.signupView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignupView();
         },
       ),
     ],

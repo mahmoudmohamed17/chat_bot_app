@@ -6,7 +6,9 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
-    this.onFieldSubmitted, this.onChanged, this.textInputType = TextInputType.text,
+    this.onFieldSubmitted,
+    this.onChanged,
+    this.textInputType = TextInputType.text,
   });
   final String hintText;
   final void Function(String)? onFieldSubmitted;
@@ -27,8 +29,10 @@ class CustomTextFormField extends StatelessWidget {
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
-        label: Text(hintText, style: AppTextStyles.regular16.copyWith(color: AppColors.textContainer),),
-        hintStyle: AppTextStyles.regular16.copyWith(color: AppColors.container),
+        hintText: hintText,
+        hintStyle: AppTextStyles.regular16.copyWith(
+          color: AppColors.textContainer,
+        ),
         fillColor: AppColors.container,
         contentPadding: const EdgeInsets.all(16),
         filled: true,
@@ -41,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
 
 OutlineInputBorder buildBorder() {
   return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: const BorderSide(color: Colors.transparent));
+    borderRadius: BorderRadius.circular(16),
+    borderSide: const BorderSide(color: Colors.transparent),
+  );
 }

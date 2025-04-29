@@ -1,18 +1,17 @@
-import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class RememberMeWidget extends StatefulWidget {
-  const RememberMeWidget({
-    super.key,
-  });
+class CustomCheckoutHintWidget extends StatefulWidget {
+  const CustomCheckoutHintWidget({super.key, required this.hint});
+  final String hint;
 
   @override
-  State<RememberMeWidget> createState() => _RememberMeWidgetState();
+  State<CustomCheckoutHintWidget> createState() =>
+      _CustomCheckoutHintWidgetState();
 }
 
-class _RememberMeWidgetState extends State<RememberMeWidget> {
+class _CustomCheckoutHintWidgetState extends State<CustomCheckoutHintWidget> {
   bool _isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class _RememberMeWidgetState extends State<RememberMeWidget> {
           activeColor: AppColors.primary,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        const Text(AppStrings.rememberMe, style: AppTextStyles.medium14),
+        Text(widget.hint, style: AppTextStyles.medium14),
       ],
     );
   }

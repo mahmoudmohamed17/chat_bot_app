@@ -10,8 +10,8 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
-class SigninView extends StatelessWidget {
-  const SigninView({super.key});
+class SignupView extends StatelessWidget {
+  const SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,32 +23,23 @@ class SigninView extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.centerLeft,
-            child: Text(AppStrings.welcome, style: AppTextStyles.bold28),
+            child: Text(AppStrings.createAccount, style: AppTextStyles.bold28),
           ),
           const SizedBox(height: 8),
           const Align(
             alignment: Alignment.centerLeft,
-            child: Text(AppStrings.signInHint, style: AppTextStyles.regular16),
+            child: Text(AppStrings.createAccountHint, style: AppTextStyles.regular16),
           ),
           const SizedBox(height: 24),
           const CustomTextFormField(hintText: AppStrings.emailAddress),
           const SizedBox(height: 8),
           const CustomPasswordFormField(hintText: AppStrings.password),
           const SizedBox(height: 16),
-          const Align(
+           const Align(
             alignment: Alignment.centerLeft,
-            child: CustomCheckoutHintWidget(hint: AppStrings.rememberMe),
+            child: CustomCheckoutHintWidget(hint: AppStrings.confirmToPolicy,),
           ),
-          const SizedBox(height: 24),
-          Align(
-            child: Text(
-              AppStrings.forgotPassword,
-              style: AppTextStyles.semiBold14.copyWith(
-                color: AppColors.primary,
-              ),
-            ),
-          ),
-          const Expanded(child: SizedBox(height: 160)),
+          const SizedBox(height: 32),
           CustomSocialButton(
             label: AppStrings.continueWithGoogle,
             image: Assets.imagesGoogle,
@@ -60,11 +51,11 @@ class SigninView extends StatelessWidget {
             image: Assets.imagesApple,
             onPressed: () {},
           ),
-          const SizedBox(height: 32),
+          const Expanded(child: SizedBox(height: 200)),
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: AppStrings.signIn,
+              label: AppStrings.next,
               backgroundColor: AppColors.primary,
               labelColor: Colors.white,
               onPressed: () {},
@@ -74,5 +65,6 @@ class SigninView extends StatelessWidget {
         ],
       ),
     );
+  
   }
 }
