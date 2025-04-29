@@ -55,7 +55,7 @@ class SigninView extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(child: SizedBox(height: 160)),
+          const Expanded(child: SizedBox(height: 150)),
           CustomSocialButton(
             label: AppStrings.continueWithGoogle,
             image: Assets.imagesGoogle,

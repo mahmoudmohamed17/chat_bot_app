@@ -1,10 +1,12 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ResetPasswordView extends StatelessWidget {
   const ResetPasswordView({super.key});
@@ -36,7 +38,10 @@ class ResetPasswordView extends StatelessWidget {
             label: AppStrings.textContinue,
             backgroundColor: AppColors.primary,
             labelColor: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              /// TODO: go should be used instead of push
+              context.push(Routes.otpVerificationView);
+            },
           ),
           const SizedBox(height: 24),
         ],

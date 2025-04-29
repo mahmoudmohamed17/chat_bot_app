@@ -1,4 +1,5 @@
 import 'package:chat_bot_app/auth/ui/views/init_auth_view.dart';
+import 'package:chat_bot_app/auth/ui/views/otp_verification_view.dart';
 import 'package:chat_bot_app/auth/ui/views/reset_password_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signin_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signup_view.dart';
@@ -44,6 +45,12 @@ class AppRouting {
         path: Routes.resetPasswordView,
         builder: (BuildContext context, GoRouterState state) {
           return const ResetPasswordView();
+        },
+      ),
+      GoRoute(
+        path: Routes.otpVerificationView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const OtpVerificationView();
         },
       ),
     ],
