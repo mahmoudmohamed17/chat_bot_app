@@ -9,7 +9,6 @@ class AppStrings {
       'GemiChat bot has all your needs covered with various features.';
   static const String onboardingSubtext3 =
       'Your safety is ours. But for this you need to set a good password.';
-
   static const String next = 'Next';
   static const String skip = 'Skip';
   static const String confirm = 'Confirm';
