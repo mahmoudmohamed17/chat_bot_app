@@ -7,13 +7,11 @@ class AppRouting {
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
-        path: Routes.onboarding,
+        path: Routes.onboardingView,
         builder: (BuildContext context, GoRouterState state) {
           return const OnboardingView();
         },
       ),
-      
     ],
-    initialLocation: ''
   );
 }

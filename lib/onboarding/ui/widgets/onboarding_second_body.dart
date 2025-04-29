@@ -14,16 +14,16 @@ class OnboardingSecondBody extends StatelessWidget {
       spacing: 4,
       children: [
         SvgPicture.asset(Assets.imagesOnboarding2),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             AppStrings.onboardingText2,
             style: AppTextStyles.bold28,
             textAlign: TextAlign.center,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             AppStrings.onboardingSubtext2,
             style: AppTextStyles.regular16,

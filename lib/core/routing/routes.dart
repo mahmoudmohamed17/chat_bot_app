@@ -1,3 +1,4 @@
 class Routes {
-  static const String onboarding = '/';
+  static const String onboardingView = '/';
+  static const String initAuthView = '/initAuthView';
 }

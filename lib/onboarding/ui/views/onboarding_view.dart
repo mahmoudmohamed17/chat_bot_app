@@ -42,7 +42,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           Expanded(
             child: PageView(
               controller: _pageController,
-              children: [
+              children: const [
                 OnboardingFirstBody(),
                 OnboardingSecondBody(),
                 OnboardingThirdBody(),
@@ -56,15 +56,14 @@ class _OnboardingViewState extends State<OnboardingView> {
             decorator: DotsDecorator(
               color: Colors.grey[300]!,
               activeColor: AppColors.primary,
-              size: Size(24, 9),
-              activeSize: Size(9, 9),
+              size: const Size(24, 9),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
               ),
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100),
               ),
-              spacing: EdgeInsets.symmetric(horizontal: 3),
+              spacing: const EdgeInsets.symmetric(horizontal: 3),
             ),
           ),
           Padding(
