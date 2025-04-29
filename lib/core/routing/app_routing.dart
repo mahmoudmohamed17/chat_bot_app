@@ -1,3 +1,6 @@
+import 'package:chat_bot_app/auth/ui/views/init_auth_view.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
+import 'package:chat_bot_app/core/utils/shared_pref.dart';
 import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +8,21 @@ import 'package:go_router/go_router.dart';
 
 class AppRouting {
   static final GoRouter router = GoRouter(
+    initialLocation:
+        SharedPrefs.getBool(isOnboardingSeen)
+            ? Routes.initAuthView
+            : Routes.onboardingView,
     routes: <RouteBase>[
       GoRoute(
         path: Routes.onboardingView,
         builder: (BuildContext context, GoRouterState state) {
           return const OnboardingView();
+        },
+      ),
+      GoRoute(
+        path: Routes.initAuthView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const InitAuthView();
         },
       ),
     ],
