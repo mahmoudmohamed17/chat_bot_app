@@ -27,7 +27,7 @@ class CustomSocialButton extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 8,
+        spacing: 16,
         children: [
           Image.asset(image, height: 24, width: 24),
           Text(

@@ -5,10 +5,12 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_checkout_hint_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SigninView extends StatelessWidget {
   const SigninView({super.key});
@@ -41,10 +43,15 @@ class SigninView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Align(
-            child: Text(
-              AppStrings.forgotPassword,
-              style: AppTextStyles.semiBold14.copyWith(
-                color: AppColors.primary,
+            child: TextButton(
+              onPressed: () {
+                context.push(Routes.resetPasswordView);
+              },
+              child: Text(
+                AppStrings.forgotPassword,
+                style: AppTextStyles.semiBold14.copyWith(
+                  color: AppColors.primary,
+                ),
               ),
             ),
           ),
