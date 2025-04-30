@@ -2,15 +2,16 @@ import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class OtpWidget extends StatefulWidget {
-  const OtpWidget({super.key, required this.onCompleted, required this.length});
+class CustomOtpAndPinWidget extends StatefulWidget {
+  const CustomOtpAndPinWidget({super.key, required this.onCompleted, required this.length, required this.isForPIN});
   final void Function(String code) onCompleted;
   final int length;
+  final bool isForPIN;
   @override
-  State<OtpWidget> createState() => _SimpleOtpWidgetState();
+  State<CustomOtpAndPinWidget> createState() => _SimpleOtpWidgetState();
 }
 
-class _SimpleOtpWidgetState extends State<OtpWidget> {
+class _SimpleOtpWidgetState extends State<CustomOtpAndPinWidget> {
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
 
@@ -62,6 +63,7 @@ class _SimpleOtpWidgetState extends State<OtpWidget> {
             controller: controllers[index],
             focusNode: focusNodes[index],
             keyboardType: TextInputType.number,
+            obscureText: widget.isForPIN ? true : false,
             textAlign: TextAlign.center,
             maxLength: 1,
             style: AppTextStyles.bold18,

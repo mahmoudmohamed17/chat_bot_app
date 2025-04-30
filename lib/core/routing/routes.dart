@@ -8,4 +8,5 @@ class Routes {
   static const String createNewPasswordView = '/createNewPasswordView';
   static const String selectGenderView = '/selectGenderView';
   static const String personalInfoView = '/personalInfoView';
+  static const String pinCodeView = '/pinCodeView';
 }

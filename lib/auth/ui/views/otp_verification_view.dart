@@ -1,5 +1,5 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
-import 'package:chat_bot_app/auth/ui/widgets/otp_widget.dart';
+import 'package:chat_bot_app/auth/ui/widgets/custom_otp_and_pin_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
@@ -35,10 +35,10 @@ class OtpVerificationView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          OtpWidget(
+          CustomOtpAndPinWidget(
             length: 4,
-            onCompleted: (code) {
-            },
+            isForPIN: false,
+            onCompleted: (code) {},
           ),
           const SizedBox(height: 32),
           const Align(

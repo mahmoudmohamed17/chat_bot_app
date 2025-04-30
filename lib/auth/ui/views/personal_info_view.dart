@@ -3,9 +3,11 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_date_of_birth_widget.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/auth/ui/widgets/setup_user_profile_image_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PersonalInfoView extends StatelessWidget {
   const PersonalInfoView({super.key});
@@ -35,11 +37,13 @@ class PersonalInfoView extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: AppStrings.confirm,
+              label: AppStrings.next,
               backgroundColor: AppColors.primary,
               labelColor: Colors.white,
               onPressed: () {
-                // context.push(Routes.selectGenderView);
+                /// After setup all needed data, time to set
+                /// a personal and secure PIN code for the user account
+                context.push(Routes.pinCodeView);
               },
             ),
           ),
