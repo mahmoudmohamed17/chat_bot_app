@@ -36,9 +36,13 @@ class _SimpleOtpWidgetState extends State<OtpWidget> {
     } else if (value.isEmpty && index > 0) {
       focusNodes[index - 1].requestFocus();
     }
+    checkAllFilled();
+  }
 
+  void checkAllFilled() {
     final code = controllers.map((c) => c.text).join();
-    if (code.length == widget.length && !code.contains('')) {
+    bool isAllFilled = controllers.every((c) => c.text.isNotEmpty);
+    if (code.length == widget.length && isAllFilled) {
       widget.onCompleted.call(code);
     }
   }
