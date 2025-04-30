@@ -1,15 +1,13 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
-import 'package:chat_bot_app/auth/ui/widgets/otp_widget.dart';
+import 'package:chat_bot_app/auth/ui/widgets/custom_password_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
-import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-class OtpVerificationView extends StatelessWidget {
-  const OtpVerificationView({super.key});
+class CreateNewPasswordView extends StatelessWidget {
+  const CreateNewPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class OtpVerificationView extends StatelessWidget {
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              AppStrings.otpCodeVerification,
+              AppStrings.createNewPassword,
               style: AppTextStyles.bold28,
             ),
           ),
@@ -30,39 +28,26 @@ class OtpVerificationView extends StatelessWidget {
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              AppStrings.otpCodeVerificationHint,
+              AppStrings.createNewPasswordHint,
               style: AppTextStyles.regular16,
             ),
           ),
-          const SizedBox(height: 24),
-          OtpWidget(
-            length: 4,
-            onCompleted: (code) {
-            },
-          ),
           const SizedBox(height: 32),
-          const Align(
-            child: Text(
-              AppStrings.dontReceiveMail,
-              style: AppTextStyles.medium14,
-            ),
-          ),
+          const CustomPasswordFormField(hintText: AppStrings.newPassword),
           const SizedBox(height: 8),
-          Align(
-            child: Text(
-              AppStrings.resendCode(32),
-              style: AppTextStyles.medium14,
-            ),
+          const CustomPasswordFormField(
+            hintText: AppStrings.confirmNewPassword,
           ),
-          const Expanded(child: SizedBox(height: 380)),
+          const Expanded(child: SizedBox(height: 400)),
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: AppStrings.next,
+              label: AppStrings.textContinue,
               backgroundColor: AppColors.primary,
               labelColor: Colors.white,
               onPressed: () {
-                context.push(Routes.createNewPasswordView);
+                /// After creating a new password, navigate to home view
+                /// context.push(Routes.createNewPasswordView);
               },
             ),
           ),

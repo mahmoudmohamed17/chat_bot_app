@@ -39,7 +39,6 @@ class ResetPasswordView extends StatelessWidget {
             backgroundColor: AppColors.primary,
             labelColor: Colors.white,
             onPressed: () {
-              /// TODO: go should be used instead of push
               context.push(Routes.otpVerificationView);
             },
           ),
