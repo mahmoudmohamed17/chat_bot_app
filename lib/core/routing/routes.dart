@@ -9,4 +9,5 @@ class Routes {
   static const String selectGenderView = '/selectGenderView';
   static const String personalInfoView = '/personalInfoView';
   static const String pinCodeView = '/pinCodeView';
+  static const String readyView = '/readyView';
 }

@@ -3,6 +3,7 @@ import 'package:chat_bot_app/auth/ui/views/init_auth_view.dart';
 import 'package:chat_bot_app/auth/ui/views/otp_verification_view.dart';
 import 'package:chat_bot_app/auth/ui/views/personal_info_view.dart';
 import 'package:chat_bot_app/auth/ui/views/pin_code_view.dart';
+import 'package:chat_bot_app/auth/ui/views/ready_view.dart';
 import 'package:chat_bot_app/auth/ui/views/reset_password_view.dart';
 import 'package:chat_bot_app/auth/ui/views/select_gender_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signin_view.dart';
@@ -79,6 +80,12 @@ class AppRouting {
         path: Routes.pinCodeView,
         builder: (BuildContext context, GoRouterState state) {
           return const PinCodeView();
+        },
+      ),
+      GoRoute(
+        path: Routes.readyView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ReadyView();
         },
       ),
     ],
