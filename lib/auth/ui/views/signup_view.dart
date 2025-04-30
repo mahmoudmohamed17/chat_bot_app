@@ -5,10 +5,12 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_checkout_hint_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupView extends StatelessWidget {
   const SignupView({super.key});
@@ -51,14 +53,18 @@ class SignupView extends StatelessWidget {
             image: Assets.imagesApple,
             onPressed: () {},
           ),
-          const Expanded(child: SizedBox(height: 200)),
+          const Expanded(child: SizedBox(height: 210)),
           SizedBox(
             width: double.infinity,
             child: CustomButton(
               label: AppStrings.next,
               backgroundColor: AppColors.primary,
               labelColor: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                /// After creating a new account, setup some user preferences
+                /// Like: gender, name, data of birth, etc.
+                context.push(Routes.selectGenderView);
+              },
             ),
           ),
           const SizedBox(height: 24),
