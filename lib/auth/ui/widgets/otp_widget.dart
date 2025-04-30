@@ -1,3 +1,5 @@
+import 'package:chat_bot_app/core/theme/app_colors.dart';
+import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class OtpWidget extends StatefulWidget {
@@ -43,6 +45,7 @@ class _SimpleOtpWidgetState extends State<OtpWidget> {
     final code = controllers.map((c) => c.text).join();
     bool isAllFilled = controllers.every((c) => c.text.isNotEmpty);
     if (code.length == widget.length && isAllFilled) {
+      FocusScope.of(context).unfocus(); // Disable keyboard automatically
       widget.onCompleted.call(code);
     }
   }
@@ -61,9 +64,27 @@ class _SimpleOtpWidgetState extends State<OtpWidget> {
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             maxLength: 1,
-            decoration: const InputDecoration(
+            style: AppTextStyles.bold18,
+            keyboardAppearance: Brightness.dark,
+            decoration: InputDecoration(
               counterText: '',
-              border: OutlineInputBorder(),
+              focusColor: Colors.transparent,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: AppColors.primary,
+                  width: 2,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: AppColors.container,
+                  width: 0,
+                ),
+              ),
+              fillColor: AppColors.container,
+              filled: true,
             ),
             onChanged: (value) => handleInput(value, index),
           ),

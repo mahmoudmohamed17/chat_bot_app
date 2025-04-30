@@ -45,7 +45,7 @@ class AppStrings {
   static const String createAccountHint =
       'Please enter your email and password to sign up.';
   static const String confirmToPolicy =
-      'I agree to GemiChat bo Terms & Policy.';
+      'I agree to GemiChat bot Terms & Policy.';
   static const String yourGender = 'Your gender';
   static const String yourGenderHint = 'What\'s your gender?';
   static const String male = 'Male';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/otp_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
@@ -38,7 +36,6 @@ class OtpVerificationView extends StatelessWidget {
           OtpWidget(
             length: 4,
             onCompleted: (code) {
-              log('Code: $code');
             },
           ),
           const SizedBox(height: 32),
