@@ -11,7 +11,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-design_prototype
+lib/core/secret/
 
 # IntelliJ related
 *.iml
