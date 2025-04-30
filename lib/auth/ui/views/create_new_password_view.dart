@@ -34,7 +34,7 @@ class CreateNewPasswordView extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           const CustomPasswordFormField(hintText: AppStrings.newPassword),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           const CustomPasswordFormField(
             hintText: AppStrings.confirmNewPassword,
           ),

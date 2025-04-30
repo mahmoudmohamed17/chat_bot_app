@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 AppBar customAppBar(BuildContext context, {String? title}) {
   return AppBar(
-    title: Text(title ?? '', style: AppTextStyles.regular18),
+    title: Text(title ?? '', style: AppTextStyles.bold18),
     centerTitle: true,
     leading: IconButton(
       onPressed: () {

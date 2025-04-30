@@ -34,7 +34,7 @@ class SigninView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           const CustomTextFormField(hintText: AppStrings.emailAddress),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           const CustomPasswordFormField(hintText: AppStrings.password),
           const SizedBox(height: 16),
           const Align(
@@ -61,7 +61,7 @@ class SigninView extends StatelessWidget {
             image: Assets.imagesGoogle,
             onPressed: () {},
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           CustomSocialButton(
             label: AppStrings.continueWithApple,
             image: Assets.imagesApple,
