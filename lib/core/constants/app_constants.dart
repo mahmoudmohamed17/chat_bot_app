@@ -11,5 +11,5 @@ const FontWeight light = FontWeight.w300;
 const String fontFamily = 'Poppins';
 
 /// Related to shared preferences
-const String isOnboardingSeen = 'isOnboardingSeen'; 
-const String isLoggedIn = 'isLoggedIn'; 
+const String isOnboardingSeen = 'isOnboardingSeen';
+const String isUserAuthenticated = 'isUserAuthenticated';

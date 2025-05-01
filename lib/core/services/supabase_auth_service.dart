@@ -72,7 +72,7 @@ class SupabaseAuthService {
     }
   }
 
-  /// Here we will follow sending and verivying an OTP
+  /// Here we will follow sending and verifying an OTP
   /// with only the phone number as the email is not setup
   /// or configured in a good maner
 

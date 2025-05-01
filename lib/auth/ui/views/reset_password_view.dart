@@ -32,14 +32,13 @@ class ResetPasswordView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const CustomTextFormField(hintText: 'Email Address'),
+          const CustomTextFormField(hintText: AppStrings.phoneNumber, textInputType: TextInputType.number,),
           const Expanded(child: SizedBox(height: 470)),
           CustomButton(
-            label: AppStrings.textContinue,
+            label: AppStrings.next,
             backgroundColor: AppColors.primary,
             labelColor: Colors.white,
             onPressed: () {
-              /// Go should be used instead of Push
               context.push(Routes.otpVerificationView);
             },
           ),

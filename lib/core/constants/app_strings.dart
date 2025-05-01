@@ -32,7 +32,7 @@ class AppStrings {
       'You will be redirected to home page shortly.';
   static const String resetPassword = 'Reset password';
   static const String resetPasswordHint =
-      'To reset your password you will need the next clear OTP code sent to your email.';
+      'To reset your password you will need the next clear OTP code sent to your phone number.';
 
   static const String newPassword = 'New password';
   static const String confirmNewPassword = 'Confirm new password';
