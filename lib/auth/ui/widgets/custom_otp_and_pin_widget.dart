@@ -56,39 +56,40 @@ class _SimpleOtpWidgetState extends State<CustomOtpAndPinWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(widget.length, (index) {
-        return Container(
-          width: 50,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          child: TextField(
-            controller: controllers[index],
-            focusNode: focusNodes[index],
-            keyboardType: TextInputType.number,
-            obscureText: widget.isForPIN ? true : false,
-            textAlign: TextAlign.center,
-            maxLength: 1,
-            style: AppTextStyles.bold18,
-            keyboardAppearance: Brightness.dark,
-            decoration: InputDecoration(
-              counterText: '',
-              focusColor: Colors.transparent,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: AppColors.primary,
-                  width: 2,
+        return Expanded(
+          child: Container(
+            margin:  EdgeInsets.symmetric(horizontal: widget.length == 4 ? 6 : 2),
+            child: TextField(
+              controller: controllers[index],
+              focusNode: focusNodes[index],
+              keyboardType: TextInputType.number,
+              obscureText: widget.isForPIN ? true : false,
+              textAlign: TextAlign.center,
+              maxLength: 1,
+              style: AppTextStyles.bold18,
+              keyboardAppearance: Brightness.dark,
+              decoration: InputDecoration(
+                counterText: '',
+                focusColor: Colors.transparent,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.primary,
+                    width: 2,
+                  ),
                 ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: AppColors.container,
-                  width: 0,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.container,
+                    width: 0,
+                  ),
                 ),
+                fillColor: AppColors.container,
+                filled: true,
               ),
-              fillColor: AppColors.container,
-              filled: true,
+              onChanged: (value) => handleInput(value, index),
             ),
-            onChanged: (value) => handleInput(value, index),
           ),
         );
       }),

@@ -42,15 +42,14 @@ class _CustomDateOfBirthWidgetState extends State<CustomDateOfBirthWidget> {
                 firstDate: DateTime(1970),
                 lastDate: DateTime(2025),
               ).then((value) {
-                date = '${value!.month}/${value.day}/${value.year}';
-                widget.onDateSelected.call(date);
-                setState(() {});
+                if (value != null) {
+                  date = '${value.day}/${value.month}/${value.year}';
+                  widget.onDateSelected.call(date);
+                  setState(() {});
+                } else {}
               });
             },
-            icon: const Icon(
-              FontAwesomeIcons.solidCalendar,
-              color: Colors.black,
-            ),
+            icon: const Icon(FontAwesomeIcons.calendar, color: Colors.black),
           ),
         ],
       ),

@@ -36,9 +36,9 @@ class OtpVerificationView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           CustomOtpAndPinWidget(
-            length: 4,
-            isForPIN: false,
             onCompleted: (code) {},
+            length: 6,
+            isForPIN: false,
           ),
           const SizedBox(height: 32),
           const Align(

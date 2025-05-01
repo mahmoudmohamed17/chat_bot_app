@@ -1,10 +1,12 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService {
-  final client = Supabase.instance.client;
+  final _client = Supabase.instance.client.auth;
+
+  User? get currentUser => _client.currentUser;
 
   Future<User> logIn({required String email, required String password}) async {
-    var response = await client.auth.signInWithPassword(
+    var response = await _client.signInWithPassword(
       email: email,
       password: password,
     );
@@ -21,7 +23,7 @@ class SupabaseAuthService {
     required String gender,
     required String dateOfBirth,
   }) async {
-    var response = await client.auth.signUp(
+    var response = await _client.signUp(
       email: email,
       password: password,
       phone: phoneNumber,
@@ -37,7 +39,7 @@ class SupabaseAuthService {
   }
 
   Future<void> signOut() async {
-    await client.auth.signOut();
+    await _client.signOut();
   }
 
   Future<bool> updateUser({
@@ -49,7 +51,7 @@ class SupabaseAuthService {
     String? gender,
     String? dateOfBirth,
   }) async {
-    var response = await client.auth.updateUser(
+    var response = await _client.updateUser(
       UserAttributes(
         email: email,
         phone: phoneNumber,
@@ -70,15 +72,28 @@ class SupabaseAuthService {
     }
   }
 
+  /// Here we will follow sending and verivying an OTP
+  /// with only the phone number as the email is not setup
+  /// or configured in a good maner
+
   Future<void> signInWithOTP({required String phone}) async {
-    await client.auth.signInWithOtp(
-      phone: phone,
-      shouldCreateUser: false,
-      channel: OtpChannel.whatsapp,
-    );
+    await _client.signInWithOtp(phone: phone, shouldCreateUser: false);
   }
 
-  Future<void> resetPassword({required String email}) async {
-    await client.auth.resetPasswordForEmail(email);
+  Future<User> verifyOTP({
+    required String token,
+    required String phoneNumber,
+  }) async {
+    var response = await _client.verifyOTP(
+      type: OtpType.sms,
+      token: token,
+      phone: phoneNumber,
+    );
+    var user = response.user!;
+    return user;
+  }
+
+  Future<void> resetPasswordWithEmail({required String email}) async {
+    await _client.resetPasswordForEmail(email);
   }
 }
