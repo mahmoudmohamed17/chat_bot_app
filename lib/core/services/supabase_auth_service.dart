@@ -42,44 +42,27 @@ class SupabaseAuthService {
     await _client.signOut();
   }
 
-  Future<bool> updateUser({
-    String? email,
-    String? password,
-    String? name,
-    String? phoneNumber,
-    String? profileImage,
-    String? gender,
-    String? dateOfBirth,
-  }) async {
+  Future<bool> updateUser({required User user}) async {
     var response = await _client.updateUser(
       UserAttributes(
-        email: email,
-        phone: phoneNumber,
-        password: password,
+        email: user.email,
         data: {
-          'name': name,
-          'profileImage': profileImage,
-          'gender': gender,
-          'dateOfBirth': dateOfBirth,
+          'name': user.userMetadata!['name'],
+          'profileImage': user.userMetadata!['profileImage'],
+          'gender': user.userMetadata!['gender'],
+          'dateOfBirth': user.userMetadata!['dateOfBirth'],
         },
       ),
     );
-    var user = response.user;
-    if (user != null) {
-      return true;
-    } else {
-      return false;
-    }
+    var result = response.user;
+    return result != null ? true : false;
   }
 
   Future<void> signInWithOTP({required String email}) async {
-    await _client.signInWithOtp(email: email, shouldCreateUser: false);
+    await _client.signInWithOtp(email: email);
   }
 
-  Future<User> verifyOTP({
-    required String token,
-    required String email,
-  }) async {
+  Future<User> verifyOTP({required String token, required String email}) async {
     var response = await _client.verifyOTP(
       type: OtpType.sms,
       token: token,

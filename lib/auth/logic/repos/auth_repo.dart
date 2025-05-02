@@ -19,15 +19,7 @@ abstract class AuthRepo {
 
   Future<void> signOut();
 
-  Future<bool> updateUser({
-    String? email,
-    String? password,
-    String? name,
-    String? phoneNumber,
-    String? profileImage,
-    String? gender,
-    String? dateOfBirth,
-  });
+  Future<bool> updateUser({required User user});
 
   Future<void> signInWithOTP({required String email});
 
