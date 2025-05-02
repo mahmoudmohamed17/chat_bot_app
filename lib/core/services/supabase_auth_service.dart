@@ -72,22 +72,18 @@ class SupabaseAuthService {
     }
   }
 
-  /// Here we will follow sending and verifying an OTP
-  /// with only the phone number as the email is not setup
-  /// or configured in a good maner
-
-  Future<void> signInWithOTP({required String phone}) async {
-    await _client.signInWithOtp(phone: phone, shouldCreateUser: false);
+  Future<void> signInWithOTP({required String email}) async {
+    await _client.signInWithOtp(email: email, shouldCreateUser: false);
   }
 
   Future<User> verifyOTP({
     required String token,
-    required String phoneNumber,
+    required String email,
   }) async {
     var response = await _client.verifyOTP(
       type: OtpType.sms,
       token: token,
-      phone: phoneNumber,
+      phone: email,
     );
     var user = response.user!;
     return user;
