@@ -32,7 +32,7 @@ class ResetPasswordView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const CustomTextFormField(hintText: AppStrings.phoneNumber, textInputType: TextInputType.number,),
+          const CustomTextFormField(hintText: AppStrings.emailAddress,),
           const Expanded(child: SizedBox(height: 470)),
           CustomButton(
             label: AppStrings.next,

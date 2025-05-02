@@ -32,6 +32,7 @@ class SupabaseAuthService {
         'profileImage': profileImage,
         'gender': gender,
         'dateOfBirth': dateOfBirth,
+        'password': password,
       },
     );
     var user = response.user!;
@@ -46,6 +47,7 @@ class SupabaseAuthService {
     var response = await _client.updateUser(
       UserAttributes(
         email: user.email,
+        phone: user.phone,
         data: {
           'name': user.userMetadata!['name'],
           'profileImage': user.userMetadata!['profileImage'],
