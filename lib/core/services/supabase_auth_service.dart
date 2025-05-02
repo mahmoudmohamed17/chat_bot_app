@@ -64,13 +64,13 @@ class SupabaseAuthService {
     await _client.signInWithOtp(email: email);
   }
 
-  Future<User> verifyOTP({required String token, required String email}) async {
+  Future<User?> verifyOTP({required String token, required String email}) async {
     var response = await _client.verifyOTP(
       type: OtpType.sms,
       token: token,
       phone: email,
     );
-    var user = response.user!;
+    var user = response.user;
     return user;
   }
 

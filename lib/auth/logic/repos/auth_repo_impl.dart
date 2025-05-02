@@ -10,6 +10,10 @@ class AuthRepoImpl extends AuthRepo {
 
   AuthRepoImpl({required this.supabaseAuthService});
 
+
+  @override
+  User? getCurrentUser() => supabaseAuthService.currentUser;
+
   @override
   Future<Either<Failure, User>> logIn({
     required String email,
@@ -78,7 +82,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<User> verifyOTP({required String token, required String email}) async {
+  Future<User?> verifyOTP({required String token, required String email}) async {
     var user = await supabaseAuthService.verifyOTP(token: token, email: email);
     return user;
   }

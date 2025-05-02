@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepo {
+  User? getCurrentUser();
+
   Future<Either<Failure, User>> logIn({
     required String email,
     required String password,
@@ -23,7 +25,7 @@ abstract class AuthRepo {
 
   Future<void> signInWithOTP({required String email});
 
-  Future<User> verifyOTP({required String token, required String email});
-
   Future<void> resetPasswordWithEmail({required String email});
+
+  Future<User?> verifyOTP({required String token, required String email});
 }
