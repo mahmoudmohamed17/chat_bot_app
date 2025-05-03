@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -35,6 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
       gender: gender,
       dateOfBirth: dateOfBirth,
     );
+    log('The result: $result');
     result.fold((failed) => emit(AuthFailed()), (user) => emit(AuthSuccess()));
   }
 
@@ -74,7 +77,9 @@ class AuthCubit extends Cubit<AuthState> {
       phone: phoneNumber,
     );
     var result = await authRepo.updateUser(user: user);
-    result ? emit(AuthSuccess()) : emit(AuthFailed());
+    result
+        ? {log('Data updated!'), emit(AuthSuccess())}
+        : {log('Error while updating data.'), emit(AuthFailed())};
   }
 
   Future<void> signInWithOTP({required String email}) async {

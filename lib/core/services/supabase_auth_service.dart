@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:chat_bot_app/core/errors/custom_exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService {
@@ -10,7 +13,11 @@ class SupabaseAuthService {
       email: email,
       password: password,
     );
-    var user = response.user!;
+    var user = response.user;
+    if(user == null) {
+      throw CustomException(errorMsg: 'No user returned from Supabase.');
+    }
+    log('Current user data: $currentUser');
     return user;
   }
 
@@ -26,16 +33,20 @@ class SupabaseAuthService {
     var response = await _client.signUp(
       email: email,
       password: password,
-      phone: phoneNumber,
       data: {
         'name': name,
         'profileImage': profileImage,
+        'phone': phoneNumber,
         'gender': gender,
         'dateOfBirth': dateOfBirth,
         'password': password,
       },
     );
-    var user = response.user!;
+    var user = response.user;
+     if(user == null) {
+      throw CustomException(errorMsg: 'No user returned from Supabase.');
+    }
+    log('Current user data: $currentUser');
     return user;
   }
 
@@ -64,11 +75,14 @@ class SupabaseAuthService {
     await _client.signInWithOtp(email: email);
   }
 
-  Future<User?> verifyOTP({required String token, required String email}) async {
+  Future<User?> verifyOTP({
+    required String token,
+    required String email,
+  }) async {
     var response = await _client.verifyOTP(
-      type: OtpType.sms,
+      type: OtpType.email,
       token: token,
-      phone: email,
+      email: email,
     );
     var user = response.user;
     return user;
