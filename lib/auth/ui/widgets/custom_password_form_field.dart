@@ -7,14 +7,12 @@ class CustomPasswordFormField extends StatefulWidget {
   const CustomPasswordFormField({
     super.key,
     required this.hintText,
-    this.onFieldSubmitted,
-    this.onChanged,
     this.textInputType = TextInputType.text,
+    required this.controller,
   });
   final String hintText;
-  final void Function(String)? onFieldSubmitted;
-  final void Function(String)? onChanged;
   final TextInputType textInputType;
+  final TextEditingController controller;
 
   @override
   State<CustomPasswordFormField> createState() =>
@@ -26,9 +24,8 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       style: AppTextStyles.regular16,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      onChanged: widget.onChanged,
       obscureText: !_isVisible,
       validator: (value) {
         if (value!.isEmpty) {
@@ -40,7 +37,9 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
       keyboardType: widget.textInputType,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: AppTextStyles.regular16.copyWith(color: AppColors.textContainer),
+        hintStyle: AppTextStyles.regular16.copyWith(
+          color: AppColors.textContainer,
+        ),
         suffixIcon: IconButton(
           onPressed: () {
             setState(() {

@@ -6,8 +6,23 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
-class CreateNewPasswordView extends StatelessWidget {
+class CreateNewPasswordView extends StatefulWidget {
   const CreateNewPasswordView({super.key});
+
+  @override
+  State<CreateNewPasswordView> createState() => _CreateNewPasswordViewState();
+}
+
+class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +48,13 @@ class CreateNewPasswordView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
-          const CustomPasswordFormField(hintText: AppStrings.newPassword),
+          CustomPasswordFormField(
+            hintText: AppStrings.newPassword,
+            controller: passwordController,
+          ),
           const SizedBox(height: 12),
-          const CustomPasswordFormField(
+          CustomPasswordFormField(
+            controller: confirmPasswordController,
             hintText: AppStrings.confirmNewPassword,
           ),
           const Expanded(child: SizedBox(height: 400)),

@@ -8,15 +8,17 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.onFieldSubmitted,
     this.onChanged,
-    this.textInputType = TextInputType.text,
+    this.textInputType = TextInputType.text, required this.controller,
   });
   final String hintText;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
   final TextInputType textInputType;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       style: AppTextStyles.regular16,
       onFieldSubmitted: onFieldSubmitted,
       onChanged: onChanged,

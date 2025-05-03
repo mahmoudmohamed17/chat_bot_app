@@ -9,8 +9,23 @@ import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class PersonalInfoView extends StatelessWidget {
+class PersonalInfoView extends StatefulWidget {
   const PersonalInfoView({super.key});
+
+  @override
+  State<PersonalInfoView> createState() => _PersonalInfoViewState();
+}
+
+class _PersonalInfoViewState extends State<PersonalInfoView> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +35,15 @@ class PersonalInfoView extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         children: [
-          SetupUserProfileImageWidget(
-            onImagePicked: (image) {
-            },
-          ),
+          SetupUserProfileImageWidget(onImagePicked: (image) {}),
           const SizedBox(height: 32),
-          const CustomTextFormField(hintText: AppStrings.emailAddress),
+          CustomTextFormField(
+            hintText: AppStrings.emailAddress,
+            controller: emailController,
+          ),
           const SizedBox(height: 12),
-          const CustomTextFormField(
+          CustomTextFormField(
+            controller: phoneNumberController,
             hintText: AppStrings.phoneNumber,
             textInputType: TextInputType.number,
           ),

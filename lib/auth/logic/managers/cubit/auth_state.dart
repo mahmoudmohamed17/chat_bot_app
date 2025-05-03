@@ -8,4 +8,8 @@ final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {}
 
-final class AuthFailed extends AuthState {}
+final class AuthFailed extends AuthState {
+  final String errorMsg;
+
+  AuthFailed({required this.errorMsg});
+}

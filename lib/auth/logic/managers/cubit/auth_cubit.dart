@@ -23,7 +23,10 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logIn({required String email, required String password}) async {
     emit(AuthLoading());
     var result = await authRepo.logIn(email: email, password: password);
-    result.fold((failed) => emit(AuthFailed()), (user) => emit(AuthSuccess()));
+    result.fold(
+      (failed) => emit(AuthFailed(errorMsg: failed.errorMsg)),
+      (user) => emit(AuthSuccess()),
+    );
   }
 
   Future<void> signUp() async {
@@ -38,7 +41,10 @@ class AuthCubit extends Cubit<AuthState> {
       dateOfBirth: dateOfBirth,
     );
     log('The result: $result');
-    result.fold((failed) => emit(AuthFailed()), (user) => emit(AuthSuccess()));
+    result.fold(
+      (failed) => emit(AuthFailed(errorMsg: failed.errorMsg)),
+      (user) => emit(AuthSuccess()),
+    );
   }
 
   Future<void> signOut() async {
@@ -78,8 +84,8 @@ class AuthCubit extends Cubit<AuthState> {
     );
     var result = await authRepo.updateUser(user: user);
     result
-        ? {log('Data updated!'), emit(AuthSuccess())}
-        : {log('Error while updating data.'), emit(AuthFailed())};
+        ? emit(AuthSuccess())
+        : emit(AuthFailed(errorMsg: 'Error while updating data.'));
   }
 
   Future<void> signInWithOTP({required String email}) async {
@@ -91,7 +97,13 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyOTP({required String email, required String token}) async {
     emit(AuthLoading());
     var result = await authRepo.verifyOTP(token: token, email: email);
-    result != null ? emit(AuthSuccess()) : emit(AuthFailed());
+    result != null
+        ? emit(AuthSuccess())
+        : emit(AuthFailed(errorMsg: 'Error verifying the OTP'));
+  }
+
+  updateUI() {
+    emit(AuthInitial());
   }
 
   set email(String email) => _email = email;

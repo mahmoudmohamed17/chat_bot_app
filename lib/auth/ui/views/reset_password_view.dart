@@ -8,8 +8,21 @@ import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ResetPasswordView extends StatelessWidget {
+class ResetPasswordView extends StatefulWidget {
   const ResetPasswordView({super.key});
+
+  @override
+  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordView> {
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +45,10 @@ class ResetPasswordView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const CustomTextFormField(hintText: AppStrings.emailAddress,),
+          CustomTextFormField(
+            hintText: AppStrings.emailAddress,
+            controller: passwordController,
+          ),
           const Expanded(child: SizedBox(height: 470)),
           CustomButton(
             label: AppStrings.next,

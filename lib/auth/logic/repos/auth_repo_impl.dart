@@ -25,7 +25,6 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
       );
       log('The user is: $response');
-      
       return right(response);
     } on AuthException catch (e) {
       log('AuthException: ${e.message}');
