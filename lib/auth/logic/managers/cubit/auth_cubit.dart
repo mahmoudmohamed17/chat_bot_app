@@ -40,7 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
       gender: gender,
       dateOfBirth: dateOfBirth,
     );
-    log('The result: $result');
+    log('The sign up result: $result');
     result.fold(
       (failed) => emit(AuthFailed(errorMsg: failed.errorMsg)),
       (user) => emit(AuthSuccess()),

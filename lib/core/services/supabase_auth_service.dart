@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_bot_app/core/errors/custom_exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,7 +15,6 @@ class SupabaseAuthService {
     if(user == null) {
       throw CustomException(errorMsg: 'No user returned from Supabase.');
     }
-    log('Current user data: $currentUser');
     return user;
   }
 
@@ -46,7 +43,6 @@ class SupabaseAuthService {
      if(user == null) {
       throw CustomException(errorMsg: 'No user returned from Supabase.');
     }
-    log('Current user data: $currentUser');
     return user;
   }
 

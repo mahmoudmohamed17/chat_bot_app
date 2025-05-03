@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:chat_bot_app/core/errors/auth_failure.dart';
 import 'package:chat_bot_app/core/errors/failure.dart';
@@ -24,13 +23,10 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
-      log('The user is: $response');
       return right(response);
     } on AuthException catch (e) {
-      log('AuthException: ${e.message}');
       return left(AuthFailure(errorMsg: e.message));
     } catch (e) {
-      log('Normal Exception: ${e.toString()}');
       return left(AuthFailure(errorMsg: e.toString()));
     }
   }
@@ -57,10 +53,8 @@ class AuthRepoImpl extends AuthRepo {
       );
       return right(response);
     } on AuthException catch (e) {
-      log('AuthException: ${e.message}');
       return left(AuthFailure(errorMsg: e.message));
     } catch (e) {
-      log('AuthException: ${e.toString()}');
       return left(AuthFailure(errorMsg: e.toString()));
     }
   }

@@ -14,25 +14,23 @@ class SigninView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(getIt()),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: customAppBar(context),
-        body: BlocConsumer<AuthCubit, AuthState>(
-          listener: (context, state) {
-            if (state is AuthSuccess) {
-              // context.go(Routes)
-            }
-            if (state is AuthFailed) {
-              snackBar(context, title: state.errorMsg);
-            }
-          },
-          builder: (context, state) {
-            return LoadingOverlayWidget(
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {}
+          if (state is AuthFailed) {
+            snackBar(context, title: state.errorMsg);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: customAppBar(context),
+            body: LoadingOverlayWidget(
               isLoading: state is AuthLoading,
               child: const SigninViewBody(),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
