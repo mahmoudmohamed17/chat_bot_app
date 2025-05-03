@@ -45,11 +45,6 @@ class AuthRepoImpl extends AuthRepo {
       var response = await supabaseAuthService.signUp(
         email: email,
         password: password,
-        name: name ?? 'NO NAME',
-        phoneNumber: 'NO PHONE NUMBER',
-        profileImage: 'NO PROFILE IMAGE',
-        gender: 'MALE',
-        dateOfBirth: 'NO DATE OF BIRTH',
       );
       return right(response);
     } on AuthException catch (e) {
@@ -65,8 +60,8 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<bool> updateUser({required User user}) async {
-    var response = await supabaseAuthService.updateUser(user: user);
+  Future<bool> updateUser({String? email, String? password}) async {
+    var response = await supabaseAuthService.updateUser(email: email, password: password);
     return response;
   }
 

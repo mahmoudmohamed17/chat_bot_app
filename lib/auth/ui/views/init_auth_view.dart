@@ -37,7 +37,7 @@ class InitAuthView extends StatelessWidget {
                     child: CustomButton(
                       label: 'Sign up',
                       onPressed: () {
-                        context.go(Routes.signupView);
+                        context.push(Routes.signupView);
                       },
                       backgroundColor: Colors.white,
                       labelColor: Colors.black,
@@ -47,7 +47,7 @@ class InitAuthView extends StatelessWidget {
                     child: CustomButton(
                       label: 'Sign in',
                       onPressed: () {
-                        context.go(Routes.signinView);
+                        context.push(Routes.signinView);
                       },
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,

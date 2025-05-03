@@ -12,16 +12,11 @@ abstract class AuthRepo {
   Future<Either<Failure, User>> signUp({
     required String email,
     required String password,
-    String? name,
-    String? profileImage,
-    String? phoneNumber,
-    String? gender,
-    String? dateOfBirth,
   });
 
   Future<void> signOut();
 
-  Future<bool> updateUser({required User user});
+  Future<bool> updateUser({String? email, String? password});
 
   Future<void> signInWithOTP({required String email});
 

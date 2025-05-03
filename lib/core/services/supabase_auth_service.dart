@@ -12,56 +12,30 @@ class SupabaseAuthService {
       password: password,
     );
     var user = response.user;
-    if(user == null) {
+    if (user == null) {
       throw CustomException(errorMsg: 'No user returned from Supabase.');
     }
     return user;
   }
 
-  Future<User> signUp({
-    required String email,
-    required String password,
-    required String name,
-    required String profileImage,
-    required String phoneNumber,
-    required String gender,
-    required String dateOfBirth,
-  }) async {
-    var response = await _client.signUp(
-      email: email,
-      password: password,
-      data: {
-        'name': name,
-        'profileImage': profileImage,
-        'phone': phoneNumber,
-        'gender': gender,
-        'dateOfBirth': dateOfBirth,
-        'password': password,
-      },
-    );
+  Future<User> signUp({required String email, required String password}) async {
+    var response = await _client.signUp(email: email, password: password);
     var user = response.user;
-     if(user == null) {
+    if (user == null) {
       throw CustomException(errorMsg: 'No user returned from Supabase.');
     }
     return user;
   }
+
+  Future<void> someFunc() async {}
 
   Future<void> signOut() async {
     await _client.signOut();
   }
 
-  Future<bool> updateUser({required User user}) async {
+  Future<bool> updateUser({String? email, String? password}) async {
     var response = await _client.updateUser(
-      UserAttributes(
-        email: user.email,
-        phone: user.phone,
-        data: {
-          'name': user.userMetadata!['name'],
-          'profileImage': user.userMetadata!['profileImage'],
-          'gender': user.userMetadata!['gender'],
-          'dateOfBirth': user.userMetadata!['dateOfBirth'],
-        },
-      ),
+      UserAttributes(email: email, password: password),
     );
     var result = response.user;
     return result != null ? true : false;

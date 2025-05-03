@@ -3,8 +3,13 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckoutHintWidget extends StatefulWidget {
-  const CustomCheckoutHintWidget({super.key, required this.hint});
+  const CustomCheckoutHintWidget({
+    super.key,
+    required this.hint,
+    this.onSelected,
+  });
   final String hint;
+  final void Function(bool)? onSelected;
 
   @override
   State<CustomCheckoutHintWidget> createState() =>
@@ -24,6 +29,7 @@ class _CustomCheckoutHintWidgetState extends State<CustomCheckoutHintWidget> {
             setState(() {
               _isChecked = value!;
             });
+            widget.onSelected?.call(_isChecked);
           },
           checkColor: Colors.white,
           activeColor: AppColors.primary,

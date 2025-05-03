@@ -1,15 +1,16 @@
+import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_checkout_hint_widget.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_password_form_field.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_social_button.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
-import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupViewBody extends StatefulWidget {
   const SignupViewBody({super.key});
@@ -21,6 +22,7 @@ class SignupViewBody extends StatefulWidget {
 class _SignupViewBodyState extends State<SignupViewBody> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _isTermsAndPolicyApproved = false;
 
   @override
   void dispose() {
@@ -57,9 +59,14 @@ class _SignupViewBodyState extends State<SignupViewBody> {
           controller: passwordController,
         ),
         const SizedBox(height: 16),
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
-          child: CustomCheckoutHintWidget(hint: AppStrings.confirmToPolicy),
+          child: CustomCheckoutHintWidget(
+            hint: AppStrings.confirmToPolicy,
+            onSelected: (value) {
+              _isTermsAndPolicyApproved = value;
+            },
+          ),
         ),
         const SizedBox(height: 32),
         CustomSocialButton(
@@ -83,7 +90,14 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             onPressed: () {
               /// After creating a new account, setup some user preferences
               /// Like: gender, name, data of birth, etc.
-              context.push(Routes.selectGenderView);
+              if (_isTermsAndPolicyApproved) {
+                context.read<AuthCubit>().signUp(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+              } else {
+                snackBar(context, title: AppStrings.agreeToPolicyAlertMessage);
+              }
             },
           ),
         ),

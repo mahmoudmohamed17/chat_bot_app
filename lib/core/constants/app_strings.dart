@@ -83,6 +83,8 @@ class AppStrings {
   static const String darkMode = 'Dark mode';
   static const String aboutGemiChatBot = 'About GemiChat bot';
   static const String privacyPolicy = 'Privacy policy';
+  static const String agreeToPolicyAlertMessage =
+      'You have to approve Terms & Policy to continue.';
   static const String logout = 'Log out';
   static const String english = 'English (EN)';
   static const String arabic = 'Arabic (AR)';
