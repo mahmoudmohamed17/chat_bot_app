@@ -4,12 +4,32 @@ import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/show_custom_dialog.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SelectGenderView extends StatelessWidget {
+class SelectGenderView extends StatefulWidget {
   const SelectGenderView({super.key});
+
+  @override
+  State<SelectGenderView> createState() => _SelectGenderViewState();
+}
+
+class _SelectGenderViewState extends State<SelectGenderView> {
+  bool _dialogShown = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_dialogShown) {
+      _dialogShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!context.mounted) return;
+        showCustomDialog(context);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

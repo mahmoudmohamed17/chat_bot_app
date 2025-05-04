@@ -20,7 +20,7 @@ abstract class AuthRepo {
 
   Future<void> signInWithOTP({required String email});
 
-  Future<void> resetPasswordWithEmail({required String email});
+  Future<void> resetPasswordForEmail({required String email});
 
   Future<User?> verifyOTP({required String token, required String email});
 }

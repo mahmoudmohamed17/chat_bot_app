@@ -58,7 +58,7 @@ class SupabaseAuthService {
     return user;
   }
 
-  Future<void> resetPasswordWithEmail({required String email}) async {
+  Future<void> resetPasswordForEmail({required String email}) async {
     await _client.resetPasswordForEmail(email);
   }
 }

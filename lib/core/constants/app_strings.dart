@@ -85,6 +85,10 @@ class AppStrings {
   static const String privacyPolicy = 'Privacy policy';
   static const String agreeToPolicyAlertMessage =
       'You have to approve Terms & Policy to continue.';
+
+  static const String goodJob = 'Good job!';
+  static const String timeToSetSomeUserPrefs =
+      'Now, time to setup some preferences';
   static const String logout = 'Log out';
   static const String english = 'English (EN)';
   static const String arabic = 'Arabic (AR)';

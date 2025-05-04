@@ -95,6 +95,10 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                   email: emailController.text,
                   password: passwordController.text,
                 );
+                if (context.read<AuthCubit>().state is AuthSuccess) {
+                  emailController.clear();
+                  passwordController.clear();
+                }
               } else {
                 snackBar(context, title: AppStrings.agreeToPolicyAlertMessage);
               }

@@ -66,8 +66,8 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> resetPasswordWithEmail({required String email}) async {
-    await supabaseAuthService.resetPasswordWithEmail(email: email);
+  Future<void> resetPasswordForEmail({required String email}) async {
+    await supabaseAuthService.resetPasswordForEmail(email: email);
   }
 
   @override

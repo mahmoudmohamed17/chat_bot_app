@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -37,9 +36,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthSuccess());
   }
 
-  Future<void> resetPasswordWithEmail({required String email}) async {
+  Future<void> resetPasswordForEmail({required String email}) async {
     emit(AuthLoading());
-    await authRepo.resetPasswordWithEmail(email: email);
+    await authRepo.resetPasswordForEmail(email: email);
     emit(AuthSuccess());
   }
 
