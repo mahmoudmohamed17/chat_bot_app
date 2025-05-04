@@ -8,7 +8,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.onFieldSubmitted,
     this.onChanged,
-    this.textInputType = TextInputType.text, required this.controller,
+    this.textInputType = TextInputType.text,
+    required this.controller,
   });
   final String hintText;
   final void Function(String)? onFieldSubmitted;

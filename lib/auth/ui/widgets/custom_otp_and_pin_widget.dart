@@ -3,7 +3,12 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomOtpAndPinWidget extends StatefulWidget {
-  const CustomOtpAndPinWidget({super.key, required this.onCompleted, required this.length, required this.isForPIN});
+  const CustomOtpAndPinWidget({
+    super.key,
+    required this.onCompleted,
+    required this.length,
+    required this.isForPIN,
+  });
   final void Function(String code) onCompleted;
   final int length;
   final bool isForPIN;
@@ -58,7 +63,9 @@ class _SimpleOtpWidgetState extends State<CustomOtpAndPinWidget> {
       children: List.generate(widget.length, (index) {
         return Expanded(
           child: Container(
-            margin:  EdgeInsets.symmetric(horizontal: widget.length == 4 ? 6 : 2),
+            margin: EdgeInsets.symmetric(
+              horizontal: widget.length == 4 ? 6 : 2,
+            ),
             child: TextField(
               controller: controllers[index],
               focusNode: focusNodes[index],

@@ -56,6 +56,7 @@ class _SignupViewState extends State<SignupView> {
       ),
     );
   }
+
   void clear() {
     emailController.clear();
     passwordController.clear();

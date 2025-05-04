@@ -13,7 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupViewBody extends StatefulWidget {
-  const SignupViewBody({super.key, required this.emailController, required this.passwordController});
+  const SignupViewBody({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
   final TextEditingController emailController;
   final TextEditingController passwordController;
 

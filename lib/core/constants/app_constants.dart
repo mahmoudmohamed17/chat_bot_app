@@ -13,3 +13,6 @@ const String fontFamily = 'Poppins';
 /// Related to shared preferences
 const String isOnboardingSeen = 'isOnboardingSeen';
 const String isUserAuthenticated = 'isUserAuthenticated';
+
+/// Related to Database
+const String usersTable = 'users';

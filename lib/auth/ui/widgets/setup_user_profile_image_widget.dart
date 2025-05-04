@@ -62,10 +62,10 @@ class _SetupUserProfileImageWidgetState
               right: 0,
               bottom: 0,
               child: Container(
-                decoration:  ShapeDecoration(
+                decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: Colors.white, width: 2)
+                    side: const BorderSide(color: Colors.white, width: 2),
                   ),
                   gradient: const LinearGradient(
                     colors: [
@@ -75,7 +75,11 @@ class _SetupUserProfileImageWidgetState
                   ),
                 ),
                 padding: const EdgeInsets.all(6),
-                child: const Icon(FontAwesomeIcons.pen, size: 12, color: Colors.white),
+                child: const Icon(
+                  FontAwesomeIcons.pen,
+                  size: 12,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

@@ -9,9 +9,11 @@ class SharedPrefs {
   static Future<void> setString(String key, String value) async {
     await instance.setString(key, value);
   }
+
   static String getString(String key) {
     return instance.getString(key) ?? '';
   }
+
   static Future<void> setInt(String key, int value) async {
     await instance.setInt(key, value);
   }

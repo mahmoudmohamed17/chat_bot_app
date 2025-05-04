@@ -18,7 +18,9 @@ class LoadingOverlayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        child, /// Main screen
+        child,
+
+        /// Main screen
         if (isLoading)
           Positioned.fill(
             child: BackdropFilter(
@@ -26,7 +28,9 @@ class LoadingOverlayWidget extends StatelessWidget {
               child: Container(
                 color: getColorOpacity(Colors.black, 0.3),
                 alignment: Alignment.center,
-                child: dialogBody, /// Dialog body
+                child: dialogBody,
+
+                /// Dialog body
               ),
             ),
           ),

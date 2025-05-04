@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         elevation: 1,
-        padding: const EdgeInsets.all(12)
+        padding: const EdgeInsets.all(12),
       ),
       child: Text(
         label,

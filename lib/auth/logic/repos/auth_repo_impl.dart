@@ -61,7 +61,10 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<bool> updateUser({String? email, String? password}) async {
-    var response = await supabaseAuthService.updateUser(email: email, password: password);
+    var response = await supabaseAuthService.updateUser(
+      email: email,
+      password: password,
+    );
     return response;
   }
 
