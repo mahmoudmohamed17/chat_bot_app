@@ -44,7 +44,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> updateUser({String? email, String? password}) async {
     emit(AuthLoading());
-    var result = await authRepo.updateUser(email: email, password: password);
+    var result = await authRepo.updateUserAuthData(email: email, password: password);
     result
         ? emit(AuthSuccess())
         : emit(AuthFailed(errorMsg: 'Error while updating data.'));

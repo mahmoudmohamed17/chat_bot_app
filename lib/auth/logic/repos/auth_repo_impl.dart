@@ -1,14 +1,20 @@
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:chat_bot_app/core/errors/auth_failure.dart';
 import 'package:chat_bot_app/core/errors/failure.dart';
+import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
+import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final SupabaseAuthService supabaseAuthService;
+  final SupabaseDatabaseService supabaseDatabaseService;
 
-  AuthRepoImpl({required this.supabaseAuthService});
+  AuthRepoImpl({
+    required this.supabaseAuthService,
+    required this.supabaseDatabaseService,
+  });
 
   @override
   User? getCurrentUser() => supabaseAuthService.currentUser;
@@ -60,7 +66,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<bool> updateUser({String? email, String? password}) async {
+  Future<bool> updateUserAuthData({String? email, String? password}) async {
     var response = await supabaseAuthService.updateUser(
       email: email,
       password: password,
@@ -85,5 +91,25 @@ class AuthRepoImpl extends AuthRepo {
   }) async {
     var user = await supabaseAuthService.verifyOTP(token: token, email: email);
     return user;
+  }
+
+  @override
+  Future<void> addUser(UserModel user) async {
+    await supabaseDatabaseService.addUser(user);
+  }
+
+  @override
+  Future<void> deleteUser(int userId) async {
+    await supabaseDatabaseService.deleteUser(userId);
+  }
+
+  @override
+  Future<UserModel?> getUser(int userId) async {
+    return await supabaseDatabaseService.getUser(userId);
+  }
+
+  @override
+  Future<void> updateUserDate(UserModel user) async {
+    await supabaseDatabaseService.updateUser(user);
   }
 }
