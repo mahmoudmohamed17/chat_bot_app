@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class GenderSelectionWidget extends StatefulWidget {
   const GenderSelectionWidget({super.key, required this.onSelectedGender});
-  final void Function(String) onSelectedGender;
+  final void Function(String?)? onSelectedGender;
 
   @override
   State<GenderSelectionWidget> createState() => _GenderSelectionWidgetState();
@@ -24,7 +24,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             setState(() {
               _activeIndex = index;
             });
-            widget.onSelectedGender.call(_genders[index]);
+            widget.onSelectedGender!.call(_genders[index]);
           },
           child: GenderItemWidget(
             text: _genders[index],

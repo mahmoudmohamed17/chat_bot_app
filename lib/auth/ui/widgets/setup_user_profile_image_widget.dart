@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 class SetupUserProfileImageWidget extends StatefulWidget {
   const SetupUserProfileImageWidget({super.key, this.onImagePicked});
-  final Function(String)? onImagePicked;
+  final Function(String?)? onImagePicked;
 
   @override
   State<SetupUserProfileImageWidget> createState() =>
