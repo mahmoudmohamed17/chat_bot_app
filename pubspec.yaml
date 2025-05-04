@@ -6,6 +6,7 @@ environment:
   sdk: ^3.7.2
 dependencies:
   bloc: ^9.0.0
+  confetti: ^0.8.0
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dots_indicator: ^4.0.1
