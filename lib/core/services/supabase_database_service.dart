@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupabaseDatabaseService {
   final _client = Supabase.instance.client;
 
-  Future<UserModel?> getUser(int userId) async {
+  Future<UserModel?> getUser(String userId) async {
     final data =
         await _client.from(usersTable).select().eq('user_id', userId).single();
     return UserModel.fromJson(data);
@@ -22,7 +22,7 @@ class SupabaseDatabaseService {
         .eq('user_id', user.userId!);
   }
 
-  Future<void> deleteUser(int userId) async {
+  Future<void> deleteUser(String userId) async {
     await _client.from(usersTable).delete().eq('user_id', userId);
   }
 }

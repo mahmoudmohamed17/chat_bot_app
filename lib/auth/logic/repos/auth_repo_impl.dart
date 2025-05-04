@@ -99,12 +99,12 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> deleteUser(int userId) async {
+  Future<void> deleteUser(String userId) async {
     await supabaseDatabaseService.deleteUser(userId);
   }
 
   @override
-  Future<UserModel?> getUser(int userId) async {
+  Future<UserModel?> getUser(String userId) async {
     return await supabaseDatabaseService.getUser(userId);
   }
 

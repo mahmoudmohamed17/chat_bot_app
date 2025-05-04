@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo_impl.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:get_it/get_it.dart';
@@ -24,4 +25,6 @@ void setupLocator() {
 
   /// Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
+  getIt.registerFactory<UsersCubit>(() => UsersCubit(getIt()));
+
 }

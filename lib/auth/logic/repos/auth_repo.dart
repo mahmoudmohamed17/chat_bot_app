@@ -25,11 +25,11 @@ abstract class AuthRepo {
 
   Future<User?> verifyOTP({required String token, required String email});
 
-  Future<UserModel?> getUser(int userId);
+  Future<UserModel?> getUser(String userId);
 
   Future<void> addUser(UserModel user);
 
   Future<void> updateUserDate(UserModel user);
 
-  Future<void> deleteUser(int userId);
+  Future<void> deleteUser(String userId);
 }
