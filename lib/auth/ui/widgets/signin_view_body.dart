@@ -14,24 +14,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SigninViewBody extends StatefulWidget {
-  const SigninViewBody({super.key});
+  const SigninViewBody({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   State<SigninViewBody> createState() => _SigninViewBodyState();
 }
 
 class _SigninViewBodyState extends State<SigninViewBody> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  GlobalKey<FormState> formKey = GlobalKey();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +50,12 @@ class _SigninViewBodyState extends State<SigninViewBody> {
           const SizedBox(height: 24),
           CustomTextFormField(
             hintText: AppStrings.emailAddress,
-            controller: emailController,
+            controller: widget.emailController,
           ),
           const SizedBox(height: 12),
           CustomPasswordFormField(
             hintText: AppStrings.password,
-            controller: passwordController,
+            controller: widget.passwordController,
           ),
           const SizedBox(height: 16),
           const Align(
@@ -100,8 +97,8 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               labelColor: Colors.white,
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  var email = emailController.text;
-                  var password = passwordController.text;
+                  var email = widget.emailController.text;
+                  var password = widget.passwordController.text;
                   context.read<AuthCubit>().logIn(
                     email: email,
                     password: password,

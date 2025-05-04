@@ -9,8 +9,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SignupView extends StatelessWidget {
+class SignupView extends StatefulWidget {
   const SignupView({super.key});
+
+  @override
+  State<SignupView> createState() => _SignupViewState();
+}
+
+class _SignupViewState extends State<SignupView> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +34,7 @@ class SignupView extends StatelessWidget {
         listener: (context, state) {
           if (state is AuthSuccess) {
             context.push(Routes.selectGenderView);
+            clear();
           }
           if (state is AuthFailed) {
             snackBar(context, title: state.errorMsg);
@@ -31,11 +46,18 @@ class SignupView extends StatelessWidget {
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: customAppBar(context),
-              body: const SignupViewBody(),
+              body: SignupViewBody(
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
             ),
           );
         },
       ),
     );
+  }
+  void clear() {
+    emailController.clear();
+    passwordController.clear();
   }
 }

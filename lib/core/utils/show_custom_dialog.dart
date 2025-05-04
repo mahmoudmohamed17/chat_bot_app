@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 Future<dynamic> showCustomDialog(BuildContext context) {
   final confettiController = ConfettiController(
-    duration: const Duration(seconds: 2),
+    duration: const Duration(seconds: 10),
   )..play();
   return showDialog(
     context: context,
@@ -23,9 +23,9 @@ Future<dynamic> showCustomDialog(BuildContext context) {
           confettiController: confettiController,
           shouldLoop: true,
           blastDirectionality: BlastDirectionality.explosive,
-          maxBlastForce: 50,
-          minBlastForce: 20,
-          emissionFrequency: 0.5,
+          maxBlastForce: 30,
+          minBlastForce: 10,
+          emissionFrequency: 0.2,
           numberOfParticles: 20,
           child: Container(
             padding: const EdgeInsets.all(24),
