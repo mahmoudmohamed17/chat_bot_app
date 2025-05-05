@@ -55,13 +55,15 @@ class AppRouting {
       GoRoute(
         path: Routes.otpVerificationView,
         builder: (BuildContext context, GoRouterState state) {
-          return const OtpVerificationView();
+          final email = state.extra as String;
+          return OtpVerificationView(email: email);
         },
       ),
       GoRoute(
         path: Routes.createNewPasswordView,
         builder: (BuildContext context, GoRouterState state) {
-          return const CreateNewPasswordView();
+          final email = state.extra as String;
+          return CreateNewPasswordView(email: email);
         },
       ),
       GoRoute(

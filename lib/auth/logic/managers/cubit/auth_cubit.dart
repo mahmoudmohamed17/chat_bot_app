@@ -11,6 +11,11 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepo authRepo;
   final UsersCubit usersCubit;
 
+  /// Used to save the current value of OTP code for verification
+  String? _code;
+  set code(String? value) => _code = value;
+  String? get code => _code;
+
   User get currentUser => authRepo.getCurrentUser()!;
 
   Future<void> logIn({required String email, required String password}) async {
@@ -96,9 +101,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> verifyOTP({required String email, required String token}) async {
     emit(AuthLoading());
-    var result = await authRepo.verifyOTP(token: token, email: email);
-    result != null
-        ? emit(AuthSuccess())
-        : emit(AuthFailed(errorMsg: 'Error verifying the OTP'));
+    try {
+      await authRepo.verifyOTP(token: token, email: email);
+      emit(AuthSuccess());
+    } catch (e) {
+      emit(AuthFailed(errorMsg: 'Invalid OTP entered.'));
+    }
   }
 }

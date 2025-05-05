@@ -38,7 +38,7 @@ class AppStrings {
   static const String confirmNewPassword = 'Confirm new password';
   static const String otpCodeVerification = 'OTP code verification';
   static const String otpCodeVerificationHint =
-      'Please check your email address and write the OTP code you received here.';
+      'Please check your email address and enter the OTP code you received here.';
   static const String dontReceiveMail = 'Don\'t receive mail?';
   static String resendCode(int seconds) => 'You can resend code in $seconds s';
   static const String createNewPassword = 'Create new password';

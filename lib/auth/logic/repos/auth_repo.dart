@@ -25,7 +25,7 @@ abstract class AuthRepo {
 
   Future<void> resetPasswordForEmail({required String email});
 
-  Future<User?> verifyOTP({required String token, required String email});
+  Future<void> verifyOTP({required String token, required String email});
 
   Future<UserModel?> getUser(String userId);
 

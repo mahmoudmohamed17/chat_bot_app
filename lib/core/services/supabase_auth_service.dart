@@ -29,7 +29,7 @@ class SupabaseAuthService {
     return user;
   }
 
-   Future<GoogleSignInAccount?> signInWithGoogle() async {
+  Future<GoogleSignInAccount?> signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn(
       clientId: ApiStrings.appAndroidClientId,
       serverClientId: ApiStrings.appWebClientId,
@@ -65,17 +65,8 @@ class SupabaseAuthService {
     await _client.signInWithOtp(email: email);
   }
 
-  Future<User?> verifyOTP({
-    required String token,
-    required String email,
-  }) async {
-    var response = await _client.verifyOTP(
-      type: OtpType.email,
-      token: token,
-      email: email,
-    );
-    var user = response.user;
-    return user;
+  Future<void> verifyOTP({required String token, required String email}) async {
+    await _client.verifyOTP(type: OtpType.email, token: token, email: email);
   }
 
   Future<void> resetPasswordForEmail({required String email}) async {
