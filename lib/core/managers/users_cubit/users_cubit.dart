@@ -33,7 +33,7 @@ class UsersCubit extends Cubit<UsersState> {
       phoneNumber: _phoneNumber,
       profilePicture: _profilePicture,
       dateOfBirth: _dateOfBirth,
-      gender: _gender,
+      gender: _gender ?? 'Male',
     );
     await authRepo.addUser(user);
     emit(UsersSuccess(user: user));

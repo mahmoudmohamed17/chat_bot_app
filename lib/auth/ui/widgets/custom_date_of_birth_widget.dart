@@ -14,7 +14,7 @@ class CustomDateOfBirthWidget extends StatefulWidget {
 }
 
 class _CustomDateOfBirthWidgetState extends State<CustomDateOfBirthWidget> {
-  String date = AppStrings.dateOfBirth;
+  String? date;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,9 +29,9 @@ class _CustomDateOfBirthWidgetState extends State<CustomDateOfBirthWidget> {
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: Text(
-              date,
+              date ?? AppStrings.dateOfBirth,
               style: AppTextStyles.regular16.copyWith(
-                color: AppColors.textContainer,
+                color: date == null ? AppColors.textContainer : Colors.black,
               ),
             ),
           ),
@@ -44,7 +44,7 @@ class _CustomDateOfBirthWidgetState extends State<CustomDateOfBirthWidget> {
               ).then((value) {
                 if (value != null) {
                   date = '${value.day}/${value.month}/${value.year}';
-                  widget.onDateSelected.call(date);
+                  widget.onDateSelected.call(date!);
                   setState(() {});
                 } else {}
               });

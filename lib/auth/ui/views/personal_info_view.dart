@@ -61,7 +61,7 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                   ),
                   const SizedBox(height: 32),
                   CustomTextFormField(
-                    hintText: AppStrings.emailAddress,
+                    hintText: AppStrings.fullName,
                     controller: nameController,
                   ),
                   const SizedBox(height: 12),

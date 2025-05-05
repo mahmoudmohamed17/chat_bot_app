@@ -7,51 +7,72 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class PinCodeView extends StatelessWidget {
+class PinCodeView extends StatefulWidget {
   const PinCodeView({super.key});
 
   @override
+  State<PinCodeView> createState() => _PinCodeViewState();
+}
+
+class _PinCodeViewState extends State<PinCodeView> {
+  bool _isLoading = false;
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: customAppBar(context),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(AppStrings.setYourPINCode, style: AppTextStyles.bold28),
-          ),
-          const SizedBox(height: 8),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppStrings.setYourPINCodeHint,
-              style: AppTextStyles.regular16,
+    return ModalProgressHUD(
+      inAsyncCall: _isLoading,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: customAppBar(context),
+        body: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppStrings.setYourPINCode,
+                style: AppTextStyles.bold28,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          CustomOtpAndPinWidget(
-            onCompleted: (code) {},
-            length: 4,
-            isForPIN: true,
-          ),
-          const Expanded(child: SizedBox(height: 470)),
-          SizedBox(
-            width: double.infinity,
-            child: CustomButton(
-              label: AppStrings.confirm,
-              backgroundColor: AppColors.primary,
-              labelColor: Colors.white,
-              onPressed: () {
-                /// Navigate to Ready Screen [Before Home Screen]
-                context.push(Routes.readyView);
-              },
+            const SizedBox(height: 8),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppStrings.setYourPINCodeHint,
+                style: AppTextStyles.regular16,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-        ],
+            const SizedBox(height: 24),
+            CustomOtpAndPinWidget(
+              onCompleted: (code) {},
+              length: 4,
+              isForPIN: true,
+            ),
+            const Expanded(child: SizedBox(height: 470)),
+            SizedBox(
+              width: double.infinity,
+              child: CustomButton(
+                label: AppStrings.confirm,
+                backgroundColor: AppColors.primary,
+                labelColor: Colors.white,
+                onPressed: () {
+                  /// Navigate to Ready Screen [Before Home Screen]
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  Future.delayed(const Duration(seconds: 3), () {
+                    setState(() {
+                      _isLoading = false;
+                    });
+                  });
+                  context.push(Routes.readyView);
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
       ),
     );
   }

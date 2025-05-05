@@ -24,7 +24,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             setState(() {
               _activeIndex = index;
             });
-            widget.onSelectedGender!.call(_genders[index]);
+            widget.onSelectedGender?.call(_genders[index]);
           },
           child: GenderItemWidget(
             text: _genders[index],

@@ -77,7 +77,7 @@ class _SelectGenderViewState extends State<SelectGenderView> {
                   const SizedBox(height: 24),
                   GenderSelectionWidget(
                     onSelectedGender: (gender) {
-                      cubit.gender = gender ?? 'Male';
+                      cubit.gender = gender;
                     },
                   ),
                   const Expanded(child: SizedBox(height: 350)),
