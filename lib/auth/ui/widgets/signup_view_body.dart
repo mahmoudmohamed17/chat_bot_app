@@ -74,7 +74,9 @@ class _SignupViewBodyState extends State<SignupViewBody> {
           CustomSocialButton(
             label: AppStrings.continueWithGoogle,
             image: Assets.imagesGoogle,
-            onPressed: () {},
+            onPressed: () {
+              context.read<AuthCubit>().signInWithGoogle();
+            },
           ),
           const SizedBox(height: 12),
           CustomSocialButton(

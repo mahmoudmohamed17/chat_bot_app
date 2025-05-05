@@ -16,10 +16,13 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logIn({required String email, required String password}) async {
     emit(AuthLoading());
     var result = await authRepo.logIn(email: email, password: password);
-    result.fold(
-      (failed) => emit(AuthFailed(errorMsg: failed.errorMsg)),
-      (user) => emit(AuthSuccess()),
-    );
+    result.fold((failed) => emit(AuthFailed(errorMsg: failed.errorMsg)), (
+      user,
+    ) async {
+      /// Gets the data of the current user logged in on this device
+      await usersCubit.getUser();
+      emit(AuthSuccess());
+    });
   }
 
   Future<void> signUp({required String email, required String password}) async {
@@ -34,26 +37,40 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     emit(AuthLoading());
-    await authRepo.signOut();
-    emit(AuthSuccess());
+    try {
+      await authRepo.signOut();
+      emit(AuthSuccess());
+    } catch (e) {
+      emit(AuthFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> signInWithGoogle() async {
-    emit(AuthLoading());
     var result = await authRepo.signInWithGoogle();
-    result.fold((failed) => emit(AuthFailed(errorMsg: failed.errorMsg)), (
-      user,
-    ) async {
-      await usersCubit.addGoogleUser(user!);
-      await usersCubit.getUser();
-      emit(AuthSuccess());
-    });
+    result.fold(
+      (failed) {
+        emit(AuthLoading());
+        Future.delayed(const Duration(seconds: 3), () {
+          emit(AuthFailed(errorMsg: failed.errorMsg));
+        });
+      },
+      (user) async {
+        emit(AuthLoading());
+        await usersCubit.addGoogleUser(user!);
+        await usersCubit.getUser();
+        emit(AuthSuccess());
+      },
+    );
   }
 
   Future<void> resetPasswordForEmail({required String email}) async {
     emit(AuthLoading());
-    await authRepo.resetPasswordForEmail(email: email);
-    emit(AuthSuccess());
+    try {
+      await authRepo.resetPasswordForEmail(email: email);
+      emit(AuthSuccess());
+    } catch (e) {
+      emit(AuthFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> updateUser({String? email, String? password}) async {
@@ -69,8 +86,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signInWithOTP({required String email}) async {
     emit(AuthLoading());
-    await authRepo.signInWithOTP(email: email);
-    emit(AuthSuccess());
+    try {
+      await authRepo.signInWithOTP(email: email);
+      emit(AuthSuccess());
+    } catch (e) {
+      emit(AuthFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> verifyOTP({required String email, required String token}) async {
