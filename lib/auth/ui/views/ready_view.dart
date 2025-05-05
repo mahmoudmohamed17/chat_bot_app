@@ -81,7 +81,7 @@ class _ReadyViewState extends State<ReadyView> {
                     },
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
               ],
             ),
           ),

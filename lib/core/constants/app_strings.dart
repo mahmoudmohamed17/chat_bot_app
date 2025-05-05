@@ -40,7 +40,7 @@ class AppStrings {
   static const String otpCodeVerificationHint =
       'Please check your email address and enter the OTP code you received here.';
   static const String dontReceiveMail = 'Don\'t receive mail?';
-  static String resendCode(int seconds) => 'You can resend code in $seconds s';
+  static const String resendCode = 'You can resend code in ';
   static const String createNewPassword = 'Create new password';
   static const String createNewPasswordHint =
       'Your password should be difficult and not known to other people.';

@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_otp_and_pin_widget.dart';
+import 'package:chat_bot_app/auth/ui/widgets/resend_code_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
@@ -72,12 +73,7 @@ class OtpVerificationView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Align(
-                    child: Text(
-                      AppStrings.resendCode(32),
-                      style: AppTextStyles.medium14,
-                    ),
-                  ),
+                  Align(child: ResendCodeWidget(email: email)),
                   const Expanded(child: SizedBox(height: 380)),
                   SizedBox(
                     width: double.infinity,
