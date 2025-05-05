@@ -1,13 +1,15 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this.authRepo) : super(AuthInitial());
+  AuthCubit(this.authRepo, this.usersCubit) : super(AuthInitial());
 
   final AuthRepo authRepo;
+  final UsersCubit usersCubit;
 
   User get currentUser => authRepo.getCurrentUser()!;
 
@@ -36,6 +38,18 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthSuccess());
   }
 
+  Future<void> signInWithGoogle() async {
+    emit(AuthLoading());
+    var result = await authRepo.signInWithGoogle();
+    result.fold((failed) => emit(AuthFailed(errorMsg: failed.errorMsg)), (
+      user,
+    ) async {
+      await usersCubit.addGoogleUser(user!);
+      await usersCubit.getUser();
+      emit(AuthSuccess());
+    });
+  }
+
   Future<void> resetPasswordForEmail({required String email}) async {
     emit(AuthLoading());
     await authRepo.resetPasswordForEmail(email: email);
@@ -44,7 +58,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> updateUser({String? email, String? password}) async {
     emit(AuthLoading());
-    var result = await authRepo.updateUserAuthData(email: email, password: password);
+    var result = await authRepo.updateUserAuthData(
+      email: email,
+      password: password,
+    );
     result
         ? emit(AuthSuccess())
         : emit(AuthFailed(errorMsg: 'Error while updating data.'));

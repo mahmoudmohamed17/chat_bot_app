@@ -16,7 +16,7 @@ class ReadyView extends StatefulWidget {
 
 class _ReadyViewState extends State<ReadyView> {
   ConfettiController confettiController = ConfettiController(
-    duration: const Duration(seconds: 10),
+    duration: const Duration(seconds: 5),
   )..play();
   bool _isLoading = false;
   @override
@@ -29,7 +29,6 @@ class _ReadyViewState extends State<ReadyView> {
   Widget build(BuildContext context) {
     return ConfettiWidget(
       confettiController: confettiController,
-      shouldLoop: true,
       blastDirectionality: BlastDirectionality.explosive,
       maxBlastForce: 30,
       minBlastForce: 10,

@@ -1,4 +1,6 @@
 import 'package:chat_bot_app/core/errors/custom_exception.dart';
+import 'package:chat_bot_app/core/secret/api_strings.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService {
@@ -27,7 +29,25 @@ class SupabaseAuthService {
     return user;
   }
 
-  Future<void> someFunc() async {}
+   Future<GoogleSignInAccount?> signInWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: ApiStrings.appAndroidClientId,
+      serverClientId: ApiStrings.appWebClientId,
+    );
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser?.authentication;
+    final accessToken = googleAuth?.accessToken;
+    final idToken = googleAuth?.idToken;
+    if (accessToken == null || idToken == null) {
+      return null;
+    }
+    await _client.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
+    return googleUser;
+  }
 
   Future<void> signOut() async {
     await _client.signOut();

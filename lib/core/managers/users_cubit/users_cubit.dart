@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
 import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
@@ -35,20 +36,49 @@ class UsersCubit extends Cubit<UsersState> {
       dateOfBirth: _dateOfBirth,
       gender: _gender ?? 'Male',
     );
-    await authRepo.addUser(user);
-    emit(UsersSuccess(user: user));
+    try {
+      await authRepo.addUser(user);
+      emit(UsersSuccess(user: user));
+    } catch (e) {
+      emit(UsersFailed(errorMsg: e.toString()));
+    }
+  }
+
+  Future<void> addGoogleUser(GoogleSignInAccount googleUser) async {
+    emit(UsersLoading());
+    var user = UserModel(
+      userId: googleUser.id,
+      createdAt: DateTime.now().toString(),
+      fullName: googleUser.displayName,
+      phoneNumber: '',
+      profilePicture: googleUser.photoUrl,
+    );
+    try {
+      await authRepo.addUser(user);
+      emit(UsersSuccess(user: user));
+    } catch (e) {
+      emit(UsersFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> updateUserDate(UserModel user) async {
     emit(UsersLoading());
-    await authRepo.updateUserDate(user);
-    emit(UsersSuccess(user: user));
+    try {
+      await authRepo.updateUserDate(user);
+      emit(UsersSuccess(user: user));
+    } catch (e) {
+      emit(UsersFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> deleteUser() async {
     emit(UsersLoading());
-    await authRepo.deleteUser(authRepo.getCurrentUser()!.id);
-    emit(const UsersSuccess(user: UserModel()));
+    try {
+      await authRepo.deleteUser(authRepo.getCurrentUser()!.id);
+      emit(const UsersSuccess(user: UserModel()));
+    } catch (e) {
+      emit(UsersFailed(errorMsg: e.toString()));
+    }
   }
 
   String? get fullName => _fullName;

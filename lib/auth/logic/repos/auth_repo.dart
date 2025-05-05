@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/core/errors/failure.dart';
 import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepo {
@@ -14,6 +15,7 @@ abstract class AuthRepo {
     required String email,
     required String password,
   });
+  Future<Either<Failure, GoogleSignInAccount?>> signInWithGoogle();
 
   Future<void> signOut();
 

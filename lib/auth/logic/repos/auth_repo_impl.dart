@@ -5,6 +5,7 @@ import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:dartz/dartz.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepoImpl extends AuthRepo {
@@ -53,6 +54,18 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
       );
       return right(response);
+    } on AuthException catch (e) {
+      return left(AuthFailure(errorMsg: e.message));
+    } catch (e) {
+      return left(AuthFailure(errorMsg: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GoogleSignInAccount?>> signInWithGoogle() async {
+    try {
+      var user = await supabaseAuthService.signInWithGoogle();
+      return right(user);
     } on AuthException catch (e) {
       return left(AuthFailure(errorMsg: e.message));
     } catch (e) {
