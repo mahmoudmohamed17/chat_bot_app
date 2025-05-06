@@ -89,6 +89,8 @@ class AppStrings {
       'You have to approve Terms & Policy to continue.';
   static const String dummyMessage =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+  static const String dummyListTitle = 'This is the list title';
+  static const String dummyListSubtitle = '23 Dec . 2023';
   static const String goodJob = 'Good job!';
   static const String timeToSetSomeUserPrefs =
       'Now, time to make your profile looks shine!';
