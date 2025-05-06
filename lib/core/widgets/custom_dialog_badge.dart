@@ -1,8 +1,9 @@
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CheckoutIconWidget extends StatelessWidget {
-  const CheckoutIconWidget({super.key});
+class CustomDialogBadge extends StatelessWidget {
+  const CustomDialogBadge({super.key, required this.icon});
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CheckoutIconWidget extends StatelessWidget {
         ),
       ),
       padding: const EdgeInsets.all(18),
-      child: const Icon(Icons.check, size: 32, color: Colors.white),
+      child: Icon(icon, size: 32, color: Colors.white),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:chat_bot_app/auth/ui/widgets/checkout_icon_widget.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
@@ -6,6 +5,7 @@ import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +53,7 @@ class _ReadyViewState extends State<ReadyView> {
                   mainAxisSize: MainAxisSize.min,
                   spacing: 8,
                   children: [
-                    CheckoutIconWidget(),
+                    CustomDialogBadge(icon: Icons.check),
                     Text(
                       AppStrings.youAreReady,
                       style: AppTextStyles.bold28,
