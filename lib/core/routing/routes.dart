@@ -10,4 +10,5 @@ class Routes {
   static const String personalInfoView = '/personalInfoView';
   static const String pinCodeView = '/pinCodeView';
   static const String readyView = '/readyView';
+  static const String mainView = '/mainView';
 }

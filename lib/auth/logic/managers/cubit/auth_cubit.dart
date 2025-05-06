@@ -54,16 +54,16 @@ class AuthCubit extends Cubit<AuthState> {
     var result = await authRepo.signInWithGoogle();
     result.fold(
       (failed) {
-        emit(AuthLoading());
+        emit(GoogleAuthLoading());
         Future.delayed(const Duration(seconds: 3), () {
-          emit(AuthFailed(errorMsg: failed.errorMsg));
+          emit(GoogleAuthFailed(errorMsg: failed.errorMsg));
         });
       },
       (user) async {
-        emit(AuthLoading());
+        emit(GoogleAuthLoading());
         await usersCubit.addGoogleUser(user!);
         await usersCubit.getUser();
-        emit(AuthSuccess());
+        emit(GoogleAuthSuccess());
       },
     );
   }

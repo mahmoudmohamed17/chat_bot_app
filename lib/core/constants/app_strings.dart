@@ -76,6 +76,7 @@ class AppStrings {
   static const String areYouSureToDelete = 'Are you sure to delete?';
   static const String areYouSureToDeleteHint =
       'If you delete it all your correspondence will be permanently deleted and cannot be recovered.';
+  static const String enterSamePasswordsAlert = 'You must enter the same passwords.';
   static const String historyIsEmpty = 'History is empty!';
   static const String historyIsEmptyHint =
       'Start a new correspondence and send us questions.';

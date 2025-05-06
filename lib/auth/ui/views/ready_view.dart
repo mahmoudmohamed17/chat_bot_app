@@ -1,10 +1,14 @@
 import 'package:chat_bot_app/auth/ui/widgets/checkout_icon_widget.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ReadyView extends StatefulWidget {
@@ -31,8 +35,8 @@ class _ReadyViewState extends State<ReadyView> {
       confettiController: confettiController,
       blastDirectionality: BlastDirectionality.explosive,
       maxBlastForce: 30,
-      minBlastForce: 10,
-      emissionFrequency: 0.2,
+      minBlastForce: 20,
+      emissionFrequency: 0.6,
       numberOfParticles: 20,
       child: ModalProgressHUD(
         inAsyncCall: _isLoading,
@@ -69,15 +73,18 @@ class _ReadyViewState extends State<ReadyView> {
                     label: 'Go to Home',
                     backgroundColor: AppColors.primary,
                     labelColor: Colors.white,
-                    onPressed: () {
+                    onPressed: () async {
                       setState(() {
                         _isLoading = true;
                       });
-                      Future.delayed(const Duration(seconds: 3), () {
-                        setState(() {
-                          _isLoading = false;
-                        });
+                      await Future.delayed(const Duration(seconds: 3));
+                      setState(() {
+                        _isLoading = false;
                       });
+                      if (context.mounted) {
+                        context.go(Routes.mainView);
+                      }
+                      SharedPrefs.setBool(isUserAuthenticated, true);
                     },
                   ),
                 ),

@@ -1,8 +1,10 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/signup_view_body.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,13 +38,23 @@ class _SignupViewState extends State<SignupView> {
             context.push(Routes.selectGenderView);
             clear();
           }
+
+          if (state is AuthFailed) {
+            snackBar(context, title: state.errorMsg);
+          }
+
+          if (state is GoogleAuthSuccess) {
+            context.go(Routes.mainView);
+            SharedPrefs.setBool(isUserAuthenticated, true);
+          }
+
           if (state is AuthFailed) {
             snackBar(context, title: state.errorMsg);
           }
         },
         builder: (context, state) {
           return ModalProgressHUD(
-            inAsyncCall: state is AuthLoading,
+            inAsyncCall: state is AuthLoading || state is GoogleAuthLoading,
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: customAppBar(context),

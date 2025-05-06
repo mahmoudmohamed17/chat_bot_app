@@ -13,3 +13,13 @@ final class AuthFailed extends AuthState {
 
   AuthFailed({required this.errorMsg});
 }
+
+final class GoogleAuthLoading extends AuthState {}
+
+final class GoogleAuthSuccess extends AuthState {}
+
+final class GoogleAuthFailed extends AuthState {
+  final String errorMsg;
+
+  GoogleAuthFailed({required this.errorMsg});
+}

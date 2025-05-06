@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
+import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,7 +33,7 @@ class UsersCubit extends Cubit<UsersState> {
       createdAt: DateTime.now().toString(),
       fullName: _fullName,
       phoneNumber: _phoneNumber,
-      profilePicture: _profilePicture,
+      profilePicture: _profilePicture ?? Assets.imagesProfilePic,
       dateOfBirth: _dateOfBirth,
       gender: _gender ?? 'Male',
     );
