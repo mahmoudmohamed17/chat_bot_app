@@ -65,9 +65,11 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                     controller: nameController,
                   ),
                   const SizedBox(height: 12),
-                  SetupUserPhoneNumberWidget(onEditingFinished: (number) {
-                    cubit.phoneNumber = number;
-                  }),
+                  SetupUserPhoneNumberWidget(
+                    onEditingFinished: (number) {
+                      cubit.phoneNumber = number;
+                    },
+                  ),
                   const SizedBox(height: 12),
                   CustomDateOfBirthWidget(
                     onDateSelected: (date) {
@@ -81,9 +83,10 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                       label: AppStrings.next,
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,
-                      onPressed: () {
+                      onPressed: () async {
                         cubit.fullName = nameController.text;
-                        cubit.addUser();
+                        await cubit.addUser();
+                        await cubit.getUser();
                       },
                     ),
                   ),
