@@ -8,6 +8,7 @@ import 'package:chat_bot_app/auth/ui/views/reset_password_view.dart';
 import 'package:chat_bot_app/auth/ui/views/select_gender_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signin_view.dart';
 import 'package:chat_bot_app/auth/ui/views/signup_view.dart';
+import 'package:chat_bot_app/chat/ui/views/new_conversation_view.dart';
 import 'package:chat_bot_app/core/utils/check_app_routing.dart';
 import 'package:chat_bot_app/main/ui/views/main_view.dart';
 import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
@@ -91,6 +92,12 @@ class AppRouting {
         path: Routes.mainView,
         builder: (BuildContext context, GoRouterState state) {
           return const MainView();
+        },
+      ),
+      GoRoute(
+        path: Routes.newConversationView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const NewConversationView();
         },
       ),
     ],

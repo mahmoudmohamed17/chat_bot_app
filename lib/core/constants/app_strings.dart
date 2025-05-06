@@ -76,7 +76,8 @@ class AppStrings {
   static const String areYouSureToDelete = 'Are you sure to delete?';
   static const String areYouSureToDeleteHint =
       'If you delete it all your correspondence will be permanently deleted and cannot be recovered.';
-  static const String enterSamePasswordsAlert = 'You must enter the same passwords.';
+  static const String enterSamePasswordsAlert =
+      'You must enter the same passwords.';
   static const String historyIsEmpty = 'History is empty!';
   static const String historyIsEmptyHint =
       'Start a new correspondence and send us questions.';
@@ -86,6 +87,8 @@ class AppStrings {
   static const String privacyPolicy = 'Privacy policy';
   static const String agreeToPolicyAlertMessage =
       'You have to approve Terms & Policy to continue.';
+  static const String dummyMessage =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
   static const String goodJob = 'Good job!';
   static const String timeToSetSomeUserPrefs =
       'Now, time to make your profile looks shine!';

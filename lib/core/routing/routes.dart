@@ -11,4 +11,5 @@ class Routes {
   static const String pinCodeView = '/pinCodeView';
   static const String readyView = '/readyView';
   static const String mainView = '/mainView';
+  static const String newConversationView = '/newConversationView';
 }
