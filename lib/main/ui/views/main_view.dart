@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -16,7 +17,7 @@ class _MainViewState extends State<MainView> {
   int _activeIndex = 0;
   final List<Widget> _screens =  [
     const ChatIntroView(),
-    Container(),
+    const HistoryView(),
     Container(),
   ];
 

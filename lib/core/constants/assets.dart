@@ -22,6 +22,10 @@ class Assets {
   /// assets/images/egy_flag.png
   static const String imagesEgyFlag = "assets/images/egy_flag.png";
 
+  /// Assets for imagesEmptyFolder
+  /// assets/images/empty_folder.svg
+  static const String imagesEmptyFolder = "assets/images/empty_folder.svg";
+
   /// Assets for imagesGoogle
   /// assets/images/google.png
   static const String imagesGoogle = "assets/images/google.png";
