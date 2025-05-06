@@ -36,7 +36,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            context.push(Routes.otpVerificationView, extra: emailController.text);
+            context.push(
+              Routes.otpVerificationView,
+              extra: emailController.text,
+            );
           }
 
           if (state is AuthFailed) {

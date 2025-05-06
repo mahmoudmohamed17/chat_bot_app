@@ -24,7 +24,8 @@ class OtpVerificationView extends StatelessWidget {
       create: (context) => getIt.get<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is AuthSuccess &&
+              context.read<AuthCubit>().code != null) {
             context.push(Routes.createNewPasswordView, extra: email);
           }
 
