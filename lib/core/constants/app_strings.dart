@@ -91,6 +91,8 @@ class AppStrings {
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
   static const String dummyListTitle = 'This is the list title';
   static const String dummyListSubtitle = '23 Dec . 2023';
+  static const String dummyUsername = 'Mahmoud Mohamed';
+  static const String dummyUserEmail = 'mahmoud1234@gmail.com';
   static const String goodJob = 'Good job!';
   static const String timeToSetSomeUserPrefs =
       'Now, time to make your profile looks shine!';
