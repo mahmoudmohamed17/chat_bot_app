@@ -31,7 +31,7 @@ class BotMessageBubble extends StatelessWidget {
               child: SizedBox(
                 width: context.width * 0.65,
                 child: AnimatedTextKit(
-                  totalRepeatCount: 1,
+                  totalRepeatCount: 0,
                   isRepeatingAnimation: false,
                   animatedTexts: [
                     TyperAnimatedText(

@@ -24,6 +24,14 @@ class MessagesList extends StatelessWidget {
         UserMessageBubble(),
         SizedBox(height: 10),
         BotMessageBubble(),
+        SizedBox(height: 10),
+        UserMessageBubble(),
+        SizedBox(height: 10),
+        BotMessageBubble(),
+        SizedBox(height: 10),
+        UserMessageBubble(),
+        SizedBox(height: 10),
+        BotMessageBubble(),
       ],
     );
   }
