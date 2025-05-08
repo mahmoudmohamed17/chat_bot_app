@@ -13,6 +13,8 @@ import 'package:chat_bot_app/core/utils/check_app_routing.dart';
 import 'package:chat_bot_app/main/ui/views/main_view.dart';
 import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
+import 'package:chat_bot_app/profile/ui/views/about_app_view.dart';
+import 'package:chat_bot_app/profile/ui/views/privacy_policy_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -98,6 +100,18 @@ class AppRouting {
         path: Routes.newConversationView,
         builder: (BuildContext context, GoRouterState state) {
           return const NewConversationView();
+        },
+      ),
+      GoRoute(
+        path: Routes.privacyPolicyView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const PrivacyPolicyView();
+        },
+      ),
+      GoRoute(
+        path: Routes.aboutAppView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const AboutAppView();
         },
       ),
     ],

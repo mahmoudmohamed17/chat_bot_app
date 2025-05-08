@@ -14,7 +14,7 @@ class HistoryViewAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.only(left: 12, right: 40),
           child: Image.asset(Assets.imagesAppLogo, scale: 10.5),
         ),
         const Text(AppStrings.history, style: AppTextStyles.bold18),
@@ -33,7 +33,7 @@ class HistoryViewAppBar extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  showConfirmDeletionDialog(context, isDeleingAll: true);
+                  showConfirmDeletionDialog(context, isDeletingAll: true);
                 },
                 icon: const Icon(
                   FontAwesomeIcons.trashCan,

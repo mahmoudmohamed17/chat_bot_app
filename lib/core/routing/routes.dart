@@ -12,4 +12,6 @@ class Routes {
   static const String readyView = '/readyView';
   static const String mainView = '/mainView';
   static const String newConversationView = '/newConversationView';
+  static const String privacyPolicyView = '/privacyPolicyView';
+  static const String aboutAppView = '/aboutAppView';
 }

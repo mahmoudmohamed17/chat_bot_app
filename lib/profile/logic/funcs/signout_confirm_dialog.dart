@@ -1,26 +1,22 @@
+import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-Future<dynamic> showConfirmDeletionDialog(
-  BuildContext context, {
-  int? index,
-  bool? isDeletingAll,
-}) {
+Future<dynamic> signoutConfirmDialog(BuildContext context) {
   return showDialog(
     context: context,
-    builder: (context) {
+    builder: (context_) {
       return Dialog(
         backgroundColor: Colors.white,
         elevation: 5,
-        insetAnimationDuration: const Duration(milliseconds: 500),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.all(24),
           margin: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -30,26 +26,19 @@ Future<dynamic> showConfirmDeletionDialog(
             mainAxisSize: MainAxisSize.min,
             spacing: 16,
             children: [
-              const CustomDialogBadge(icon: FontAwesomeIcons.circleQuestion),
+              const CustomDialogBadge(icon: Icons.error_outline),
               const Text(
-                AppStrings.areYouSureToDelete,
+                AppStrings.areYouSureToSignout,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bold16,
               ),
-              Text(
-                AppStrings.areYouSureToDeleteHint,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.semiBold14.copyWith(
-                  color: AppColors.textContainer,
-                ),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: 8,
+                spacing: 16,
                 children: [
                   Expanded(
                     child: CustomButton(
-                      label: AppStrings.close,
+                      label: AppStrings.cancel,
                       backgroundColor: Colors.white,
                       labelColor: Colors.black,
                       onPressed: () {
@@ -59,16 +48,12 @@ Future<dynamic> showConfirmDeletionDialog(
                   ),
                   Expanded(
                     child: CustomButton(
-                      label: AppStrings.delete,
+                      label: AppStrings.signOut,
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,
                       onPressed: () {
-                        if (isDeletingAll != null && isDeletingAll) {
-                          /// TODO: Delete all
-                        }
-                        if (index != null) {
-                          /// TODO: Delete specific item
-                        }
+                        context.pop();
+                        context.read<AuthCubit>().signOut();
                       },
                     ),
                   ),

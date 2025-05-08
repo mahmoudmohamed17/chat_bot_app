@@ -15,8 +15,10 @@ class AppStrings {
   static const String textContinue = 'Continue';
   static const String edit = 'Edit';
   static const String delete = 'Delete';
+  static const String cancel = 'Cancel';
   static const String close = 'Close';
   static const String save = 'Save';
+  static const String signOut = 'Sign out';
   static const String signIn = 'Sign in';
   static const String welcome = 'Welcome';
   static const String signInHint =
@@ -73,6 +75,7 @@ class AppStrings {
   static const String myProfile = 'Profile';
   static const String history = 'History';
   static const String recent = 'Recent';
+  static const String areYouSureToSignout = 'Are you sure to sign out?';
   static const String areYouSureToDelete = 'Are you sure to delete?';
   static const String areYouSureToDeleteHint =
       'If you delete it all your correspondence will be permanently deleted and cannot be recovered.';
@@ -101,42 +104,42 @@ class AppStrings {
   static const String arabic = 'Arabic (AR)';
   static const String privacyPolicyText =
       '''At GemiChat, we are committed to protecting your privacy and ensuring transparency in how we handle your personal information.
-      This Privacy Policy explains what data we collect, how we use it, and the measures we take to protect it.\n
-      1. Information Collection\n
-      We may collect limited information, including but not limited to device details, usage statistics, and conversation data. This data is collected solely to enhance the functionality and improve the user experience of the GemiChat application.\n
-      2. Use of Information\n
-      Collected information is used for the following purposes:\n
-      Improving service functionality and performance.\n
-      Personalizing user experience.\n
-      Troubleshooting technical issues.\n
-      Communicating updates and important notifications related to the application.\n
-      We do not sell, rent, or share your personal data with third parties without your explicit consent, except as required by applicable law.\n
-      3. Data Security\n
-      We implement appropriate technical and organizational measures to safeguard your personal information from unauthorized access, alteration, disclosure, or destruction.
-      While we strive to use commercially acceptable means to protect your personal data, no method of transmission over the Internet or method of electronic storage is 100% secure.\n
-      4. User Responsibilities\n
-      By using GemiChat, you agree to:\n
-      Use the application in compliance with all applicable laws and regulations.\n
-      Avoid using the application for unlawful, harmful, or abusive activities.\n
-      Maintain the confidentiality of any credentials or sensitive information associated with your use of the application.\n
-      You are solely responsible for any activity conducted through your account or device.\n
-      5. Third-Party Services\n
-      GemiChat may include links to or integrations with third-party websites, applications, or services that are not operated by us.\n
-      We are not responsible for the content, privacy policies, or practices of any third-party services.\n
-      We recommend that you review the privacy policies of any third-party services you interact with through GemiChat.\n
-      6. Changes to This Policy\n
-      We reserve the right to update or modify this Privacy Policy at any time.\n
-      When changes are made, we will update the "Effective Date" at the top of this policy and may provide additional notice as necessary within the application.\n
-      By continuing to use GemiChat after any changes become effective, you agree to be bound by the revised Privacy Policy.\n
-      7. Contact Us\n
-      If you have any questions, concerns, or feedback regarding this Privacy Policy or GemiChat’s data practices, please contact us at:\n
-      Email: ma5975986@gmail.com
+This Privacy Policy explains what data we collect, how we use it, and the measures we take to protect it.\n
+1. Information Collection\n
+We may collect limited information, including but not limited to device details, usage statistics, and conversation data. This data is collected solely to enhance the functionality and improve the user experience of the GemiChat application.\n
+2. Use of Information\n
+Collected information is used for the following purposes:\n
+• Improving service functionality and performance.\n
+• Personalizing user experience.\n
+• Troubleshooting technical issues.\n
+• Communicating updates and important notifications related to the application.\n
+• We do not sell, rent, or share your personal data with third parties without your explicit consent, except as required by applicable law.\n
+3. Data Security\n
+We implement appropriate technical and organizational measures to safeguard your personal information from unauthorized access, alteration, disclosure, or destruction.
+While we strive to use commercially acceptable means to protect your personal data, no method of transmission over the Internet or method of electronic storage is 100% secure.\n
+4. User Responsibilities\n
+By using GemiChat, you agree to:\n
+• Use the application in compliance with all applicable laws and regulations.\n
+• Avoid using the application for unlawful, harmful, or abusive activities.\n
+• Maintain the confidentiality of any credentials or sensitive information associated with your use of the application.\n
+• You are solely responsible for any activity conducted through your account or device.\n
+5. Third-Party Services\n
+GemiChat may include links to or integrations with third-party websites, applications, or services that are not operated by us.\n
+We are not responsible for the content, privacy policies, or practices of any third-party services.\n
+We recommend that you review the privacy policies of any third-party services you interact with through GemiChat.\n
+6. Changes to This Policy\n
+We reserve the right to update or modify this Privacy Policy at any time.\n
+When changes are made, we will update the "Effective Date" at the top of this policy and may provide additional notice as necessary within the application.\n
+By continuing to use GemiChat after any changes become effective, you agree to be bound by the revised Privacy Policy.\n
+7. Contact Us\n
+If you have any questions, concerns, or feedback regarding this Privacy Policy or GemiChat’s data practices, please contact us at:\n
+Email: ma5975986@gmail.com
         ''';
   static const String aboutGemiChatBotText =
       '''GemiChat is an intelligent conversational assistant designed to offer users a friendly, supportive, and efficient communication experience.\n
-      Leveraging advanced language models and smart algorithms, GemiChat assists users with answering questions, offering recommendations, casual chatting, and boosting daily productivity.\n
-      Our mission is to provide a seamless, natural, and highly personalized interaction that meets the communication needs of modern users.\n
-      We are constantly working to enhance GemiChat’s capabilities to ensure it remains a reliable, innovative, and trusted companion in your digital life.
-      Thank you for choosing GemiChat — your intelligent partner for smarter conversations.
+Leveraging advanced language models and smart algorithms, GemiChat assists users with answering questions, offering recommendations, casual chatting, and boosting daily productivity.\n
+Our mission is to provide a seamless, natural, and highly personalized interaction that meets the communication needs of modern users.\n
+We are constantly working to enhance GemiChat’s capabilities to ensure it remains a reliable, innovative, and trusted companion in your digital life.\n
+Thank you for choosing GemiChat — your intelligent partner for smarter conversations.
         ''';
 }
