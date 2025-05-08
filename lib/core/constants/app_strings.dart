@@ -26,6 +26,7 @@ class AppStrings {
   static const String emailAddress = 'Email address';
   static const String password = 'Password';
   static const String forgotPassword = 'Forgot password?';
+  static const String sendMessage = 'Send message';
   static const String rememberMe = 'Remember me';
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithApple = 'Continue with Apple';

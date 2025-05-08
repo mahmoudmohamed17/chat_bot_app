@@ -16,7 +16,7 @@ class NewConversationView extends StatelessWidget {
           /// TODO: Use cubit to manage the state of showing messages with the app logo
           /// Align(child: Image.asset(Assets.imagesAppLogoGrey, scale: 3)),
           Expanded(child: MessagesList()),
-          SendMesssageTextBoxWidget(),
+          SendMessageTextBoxWidget(),
         ],
       ),
     );

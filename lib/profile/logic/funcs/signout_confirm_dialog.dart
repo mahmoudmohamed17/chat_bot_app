@@ -1,7 +1,9 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,7 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
                       onPressed: () {
                         context.pop();
                         context.read<AuthCubit>().signOut();
+                        SharedPrefs.setBool(isUserAuthenticated, false);
                       },
                     ),
                   ),
