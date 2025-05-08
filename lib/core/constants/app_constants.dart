@@ -14,6 +14,7 @@ const String fontFamily = 'Poppins';
 const String isOnboardingSeen = 'isOnboardingSeen';
 const String isUserAuthenticated = 'isUserAuthenticated';
 const String isDarkMode = 'isDarkMode';
+const String selectedLangIndex = 'selectedLangIndex';
 
 /// Related to Database
 const String usersTable = 'users';

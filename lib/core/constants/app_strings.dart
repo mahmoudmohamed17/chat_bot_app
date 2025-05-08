@@ -69,8 +69,8 @@ class AppStrings {
   static const String startChatHint =
       'You should start asking us everything that interests you!';
   static const String chat = 'Chat';
-  static const String myTopics = 'My topics';
-  static const String myProfile = 'My profile';
+  static const String myTopics = 'Topics';
+  static const String myProfile = 'Profile';
   static const String history = 'History';
   static const String recent = 'Recent';
   static const String areYouSureToDelete = 'Are you sure to delete?';

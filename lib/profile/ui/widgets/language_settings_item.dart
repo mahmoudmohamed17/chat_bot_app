@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/profile/ui/widgets/language_selection_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,7 +13,8 @@ class LanguageSettignsItem extends StatefulWidget {
 }
 
 class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
-  bool _isOpened = false;
+  bool _isDialogOpen = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,26 +43,28 @@ class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
           IconButton(
             onPressed: () {
               setState(() {
-                _isOpened = !_isOpened;
+                _isDialogOpen = true;
               });
               showModalBottomSheet(
                 context: context,
+                isDismissible: false,
                 builder: (context) {
-                  return BottomSheet(
-                    onClosing: () {
-                      setState(() {
-                        _isOpened = !_isOpened;
-                      });
-                    },
-                    builder: (context) {
-                      return const Column();
+                  return LanguageSelectionDialog(
+                    onClose: (value) {
+                      if (value) {
+                        setState(() {
+                          _isDialogOpen = false;
+                        });
+                      }
                     },
                   );
                 },
               );
             },
             icon: Icon(
-              _isOpened ? FontAwesomeIcons.angleUp : FontAwesomeIcons.angleDown,
+              _isDialogOpen
+                  ? FontAwesomeIcons.angleUp
+                  : FontAwesomeIcons.angleDown,
               color: Colors.black,
               size: 20,
             ),
