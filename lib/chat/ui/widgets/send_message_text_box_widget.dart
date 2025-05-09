@@ -1,8 +1,9 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
+import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
-import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SendMessageTextBoxWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<MessagesCubit>();
     return Container(
       color: Colors.white,
       width: double.infinity,
@@ -27,11 +29,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              SupabaseDatabaseService().addMessage(
-                chatId: 'd6b09b9b-c63f-426f-bb03-cb4c70d55f74',
-                sender: 'user',
-                message: 'This is a test message',
-              );
+              cubit.sendMessageFromUser();
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
@@ -45,11 +43,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              SupabaseDatabaseService().addMessage(
-                chatId: 'd6b09b9b-c63f-426f-bb03-cb4c70d55f74',
-                sender: 'bot',
-                message: 'This is a test message',
-              );
+              cubit.sendMessageFromBot();
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
