@@ -15,6 +15,14 @@ const String isOnboardingSeen = 'isOnboardingSeen';
 const String isUserAuthenticated = 'isUserAuthenticated';
 const String isDarkMode = 'isDarkMode';
 const String selectedLangIndex = 'selectedLangIndex';
+const String selectedLangLabel = 'selectedLangLabel';
 
 /// Related to Database
 const String usersTable = 'users';
+const String chatsTable = 'chats';
+const String messagesTable = 'messages';
+
+/// Dummy data for testing
+const String userMessage = 'Hello GemiChat! How are you?';
+const String botMessage =
+    'I feel good! How are you too? How can I help you today?';

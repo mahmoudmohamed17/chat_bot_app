@@ -14,6 +14,8 @@ class AppStrings {
   static const String confirm = 'Confirm';
   static const String textContinue = 'Continue';
   static const String edit = 'Edit';
+  static const String user = 'user';
+  static const String bot = 'bot';
   static const String delete = 'Delete';
   static const String cancel = 'Cancel';
   static const String close = 'Close';
@@ -26,6 +28,7 @@ class AppStrings {
   static const String emailAddress = 'Email address';
   static const String password = 'Password';
   static const String forgotPassword = 'Forgot password?';
+  static const String messageCopied = 'Message copied!';
   static const String sendMessage = 'Send message';
   static const String rememberMe = 'Remember me';
   static const String continueWithGoogle = 'Continue with Google';

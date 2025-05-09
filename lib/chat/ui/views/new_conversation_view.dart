@@ -13,10 +13,8 @@ class NewConversationView extends StatelessWidget {
       appBar: customAppBar(context, title: AppStrings.appName),
       body: const Column(
         children: [
-          /// TODO: Use cubit to manage the state of showing messages with the app logo
-          /// Align(child: Image.asset(Assets.imagesAppLogoGrey, scale: 3)),
-          Expanded(child: MessagesList()),
-          SendMessageTextBoxWidget(),
+          Expanded(child: MessagesList(chatId: '',)),
+          SendMessageTextBoxWidget(chatId: '',),
         ],
       ),
     );

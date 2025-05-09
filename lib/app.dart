@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             theme: ThemeData(
               brightness: cubit.state ? Brightness.dark : Brightness.light,
+              useMaterial3: true
             ),
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouting.router,

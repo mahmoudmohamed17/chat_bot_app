@@ -25,6 +25,8 @@ class ChatIntroView extends StatelessWidget {
             style: AppTextStyles.bold24,
             textAlign: TextAlign.center,
           ),
+          /// I feel good! How are you too? How can I help you today?
+          /// Hello GemiChat! How are you?
           const Text(
             AppStrings.startChatHint,
             style: AppTextStyles.regular18,

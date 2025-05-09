@@ -4,11 +4,14 @@ import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/extensions/context_extension.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BotMessageBubble extends StatelessWidget {
-  const BotMessageBubble({super.key});
+  const BotMessageBubble({super.key, required this.message});
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class BotMessageBubble extends StatelessWidget {
                   isRepeatingAnimation: false,
                   animatedTexts: [
                     TyperAnimatedText(
-                      AppStrings.dummyMessage,
+                      message,
                       textAlign: TextAlign.center,
                       textStyle: AppTextStyles.regular16.copyWith(
                         color: Colors.black,
@@ -57,7 +60,14 @@ class BotMessageBubble extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: message));
+                    snackBar(
+                      context,
+                      title: AppStrings.messageCopied,
+                      timeInSeconds: 2,
+                    );
+                  },
                   icon: const Icon(
                     FontAwesomeIcons.copy,
                     color: Colors.black,

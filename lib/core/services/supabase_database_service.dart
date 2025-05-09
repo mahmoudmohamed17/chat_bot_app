@@ -25,4 +25,33 @@ class SupabaseDatabaseService {
   Future<void> deleteUser(String userId) async {
     await _client.from(usersTable).delete().eq('user_id', userId);
   }
+
+  Future<String> createChat(String userId) async {
+    final result = await _client
+        .from(usersTable)
+        .upsert({'for_user': userId})
+        .select()
+        .single();
+    return result['id'];
+  }
+
+  Future<void> addMessage({
+    required String chatId,
+    String? message,
+    String? sender,
+  }) async {
+    await _client.from(messagesTable).upsert({
+      'for_chat': chatId,
+      'message': message,
+      'sender': sender,
+    });
+  }
+
+  Stream messagesStream(String chatId) {
+    return _client
+        .from(messagesTable)
+        .stream(primaryKey: ['id'])
+        .eq('for_chat', chatId)
+        .order('created_at', ascending: true);
+  }
 }
