@@ -46,7 +46,7 @@ class _MessagesListState extends State<MessagesList> {
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          snackBar(context, title: 'Error fetching messages, try again later.');
+          snackBar(context, title: AppStrings.fetchingMessagesErrorAlert);
           return Align(
             child: FadeIn(
               child: Image.asset(Assets.imagesAppLogoGrey, scale: 3),
@@ -67,10 +67,11 @@ class _MessagesListState extends State<MessagesList> {
           );
         }
 
-        WidgetsBinding.instance.addPostFrameCallback((v) => _scrollToBottom());
-
         return BlocBuilder<MessagesCubit, MessagesState>(
           builder: (context, state) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (v) => _scrollToBottom(),
+            );
             return ListView.builder(
               padding: const EdgeInsets.all(12),
               controller: _scrollController,
