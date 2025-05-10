@@ -99,7 +99,8 @@ class AppRouting {
       GoRoute(
         path: Routes.newConversationView,
         builder: (BuildContext context, GoRouterState state) {
-          return const NewConversationView();
+          final chatId = state.extra as String;
+          return NewConversationView(chatId: chatId);
         },
       ),
       GoRoute(

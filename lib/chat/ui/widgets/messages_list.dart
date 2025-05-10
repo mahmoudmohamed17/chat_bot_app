@@ -27,7 +27,7 @@ class _MessagesListState extends State<MessagesList> {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 500),
-        curve: Curves.easeOutBack,
+        curve: Curves.ease,
       );
     }
   }
@@ -41,9 +41,7 @@ class _MessagesListState extends State<MessagesList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: SupabaseDatabaseService().messagesStream(
-        'd6b09b9b-c63f-426f-bb03-cb4c70d55f74',
-      ),
+      stream: SupabaseDatabaseService().messagesStream(widget.chatId),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           snackBar(context, title: AppStrings.fetchingMessagesErrorAlert);
@@ -91,8 +89,12 @@ class _MessagesListState extends State<MessagesList> {
                   padding: const EdgeInsets.only(bottom: 10),
                   child:
                       comment['sender'] == AppStrings.user
-                          ? const UserMessageBubble(message: userMessage)
-                          : const BotMessageBubble(message: botMessage),
+                          ? UserMessageBubble(
+                            message: comment['message'] ?? dummyUserMessage,
+                          )
+                          : BotMessageBubble(
+                            message: comment['message'] ?? dummyBotMessage,
+                          ),
                 );
               },
             );

@@ -18,11 +18,13 @@ class CustomLoadingComment extends StatelessWidget {
             bottomRight: Radius.circular(16),
           ),
         ),
+
         width: 100,
         padding: const EdgeInsets.all(16),
         child: const AnimatedLoadingJumpingDots(
-          jumpingHeight: 11,
-          dotSize: 6,
+          jumpingHeight: 10,
+          dotSize: 5,
+          numberOfDots: 3,
           speed: Duration(milliseconds: 200),
           delayBetweenBounces: Duration(milliseconds: 30),
         ),

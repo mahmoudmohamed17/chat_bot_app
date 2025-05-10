@@ -28,7 +28,7 @@ class SupabaseDatabaseService {
 
   Future<String> createChat(String userId) async {
     final result = await _client
-        .from(usersTable)
+        .from(chatsTable)
         .upsert({'for_user': userId})
         .select()
         .single();

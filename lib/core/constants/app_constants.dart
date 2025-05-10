@@ -23,6 +23,6 @@ const String chatsTable = 'chats';
 const String messagesTable = 'messages';
 
 /// Dummy data for testing
-const String userMessage = 'Hello GemiChat! How are you?';
-const String botMessage =
+const String dummyUserMessage = 'Hello GemiChat! How are you?';
+const String dummyBotMessage =
     'I feel good! How are you too? How can I help you today?';

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewConversationView extends StatelessWidget {
-  const NewConversationView({super.key});
+  const NewConversationView({super.key, required this.chatId});
+  final String chatId;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,10 @@ class NewConversationView extends StatelessWidget {
       create: (context) => getIt.get<MessagesCubit>(),
       child: Scaffold(
         appBar: customAppBar(context, title: AppStrings.appName),
-        body: const Column(
+        body: Column(
           children: [
-            Expanded(child: MessagesList(chatId: 'id')),
-            SendMessageTextBoxWidget(chatId: ''),
+            Expanded(child: MessagesList(chatId: chatId)),
+            SendMessageTextBoxWidget(chatId: chatId),
           ],
         ),
       ),

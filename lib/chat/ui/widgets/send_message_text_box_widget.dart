@@ -29,7 +29,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              cubit.sendMessageFromUser();
+              cubit.sendMessageFromUser(chatId: chatId);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
@@ -43,7 +43,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              cubit.sendMessageFromBot();
+              cubit.sendMessageFromBot(chatId: chatId);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),

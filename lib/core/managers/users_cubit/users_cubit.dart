@@ -48,7 +48,7 @@ class UsersCubit extends Cubit<UsersState> {
   Future<void> addGoogleUser(GoogleSignInAccount googleUser) async {
     emit(UsersLoading());
     var user = UserModel(
-      userId: googleUser.id,
+      userId: authRepo.getCurrentUser()!.id,
       createdAt: DateTime.now().toString(),
       fullName: googleUser.displayName,
       phoneNumber: '',
