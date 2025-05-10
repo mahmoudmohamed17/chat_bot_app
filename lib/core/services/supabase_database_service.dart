@@ -37,6 +37,11 @@ class SupabaseDatabaseService {
     return result['id'];
   }
 
+  /// Delete a chat with chatId got from Topic Model
+  Future<void> deleteChat(String chatId) async {
+    await _client.from(chatsTable).delete().eq('id', chatId).single();
+  }
+
   Future<void> addMessage({
     required String chatId,
     String? message,
@@ -47,6 +52,11 @@ class SupabaseDatabaseService {
       'message': message,
       'sender': sender,
     });
+  }
+
+  /// Delete all messages with chatId got from Topic Model
+  Future<void> deleteAllMessages(String chatId) async {
+    await _client.from(messagesTable).delete().eq('for_chat', chatId);
   }
 
   Stream messagesStream(String chatId) {

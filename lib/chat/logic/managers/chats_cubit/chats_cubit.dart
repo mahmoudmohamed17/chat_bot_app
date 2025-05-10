@@ -1,57 +1,48 @@
 import 'package:bloc/bloc.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
-import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:equatable/equatable.dart';
 part 'chats_state.dart';
 
 class ChatsCubit extends Cubit<ChatsState> {
-  ChatsCubit() : super(ChatsInitial());
+  ChatsCubit(this.supabeAuthService, this.supabaseDatabaseService, this.topicsCubit) : super(ChatsInitial());
 
-  final supabeAuthService = SupabaseAuthService();
-  final supabaseDatabaseService = SupabaseDatabaseService();
-
-  String? _chatId;
-  List<TopicModel>? topics;
+  final SupabaseAuthService supabeAuthService;
+  final SupabaseDatabaseService supabaseDatabaseService;
+  late TopicsCubit? topicsCubit;
+ 
+  String? chatId;
 
   Future<void> createChat() async {
     emit(ChatLoading());
     try {
-      final chatId = await supabaseDatabaseService.createChat(
+      final id = await supabaseDatabaseService.createChat(
         supabeAuthService.currentUser!.id,
       );
-      _chatId = chatId;
-      await addTopic();
-      emit(ChatsSuccess(chatId: chatId));
+      chatId = id;
+      await topicsCubit!.addTopic();
+      emit(ChatsSuccess());
     } catch (e) {
       emit(ChatsFailed(errorMsg: e.toString()));
     }
   }
 
-  Future<void> addTopic() async {
+  Future<void> deleteChat(String chatId) async {
     try {
-      await supabaseDatabaseService.addTopic(_chatId!);
-      await getTopics();
+      await supabaseDatabaseService.deleteChat(chatId);
+      emit(ChatsSuccess());
     } catch (e) {
-      emit(TopicsFailed(errorMsg: e.toString()));
+      emit(ChatsFailed(errorMsg: e.toString()));
     }
   }
 
-  Future<void> deleteTopic(String topicId) async {
+  Future<void> deleteAllMessages(String chatId) async {
     try {
-      await supabaseDatabaseService.deleteTopic(topicId);
-      await getTopics();
+      await supabaseDatabaseService.deleteAllMessages(chatId);
+      emit(ChatsSuccess());
     } catch (e) {
-      emit(TopicsFailed(errorMsg: e.toString()));
-    }
-  }
-
-  Future<void> getTopics() async {
-    try {
-      topics = await supabaseDatabaseService.getTopics();
-      emit(TopicsSuccess());
-    } catch (e) {
-      emit(TopicsFailed(errorMsg: e.toString()));
+      emit(ChatsFailed(errorMsg: e.toString()));
     }
   }
 }

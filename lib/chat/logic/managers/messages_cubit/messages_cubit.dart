@@ -5,8 +5,9 @@ import 'package:equatable/equatable.dart';
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
-  MessagesCubit() : super(MessagesInitial());
-  final supabaseDatabaseService = SupabaseDatabaseService();
+  MessagesCubit(this.supabaseDatabaseService) : super(MessagesInitial());
+  final SupabaseDatabaseService supabaseDatabaseService;
+  /// TODO: use Gemini Service here
 
   Future<void> sendMessageFromUser({
     required String chatId,
@@ -30,6 +31,7 @@ class MessagesCubit extends Cubit<MessagesState> {
   }) async {
     emit(MessagesLoading());
     try {
+      /// TODO: taking reponse from Gemini and add it to stream
       await Future.delayed(const Duration(seconds: 5), () async {
         await supabaseDatabaseService.addMessage(
           chatId: chatId,
