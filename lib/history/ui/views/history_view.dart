@@ -9,12 +9,7 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        children: [
-          const HistoryViewAppBar(),
-          Expanded(
-            child: HistoryList(),
-          ),
-        ],
+        children: [const HistoryViewAppBar(), Expanded(child: HistoryList())],
       ),
     );
   }

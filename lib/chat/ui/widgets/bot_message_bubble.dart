@@ -55,7 +55,7 @@ class BotMessageBubble extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     FontAwesomeIcons.shareNodes,
-                    color: Colors.black,
+                    color: AppColors.textContainer,
                     size: 20,
                   ),
                 ),
@@ -70,7 +70,7 @@ class BotMessageBubble extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.copy,
-                    color: Colors.black,
+                    color: AppColors.textContainer,
                     size: 20,
                   ),
                 ),

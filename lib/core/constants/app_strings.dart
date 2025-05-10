@@ -40,7 +40,8 @@ class AppStrings {
   static const String resetPasswordHint =
       'To reset your password you will need the next clear OTP code sent to your email.';
   static const String newPassword = 'New password';
-  static const String fetchingMessagesErrorAlert = 'Error fetching messages, try again later.';
+  static const String fetchingMessagesErrorAlert =
+      'Error fetching messages, try again later.';
   static const String confirmNewPassword = 'Confirm new password';
   static const String otpCodeVerification = 'OTP code verification';
   static const String otpCodeVerificationHint =

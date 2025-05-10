@@ -8,7 +8,10 @@ class MessagesCubit extends Cubit<MessagesState> {
   MessagesCubit() : super(MessagesInitial());
   final supabaseDatabaseService = SupabaseDatabaseService();
 
-  Future<void> sendMessageFromUser({required String chatId, String? message}) async {
+  Future<void> sendMessageFromUser({
+    required String chatId,
+    String? message,
+  }) async {
     try {
       await supabaseDatabaseService.addMessage(
         chatId: chatId,
@@ -21,7 +24,10 @@ class MessagesCubit extends Cubit<MessagesState> {
     }
   }
 
-  Future<void> sendMessageFromBot({required String chatId, String? message}) async {
+  Future<void> sendMessageFromBot({
+    required String chatId,
+    String? message,
+  }) async {
     emit(MessagesLoading());
     try {
       await Future.delayed(const Duration(seconds: 5), () async {

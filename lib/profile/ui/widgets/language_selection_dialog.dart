@@ -11,7 +11,6 @@ class LanguageSelectionDialog extends StatefulWidget {
   const LanguageSelectionDialog({super.key, this.onClose});
   final void Function(bool)? onClose;
 
-
   @override
   State<LanguageSelectionDialog> createState() =>
       _LanguageSelectionDialogState();
@@ -70,7 +69,10 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                   labelColor: Colors.white,
                   onPressed: () {
                     SharedPrefs.setInt(selectedLangIndex, _activeIndex);
-                    SharedPrefs.setString(selectedLangLabel, _translations[_activeIndex]);
+                    SharedPrefs.setString(
+                      selectedLangLabel,
+                      _translations[_activeIndex],
+                    );
                     widget.onClose?.call(true);
                     context.pop();
                   },

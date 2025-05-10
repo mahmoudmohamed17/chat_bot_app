@@ -98,10 +98,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> verifyOTP({
-    required String token,
-    required String email,
-  }) async {
+  Future<void> verifyOTP({required String token, required String email}) async {
     await supabaseAuthService.verifyOTP(token: token, email: email);
   }
 

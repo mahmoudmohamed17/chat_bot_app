@@ -5,15 +5,14 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileBadge extends StatelessWidget {
-  const UserProfileBadge({
-    super.key,
-  });
+  const UserProfileBadge({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {},
       contentPadding: EdgeInsets.zero,
+
       /// TODO: Display image with Image Picker Widget
       leading: const CircleAvatar(
         radius: 30,
@@ -27,9 +26,7 @@ class UserProfileBadge extends StatelessWidget {
       subtitle: Text(
         AppStrings.dummyUserEmail,
         overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.regular12.copyWith(
-          color: AppColors.textContainer,
-        ),
+        style: AppTextStyles.regular12.copyWith(color: AppColors.textContainer),
       ),
     );
   }

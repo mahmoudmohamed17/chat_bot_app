@@ -17,15 +17,12 @@ class PrivacyPolicyView extends StatelessWidget {
             spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                AppStrings.privacyPolicy,
-                style: AppTextStyles.bold28,
-              ),
+              Text(AppStrings.privacyPolicy, style: AppTextStyles.bold28),
               Text(
                 AppStrings.privacyPolicyText,
                 style: AppTextStyles.regular14,
               ),
-              SizedBox(height: 24,),
+              SizedBox(height: 24),
             ],
           ),
         ),

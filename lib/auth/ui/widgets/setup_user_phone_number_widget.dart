@@ -23,9 +23,11 @@ class _SetupUserPhoneNumberWidgetState
       spacing: 8,
       children: [
         Expanded(
-          child: CountryDropdown(onChanged: (value) {
-            countryCode = value ?? '+1';
-          },),
+          child: CountryDropdown(
+            onChanged: (value) {
+              countryCode = value ?? '+1';
+            },
+          ),
         ),
         Expanded(
           flex: 3,

@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EmptyHistoryViewWidget extends StatelessWidget {
-  const EmptyHistoryViewWidget({
-    super.key,
-  });
+  const EmptyHistoryViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +15,7 @@ class EmptyHistoryViewWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: 16,
       children: [
-        SvgPicture.asset(
-          Assets.imagesEmptyFolder,
-          height: 150,
-          width: 150,
-        ),
+        SvgPicture.asset(Assets.imagesEmptyFolder, height: 150, width: 150),
         const Text(
           AppStrings.historyIsEmpty,
           style: AppTextStyles.regular18,
