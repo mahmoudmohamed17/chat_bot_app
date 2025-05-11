@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
@@ -7,7 +9,9 @@ part 'topics_state.dart';
 
 class TopicsCubit extends Cubit<TopicsState> {
   TopicsCubit(this.supabaseDatabaseService)
-    : super(TopicsInitial());
+    : super(TopicsInitial()) {
+      loadTopics();
+    }
 
   final SupabaseDatabaseService supabaseDatabaseService;
 
@@ -31,6 +35,7 @@ class TopicsCubit extends Cubit<TopicsState> {
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
+    emit(TopicsLoading());
     try {
       await supabaseDatabaseService.deleteTopic(topic.id!);
       await deleteMessages(topic.forChat!);
@@ -45,6 +50,7 @@ class TopicsCubit extends Cubit<TopicsState> {
         await loadTopics();
       }
     } catch (e) {
+      log('Error with deleteTopic: ${e.toString()}');
       emit(TopicsFailed(errorMsg: e.toString()));
     }
   }
@@ -58,6 +64,7 @@ class TopicsCubit extends Cubit<TopicsState> {
         emit(TopicsSuccess(topics: topics));
       }
     } catch (e) {
+      log('Error with loadTopics: ${e.toString()}');
       emit(TopicsFailed(errorMsg: e.toString()));
     }
   }

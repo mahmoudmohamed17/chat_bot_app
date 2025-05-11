@@ -1,4 +1,5 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
@@ -16,8 +17,11 @@ class ChatIntroView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt.get<ChatsCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt.get<ChatsCubit>()),
+        BlocProvider(create: (context) => getIt.get<TopicsCubit>()),
+      ],
       child: BlocConsumer<ChatsCubit, ChatsState>(
         listener: (context, state) {
           if (state is ChatsSuccess) {
@@ -32,7 +36,8 @@ class ChatIntroView extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var cubit = context.read<ChatsCubit>();
+          final chatCubit = context.read<ChatsCubit>();
+          final topicsCubit = context.read<TopicsCubit>();
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -58,8 +63,9 @@ class ChatIntroView extends StatelessWidget {
                     label: AppStrings.startChat,
                     backgroundColor: AppColors.primary,
                     labelColor: Colors.white,
-                    onPressed: () {
-                      cubit.createChat();
+                    onPressed: () async {
+                      final id = await chatCubit.createChat();
+                      await topicsCubit.addTopic(id ?? '');
                     },
                   ),
                 ),

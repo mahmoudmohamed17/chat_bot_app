@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
@@ -5,10 +7,8 @@ import 'package:equatable/equatable.dart';
 part 'chats_state.dart';
 
 class ChatsCubit extends Cubit<ChatsState> {
-  ChatsCubit(
-    this.supabeAuthService,
-    this.supabaseDatabaseService,
-  ) : super(ChatsInitial());
+  ChatsCubit(this.supabeAuthService, this.supabaseDatabaseService)
+    : super(ChatsInitial());
 
   final SupabaseAuthService supabeAuthService;
   final SupabaseDatabaseService supabaseDatabaseService;
@@ -45,6 +45,7 @@ class ChatsCubit extends Cubit<ChatsState> {
       await action();
       emit(ChatsSuccess());
     } catch (e) {
+      log('Error with _safeExcute: ${e.toString()}');
       emit(ChatsFailed(errorMsg: e.toString()));
     }
   }

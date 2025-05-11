@@ -39,7 +39,7 @@ class SupabaseDatabaseService {
 
   /// Delete a chat with chatId got from Topic Model
   Future<void> deleteChat(String chatId) async {
-    await _client.from(chatsTable).delete().eq('id', chatId).single();
+    await _client.from(chatsTable).delete().eq('id', chatId);
   }
 
   Future<void> addMessage({

@@ -9,6 +9,8 @@ sealed class TopicsState extends Equatable {
 
 final class TopicsInitial extends TopicsState {}
 
+final class TopicsLoading extends TopicsState {}
+
 final class TopicsSuccess extends TopicsState {
   final List<TopicModel> topics;
 

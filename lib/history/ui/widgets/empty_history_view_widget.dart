@@ -18,12 +18,12 @@ class EmptyHistoryViewWidget extends StatelessWidget {
         SvgPicture.asset(Assets.imagesEmptyFolder, height: 150, width: 150),
         const Text(
           AppStrings.historyIsEmpty,
-          style: AppTextStyles.regular18,
+          style: AppTextStyles.bold18,
           textAlign: TextAlign.center,
         ),
         const Text(
           AppStrings.historyIsEmptyHint,
-          style: AppTextStyles.bold16,
+          style: AppTextStyles.regular16,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 25),
