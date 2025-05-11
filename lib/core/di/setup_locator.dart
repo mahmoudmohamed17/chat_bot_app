@@ -27,18 +27,11 @@ void setupLocator() {
     ),
   );
 
-  /// Utils
-  late ChatsCubit chatsCubit;
-  late TopicsCubit topicsCubit;
-  chatsCubit = ChatsCubit(getIt(), getIt(), null);
-  topicsCubit = TopicsCubit(getIt(), chatsCubit);
-  chatsCubit.topicsCubit = topicsCubit;
-
   /// Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt(), getIt()));
   getIt.registerFactory<UsersCubit>(() => UsersCubit(getIt()));
   getIt.registerFactory<ModeCubit>(() => ModeCubit());
   getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt()));
-  getIt.registerSingleton<ChatsCubit>(chatsCubit);
-  getIt.registerSingleton<TopicsCubit>(topicsCubit);
+  getIt.registerSingleton<ChatsCubit>(ChatsCubit(getIt(), getIt()));
+  getIt.registerSingleton<TopicsCubit>(TopicsCubit(getIt()));
 }

@@ -1,20 +1,24 @@
+import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
+import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 Future<dynamic> showConfirmDeletionDialog(
   BuildContext context, {
-  int? index,
+  TopicModel? topic,
   bool? isDeletingAll,
 }) {
   return showDialog(
     context: context,
-    builder: (context) {
+    builder: (context_) {
       return Dialog(
         backgroundColor: Colors.white,
         elevation: 5,
@@ -66,8 +70,16 @@ Future<dynamic> showConfirmDeletionDialog(
                         if (isDeletingAll != null && isDeletingAll) {
                           /// TODO: Delete all
                         }
-                        if (index != null) {
-                          /// TODO: Delete specific item
+                        if (topic != null) {
+                          final topicsCubit = context.read<TopicsCubit>();
+                          final chatsCubit = context.read<ChatsCubit>();
+
+                          topicsCubit.deleteTopic(
+                            topic: topic,
+                            deleteChat: chatsCubit.deleteChat,
+                            deleteMessages: chatsCubit.deleteAllMessages,
+                          );
+                          context.pop();
                         }
                       },
                     ),

@@ -1,45 +1,48 @@
 import 'package:bloc/bloc.dart';
-import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:equatable/equatable.dart';
 part 'chats_state.dart';
 
 class ChatsCubit extends Cubit<ChatsState> {
-  ChatsCubit(this.supabeAuthService, this.supabaseDatabaseService, this.topicsCubit) : super(ChatsInitial());
+  ChatsCubit(
+    this.supabeAuthService,
+    this.supabaseDatabaseService,
+  ) : super(ChatsInitial());
 
   final SupabaseAuthService supabeAuthService;
   final SupabaseDatabaseService supabaseDatabaseService;
-  late TopicsCubit? topicsCubit;
- 
+
   String? chatId;
 
-  Future<void> createChat() async {
+  Future<String?> createChat() async {
     emit(ChatLoading());
     try {
       final id = await supabaseDatabaseService.createChat(
         supabeAuthService.currentUser!.id,
       );
       chatId = id;
-      await topicsCubit!.addTopic();
       emit(ChatsSuccess());
+      return id;
     } catch (e) {
       emit(ChatsFailed(errorMsg: e.toString()));
+      return null;
     }
   }
 
   Future<void> deleteChat(String chatId) async {
-    try {
-      await supabaseDatabaseService.deleteChat(chatId);
-      emit(ChatsSuccess());
-    } catch (e) {
-      emit(ChatsFailed(errorMsg: e.toString()));
-    }
+    await _safeExcute(action: () => supabaseDatabaseService.deleteChat(chatId));
   }
 
   Future<void> deleteAllMessages(String chatId) async {
+    await _safeExcute(
+      action: () => supabaseDatabaseService.deleteAllMessages(chatId),
+    );
+  }
+
+  Future<void> _safeExcute({required Future<void> Function() action}) async {
     try {
-      await supabaseDatabaseService.deleteAllMessages(chatId);
+      await action();
       emit(ChatsSuccess());
     } catch (e) {
       emit(ChatsFailed(errorMsg: e.toString()));

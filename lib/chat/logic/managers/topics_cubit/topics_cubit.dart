@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:equatable/equatable.dart';
@@ -7,37 +6,57 @@ import 'package:equatable/equatable.dart';
 part 'topics_state.dart';
 
 class TopicsCubit extends Cubit<TopicsState> {
-  TopicsCubit(this.supabaseDatabaseService, this.chatsCubit) : super(TopicsInitial());
+  TopicsCubit(this.supabaseDatabaseService)
+    : super(TopicsInitial());
 
   final SupabaseDatabaseService supabaseDatabaseService;
-  final ChatsCubit chatsCubit;
-  List<TopicModel>? topics;
 
-  Future<void> addTopic() async {
+  Future<void> addTopic(String chatId) async {
     try {
-      await supabaseDatabaseService.addTopic(chatsCubit.chatId!);
-      await getTopics();
+      var newTopic = await supabaseDatabaseService.addTopic(chatId);
+      if (state is TopicsSuccess) {
+        final current = (state as TopicsSuccess).topics;
+        emit(TopicsSuccess(topics: [...current, newTopic]));
+      } else {
+        await loadTopics();
+      }
     } catch (e) {
       emit(TopicsFailed(errorMsg: e.toString()));
     }
   }
 
   /// Deleting topic means deleting the chat related to it and also the messages
-  Future<void> deleteTopic({required TopicModel topic}) async {
+  Future<void> deleteTopic({
+    required TopicModel topic,
+    required Future<void> Function(String chatId) deleteChat,
+    required Future<void> Function(String chatId) deleteMessages,
+  }) async {
     try {
       await supabaseDatabaseService.deleteTopic(topic.id!);
-      await chatsCubit.deleteAllMessages(topic.forChat!);
-      await chatsCubit.deleteChat(topic.forChat!);
-      await getTopics();
+      await deleteMessages(topic.forChat!);
+      await deleteChat(topic.forChat!);
+      if (state is TopicsSuccess) {
+        final updated =
+            (state as TopicsSuccess).topics
+                .where((t) => t.id != topic.id)
+                .toList();
+        emit(updated.isEmpty ? TopicsEmpty() : TopicsSuccess(topics: updated));
+      } else {
+        await loadTopics();
+      }
     } catch (e) {
       emit(TopicsFailed(errorMsg: e.toString()));
     }
   }
 
-  Future<void> getTopics() async {
+  Future<void> loadTopics() async {
     try {
-      topics = await supabaseDatabaseService.getTopics();
-      emit(TopicsSuccess());
+      final topics = await supabaseDatabaseService.getTopics();
+      if (topics.isEmpty) {
+        emit(TopicsEmpty());
+      } else {
+        emit(TopicsSuccess(topics: topics));
+      }
     } catch (e) {
       emit(TopicsFailed(errorMsg: e.toString()));
     }
