@@ -35,6 +35,7 @@ class _SignupViewState extends State<SignupView> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
+            context.read<AuthCubit>().password = passwordController.text;
             context.push(Routes.selectGenderView);
             clear();
           }

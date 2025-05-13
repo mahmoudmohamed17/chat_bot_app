@@ -18,6 +18,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   User get currentUser => authRepo.getCurrentUser()!;
 
+  /// To save the current password entered by user for further processing
+  String? _password;
+  set password(String? value) => _password = value;
+  String? get password => _password;
+
   Future<void> logIn({required String email, required String password}) async {
     emit(AuthLoading());
     var result = await authRepo.logIn(email: email, password: password);
