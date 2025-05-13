@@ -2,7 +2,6 @@ import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/signin_view_body.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
-import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
@@ -31,39 +30,36 @@ class _SigninViewState extends State<SigninView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess || state is GoogleAuthSuccess) {
-            context.go(Routes.mainView);
-            SharedPrefs.setBool(isUserAuthenticated, true);
-            clear();
-          }
-
-          if (state is AuthFailed) {
-            snackBar(context, title: state.errorMsg);
-          }
-
-          if (state is GoogleAuthFailed) {
-            snackBar(context, title: state.errorMsg);
-          }
-        },
-        builder: (context, state) {
-          return LoadingOverlayWidget(
-            isLoading: state is AuthLoading || state is GoogleAuthLoading,
-            dialogBody: const LoadingDialogBody(),
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              appBar: customAppBar(context),
-              body: SigninViewBody(
-                emailController: emailController,
-                passwordController: passwordController,
-              ),
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess || state is GoogleAuthSuccess) {
+          context.go(Routes.mainView);
+          SharedPrefs.setBool(isUserAuthenticated, true);
+          clear();
+        }
+    
+        if (state is AuthFailed) {
+          snackBar(context, title: state.errorMsg);
+        }
+    
+        if (state is GoogleAuthFailed) {
+          snackBar(context, title: state.errorMsg);
+        }
+      },
+      builder: (context, state) {
+        return LoadingOverlayWidget(
+          isLoading: state is AuthLoading || state is GoogleAuthLoading,
+          dialogBody: const LoadingDialogBody(),
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: customAppBar(context),
+            body: SigninViewBody(
+              emailController: emailController,
+              passwordController: passwordController,
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

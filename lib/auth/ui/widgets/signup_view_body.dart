@@ -94,6 +94,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   if (_isTermsAndPolicyApproved) {
+                    context.read<AuthCubit>().password =
+                        widget.passwordController.text;
                     context.read<AuthCubit>().signUp(
                       email: widget.emailController.text,
                       password: widget.passwordController.text,

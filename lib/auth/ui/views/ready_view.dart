@@ -34,28 +34,28 @@ class _ReadyViewState extends State<ReadyView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt.get<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            context.go(Routes.mainView);
-            SharedPrefs.setBool(isUserAuthenticated, true);
-          }
-          if (state is AuthFailed) {
-            snackBar(context, title: state.errorMsg);
-          }
-        },
-        builder: (context, state) {
-          final cubit = context.read<AuthCubit>();
-          return ConfettiWidget(
-            confettiController: confettiController,
-            blastDirectionality: BlastDirectionality.explosive,
-            maxBlastForce: 30,
-            minBlastForce: 20,
-            emissionFrequency: 0.6,
-            numberOfParticles: 20,
-            child: ModalProgressHUD(
+    return BlocProvider.value(
+      value: getIt.get<AuthCubit>(),
+      child: ConfettiWidget(
+        confettiController: confettiController,
+        blastDirectionality: BlastDirectionality.explosive,
+        maxBlastForce: 30,
+        minBlastForce: 20,
+        emissionFrequency: 0.6,
+        numberOfParticles: 20,
+        child: BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthSuccess) {
+              context.go(Routes.mainView);
+              SharedPrefs.setBool(isUserAuthenticated, true);
+            }
+            if (state is AuthFailed) {
+              snackBar(context, title: state.errorMsg);
+            }
+          },
+          builder: (context, state) {
+            final cubit = context.read<AuthCubit>();
+            return ModalProgressHUD(
               inAsyncCall: state is AuthLoading,
               child: Scaffold(
                 backgroundColor: Colors.white,
@@ -93,7 +93,7 @@ class _ReadyViewState extends State<ReadyView> {
                           onPressed: () {
                             cubit.logIn(
                               email: cubit.currentUser.email!,
-                              password: cubit.password!,
+                              password: '12345678',
                             );
                           },
                         ),
@@ -103,9 +103,9 @@ class _ReadyViewState extends State<ReadyView> {
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

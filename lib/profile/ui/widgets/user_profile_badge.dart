@@ -21,9 +21,10 @@ class UserProfileBadge extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
         radius: 30,
-        backgroundImage: FileImage(
-          File(userData?.profilePicture ?? Assets.imagesProfilePic),
-        ),
+        backgroundImage:
+            userData?.profilePicture != null
+                ? FileImage(File(userData!.profilePicture!)) as ImageProvider
+                : const AssetImage(Assets.imagesProfilePic),
       ),
       title: Text(
         userData?.fullName ?? AppStrings.dummyUsername,

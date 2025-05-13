@@ -28,10 +28,10 @@ void setupLocator() {
   );
 
   /// Cubits
-  getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt(), getIt()));
-  getIt.registerFactory<UsersCubit>(() => UsersCubit(getIt()));
-  getIt.registerFactory<ModeCubit>(() => ModeCubit());
+  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt(), getIt()));
+  getIt.registerLazySingleton<UsersCubit>(() => UsersCubit(getIt()));
+  getIt.registerLazySingleton<ModeCubit>(() => ModeCubit());
   getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt()));
-  getIt.registerSingleton<ChatsCubit>(ChatsCubit(getIt(), getIt()));
-  getIt.registerSingleton<TopicsCubit>(TopicsCubit(getIt(), getIt() ));
+  getIt.registerLazySingleton<ChatsCubit>(() => ChatsCubit(getIt(), getIt()));
+  getIt.registerLazySingleton<TopicsCubit>(() => TopicsCubit(getIt(), getIt()));
 }
