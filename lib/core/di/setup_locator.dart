@@ -33,5 +33,5 @@ void setupLocator() {
   getIt.registerFactory<ModeCubit>(() => ModeCubit());
   getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt()));
   getIt.registerSingleton<ChatsCubit>(ChatsCubit(getIt(), getIt()));
-  getIt.registerSingleton<TopicsCubit>(TopicsCubit(getIt()));
+  getIt.registerSingleton<TopicsCubit>(TopicsCubit(getIt(), getIt() ));
 }

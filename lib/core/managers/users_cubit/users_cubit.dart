@@ -16,11 +16,13 @@ class UsersCubit extends Cubit<UsersState> {
   String? _gender;
   String? _dateOfBirth;
 
+  UserModel? user;
+
   Future<void> getUser() async {
     emit(UsersLoading());
     try {
-      var user = await authRepo.getUser(authRepo.getCurrentUser()!.id);
-      emit(UsersSuccess(user: user!));
+      user = await authRepo.getUser(authRepo.getCurrentUser()!.id);
+      emit(UsersSuccess());
     } catch (e) {
       emit(UsersFailed(errorMsg: e.toString()));
     }
@@ -39,7 +41,7 @@ class UsersCubit extends Cubit<UsersState> {
     );
     try {
       await authRepo.addUser(user);
-      emit(UsersSuccess(user: user));
+      emit(UsersSuccess());
     } catch (e) {
       emit(UsersFailed(errorMsg: e.toString()));
     }
@@ -56,7 +58,7 @@ class UsersCubit extends Cubit<UsersState> {
     );
     try {
       await authRepo.addUser(user);
-      emit(UsersSuccess(user: user));
+      emit(UsersSuccess());
     } catch (e) {
       emit(UsersFailed(errorMsg: e.toString()));
     }
@@ -66,7 +68,7 @@ class UsersCubit extends Cubit<UsersState> {
     emit(UsersLoading());
     try {
       await authRepo.updateUserDate(user);
-      emit(UsersSuccess(user: user));
+      emit(UsersSuccess());
     } catch (e) {
       emit(UsersFailed(errorMsg: e.toString()));
     }
@@ -76,7 +78,7 @@ class UsersCubit extends Cubit<UsersState> {
     emit(UsersLoading());
     try {
       await authRepo.deleteUser(authRepo.getCurrentUser()!.id);
-      emit(const UsersSuccess(user: UserModel()));
+      emit(UsersSuccess());
     } catch (e) {
       emit(UsersFailed(errorMsg: e.toString()));
     }

@@ -67,11 +67,11 @@ class SupabaseDatabaseService {
         .order('created_at', ascending: true);
   }
 
-  Future<TopicModel> addTopic(String chatId) async {
+  Future<TopicModel> addTopic(String chatId, String userId) async {
     final data =
         await _client
             .from(topicsTable)
-            .upsert({'for_chat': chatId})
+            .upsert({'for_chat': chatId, 'for_user': userId})
             .select()
             .single();
     final topic = TopicModel.fromJson(data);
@@ -82,8 +82,11 @@ class SupabaseDatabaseService {
     await _client.from(topicsTable).delete().eq('id', topicId);
   }
 
-  Future<List<TopicModel>> getTopics() async {
-    final data = await _client.from(topicsTable).select();
+  Future<List<TopicModel>> getTopics(String userId) async {
+    final data = await _client
+        .from(topicsTable)
+        .select()
+        .eq('for_user', userId);
     final topics = data.map((topic) => TopicModel.fromJson(topic)).toList();
     return topics;
   }

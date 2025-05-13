@@ -1,23 +1,26 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
+import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:equatable/equatable.dart';
-
 part 'topics_state.dart';
 
 class TopicsCubit extends Cubit<TopicsState> {
-  TopicsCubit(this.supabaseDatabaseService)
+  TopicsCubit(this.supabaseDatabaseService, this.supabaseAuthService)
     : super(TopicsInitial()) {
-      loadTopics();
-    }
+    loadTopics();
+  }
 
   final SupabaseDatabaseService supabaseDatabaseService;
+  final SupabaseAuthService supabaseAuthService;
 
   Future<void> addTopic(String chatId) async {
     try {
-      var newTopic = await supabaseDatabaseService.addTopic(chatId);
+      var newTopic = await supabaseDatabaseService.addTopic(
+        chatId,
+        supabaseAuthService.currentUser!.id,
+      );
       if (state is TopicsSuccess) {
         final current = (state as TopicsSuccess).topics;
         emit(TopicsSuccess(topics: [...current, newTopic]));
@@ -57,7 +60,9 @@ class TopicsCubit extends Cubit<TopicsState> {
 
   Future<void> loadTopics() async {
     try {
-      final topics = await supabaseDatabaseService.getTopics();
+      final topics = await supabaseDatabaseService.getTopics(
+        supabaseAuthService.currentUser!.id,
+      );
       if (topics.isEmpty) {
         emit(TopicsEmpty());
       } else {
