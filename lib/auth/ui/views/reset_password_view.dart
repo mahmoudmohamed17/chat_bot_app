@@ -2,6 +2,7 @@ import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
@@ -30,64 +31,67 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is AuthSuccess) {
-          context.push(
-            Routes.otpVerificationView,
-            extra: emailController.text,
-          );
-        }
-    
-        if (state is AuthFailed) {
-          snackBar(context, title: state.errorMsg);
-        }
-      },
-      builder: (context, state) {
-        var cubit = context.read<AuthCubit>();
-        return ModalProgressHUD(
-          inAsyncCall: state is AuthLoading,
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: customAppBar(context),
-            body: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    AppStrings.resetPassword,
-                    style: AppTextStyles.bold28,
+    return BlocProvider.value(
+      value: getIt.get<AuthCubit>(),
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {
+            context.push(
+              Routes.otpVerificationView,
+              extra: emailController.text,
+            );
+          }
+
+          if (state is AuthFailed) {
+            snackBar(context, title: state.errorMsg);
+          }
+        },
+        builder: (context, state) {
+          var cubit = context.read<AuthCubit>();
+          return ModalProgressHUD(
+            inAsyncCall: state is AuthLoading,
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: customAppBar(context),
+              body: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppStrings.resetPassword,
+                      style: AppTextStyles.bold28,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    AppStrings.resetPasswordHint,
-                    style: AppTextStyles.regular16,
+                  const SizedBox(height: 8),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppStrings.resetPasswordHint,
+                      style: AppTextStyles.regular16,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                CustomTextFormField(
-                  hintText: AppStrings.emailAddress,
-                  controller: emailController,
-                ),
-                const Expanded(child: SizedBox(height: 470)),
-                CustomButton(
-                  label: AppStrings.next,
-                  backgroundColor: AppColors.primary,
-                  labelColor: Colors.white,
-                  onPressed: () {
-                    cubit.signInWithOTP(email: emailController.text);
-                  },
-                ),
-                const SizedBox(height: 24),
-              ],
+                  const SizedBox(height: 24),
+                  CustomTextFormField(
+                    hintText: AppStrings.emailAddress,
+                    controller: emailController,
+                  ),
+                  const Expanded(child: SizedBox(height: 470)),
+                  CustomButton(
+                    label: AppStrings.next,
+                    backgroundColor: AppColors.primary,
+                    labelColor: Colors.white,
+                    onPressed: () {
+                      cubit.signInWithOTP(email: emailController.text);
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

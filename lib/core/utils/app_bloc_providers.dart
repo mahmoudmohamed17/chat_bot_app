@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocProviders {
   static List<BlocProvider> providers = [
-    BlocProvider.value(value: getIt.get<ModeCubit>()),
-    BlocProvider.value(value: getIt.get<AuthCubit>()),
-    BlocProvider.value(value: getIt.get<UsersCubit>()),
+    BlocProvider(create: (context) => getIt.get<ModeCubit>()),
+    BlocProvider(create: (context) => getIt.get<AuthCubit>()),
+    BlocProvider(create: (context) => getIt.get<UsersCubit>()),
   ];
 }
