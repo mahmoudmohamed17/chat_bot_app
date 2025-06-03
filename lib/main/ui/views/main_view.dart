@@ -24,6 +24,11 @@ class _MainViewState extends State<MainView> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(index: _activeIndex, children: _screens),

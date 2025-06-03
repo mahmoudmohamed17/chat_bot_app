@@ -24,7 +24,7 @@ class ReadyView extends StatefulWidget {
 
 class _ReadyViewState extends State<ReadyView> {
   ConfettiController confettiController = ConfettiController(
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 6),
   )..play();
   @override
   void dispose() {
@@ -48,6 +48,7 @@ class _ReadyViewState extends State<ReadyView> {
             if (state is AuthSuccess) {
               context.go(Routes.mainView);
               SharedPrefs.setBool(isUserAuthenticated, true);
+              SharedPrefs.setInt(selectedLangIndex, 0);
             }
             if (state is AuthFailed) {
               snackBar(context, title: state.errorMsg);

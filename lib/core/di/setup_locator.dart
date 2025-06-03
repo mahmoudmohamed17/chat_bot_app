@@ -28,7 +28,7 @@ void setupLocator() {
   );
 
   /// Cubits
-  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt(), getIt()));
+  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt()));
   getIt.registerLazySingleton<UsersCubit>(() => UsersCubit(getIt()));
   getIt.registerSingleton<ModeCubit>(ModeCubit());
   getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt()));

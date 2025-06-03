@@ -56,17 +56,19 @@ class _PinCodeViewState extends State<PinCodeView> {
                 label: AppStrings.confirm,
                 backgroundColor: AppColors.primary,
                 labelColor: Colors.white,
-                onPressed: () {
+                onPressed: () async {
                   /// Navigate to Ready Screen [Before Home Screen]
                   setState(() {
                     _isLoading = true;
                   });
-                  Future.delayed(const Duration(seconds: 3), () {
+                  await Future.delayed(const Duration(seconds: 3), () {
                     setState(() {
                       _isLoading = false;
                     });
                   });
-                  context.push(Routes.readyView);
+                  if (context.mounted) {
+                    context.push(Routes.readyView);
+                  }
                 },
               ),
             ),

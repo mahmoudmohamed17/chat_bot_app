@@ -3,6 +3,7 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/auth/ui/widgets/signup_view_body.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
@@ -30,8 +31,11 @@ class _SignupViewState extends State<SignupView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt.get<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt.get<AuthCubit>()),
+        BlocProvider.value(value: getIt.get<UsersCubit>()),
+      ],
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
@@ -46,6 +50,7 @@ class _SignupViewState extends State<SignupView> {
           if (state is GoogleAuthSuccess) {
             context.go(Routes.mainView);
             SharedPrefs.setBool(isUserAuthenticated, true);
+            SharedPrefs.setInt(selectedLangIndex, 0);
           }
 
           if (state is AuthFailed) {

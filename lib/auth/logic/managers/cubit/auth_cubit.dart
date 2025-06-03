@@ -1,15 +1,14 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
-import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this.authRepo, this.usersCubit) : super(AuthInitial());
+  AuthCubit(this.authRepo) : super(AuthInitial());
 
   final AuthRepo authRepo;
-  final UsersCubit usersCubit;
 
   /// Used to save the current value of OTP code for verification
   String? _code;
@@ -23,14 +22,17 @@ class AuthCubit extends Cubit<AuthState> {
   set password(String? value) => _password = value;
   String? get password => _password;
 
-  Future<void> logIn({required String email, required String password}) async {
+  Future<void> logIn({
+    required String email,
+    required String password,
+    Future<void> Function()? getUser,
+  }) async {
     emit(AuthLoading());
     var result = await authRepo.logIn(email: email, password: password);
     result.fold((failed) => emit(AuthFailed(errorMsg: failed.errorMsg)), (
       user,
     ) async {
-      /// Gets the data of the current user logged in on this device
-      await usersCubit.getUser();
+      await getUser!();
       emit(AuthSuccess());
     });
   }
@@ -55,7 +57,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle({
+    Future<void> Function(GoogleSignInAccount user)? addGoogleUser,
+    Future<void> Function()? getUser,
+  }) async {
     var result = await authRepo.signInWithGoogle();
     result.fold(
       (failed) {
@@ -66,8 +71,8 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (user) async {
         emit(GoogleAuthLoading());
-        await usersCubit.addGoogleUser(user!);
-        await usersCubit.getUser();
+        await addGoogleUser!(user!);
+        await getUser!();
         emit(GoogleAuthSuccess());
       },
     );

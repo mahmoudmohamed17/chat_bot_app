@@ -5,6 +5,7 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_social_button.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
@@ -81,7 +82,11 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             label: AppStrings.continueWithGoogle,
             image: Assets.imagesGoogle,
             onPressed: () {
-              context.read<AuthCubit>().signInWithGoogle();
+              final usersCubit = context.read<UsersCubit>();
+              context.read<AuthCubit>().signInWithGoogle(
+                addGoogleUser: usersCubit.addGoogleUser,
+                getUser: usersCubit.getUser, 
+              );
             },
           ),
           const SizedBox(height: 12),
