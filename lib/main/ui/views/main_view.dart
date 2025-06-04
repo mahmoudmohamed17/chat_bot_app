@@ -1,16 +1,10 @@
 import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
-import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
-import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
-import 'package:chat_bot_app/core/theme/app_text_styles.dart';
-import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -40,39 +34,50 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(index: _activeIndex, children: _screens),
-      bottomNavigationBar: GNav(
+      bottomNavigationBar: NavigationBar(
         selectedIndex: _activeIndex,
-        onTabChange: (index) {
+        onDestinationSelected: (index) {
           setState(() {
             _activeIndex = index;
           });
         },
-        tabBorderRadius: 24,
-        curve: Curves.easeOutExpo,
-        textStyle: AppTextStyles.semiBold16.copyWith(color: Colors.white),
-        gap: 8,
-        color: Colors.grey[350],
-        activeColor: Colors.white,
-        iconSize: 24,
         backgroundColor: Colors.white,
-        tabBackgroundColor: AppColors.primary,
-        tabMargin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        tabs: const [
-          GButton(
-            icon: FontAwesomeIcons.solidComments,
-            text: AppStrings.chat,
-            gap: 12,
+        indicatorColor: Colors.blue[80],
+
+        elevation: 5,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(
+              FontAwesomeIcons.solidComments,
+              color: AppColors.primaryExtraLight,
+            ),
+            selectedIcon: Icon(
+              FontAwesomeIcons.solidComments,
+              color: AppColors.primary,
+            ),
+            label: AppStrings.chat,
           ),
-          GButton(
-            icon: FontAwesomeIcons.solidFolder,
-            text: AppStrings.myTopics,
-            gap: 12,
+          NavigationDestination(
+            icon: Icon(
+              FontAwesomeIcons.solidFolder,
+              color: AppColors.primaryExtraLight,
+            ),
+            selectedIcon: Icon(
+              FontAwesomeIcons.solidFolder,
+              color: AppColors.primary,
+            ),
+            label: AppStrings.myTopics,
           ),
-          GButton(
-            icon: FontAwesomeIcons.solidUser,
-            text: AppStrings.myProfile,
-            gap: 12,
+          NavigationDestination(
+            icon: Icon(
+              FontAwesomeIcons.solidUser,
+              color: AppColors.primaryExtraLight,
+            ),
+            selectedIcon: Icon(
+              FontAwesomeIcons.solidUser,
+              color: AppColors.primary,
+            ),
+            label: AppStrings.myProfile,
           ),
         ],
       ),
