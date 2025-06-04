@@ -17,9 +17,9 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 Future<dynamic> signoutConfirmDialog(BuildContext context) {
   return showDialog(
     context: context,
-    builder: (context_) {
-      return BlocProvider(
-        create: (context) => getIt.get<AuthCubit>(),
+    builder: (_) {
+      return BlocProvider.value(
+        value: getIt.get<AuthCubit>(),
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {

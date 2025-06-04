@@ -6,9 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SendMessageTextBoxWidget extends StatelessWidget {
+class SendMessageTextBoxWidget extends StatefulWidget {
   const SendMessageTextBoxWidget({super.key, required this.chatId});
   final String chatId;
+
+  @override
+  State<SendMessageTextBoxWidget> createState() =>
+      _SendMessageTextBoxWidgetState();
+}
+
+class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
+  TextEditingController controller = TextEditingController();
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +34,21 @@ class SendMessageTextBoxWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         spacing: 8,
         children: [
-          const Expanded(
+          Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: 8),
-              child: CustomTextFormField(hintText: AppStrings.sendMessage),
+              padding: const EdgeInsets.only(left: 8),
+              child: CustomTextFormField(
+                hintText: AppStrings.sendMessage,
+                controller: controller,
+              ),
             ),
           ),
           ElevatedButton(
             onPressed: () {
-              cubit.sendMessageFromUser(chatId: chatId);
+              cubit.sendMessageFromUser(
+                chatId: widget.chatId,
+                message: controller.text,
+              );
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
@@ -43,7 +62,7 @@ class SendMessageTextBoxWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              cubit.sendMessageFromBot(chatId: chatId);
+              cubit.getBotResponse(chatId: widget.chatId);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),

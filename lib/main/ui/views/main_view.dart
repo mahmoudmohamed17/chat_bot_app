@@ -1,9 +1,13 @@
+import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainView extends StatefulWidget {
@@ -33,7 +37,13 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _activeIndex, children: _screens),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => getIt.get<ChatsCubit>()),
+          BlocProvider(create: (context) => getIt.get<TopicsCubit>()),
+        ],
+        child: IndexedStack(index: _activeIndex, children: _screens),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _activeIndex,
         onDestinationSelected: (index) {

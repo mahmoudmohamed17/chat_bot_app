@@ -16,8 +16,8 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getIt.get<ChatsCubit>()),
-        BlocProvider(create: (context) => getIt.get<TopicsCubit>()),
+        BlocProvider.value(value: getIt.get<ChatsCubit>()),
+        BlocProvider.value(value: getIt.get<TopicsCubit>()),
       ],
       child: BlocBuilder<TopicsCubit, TopicsState>(
         builder: (context, state) {

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
+import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:equatable/equatable.dart';
 part 'messages_state.dart';
 
@@ -12,7 +13,7 @@ class MessagesCubit extends Cubit<MessagesState> {
 
   Future<void> sendMessageFromUser({
     required String chatId,
-    String? message,
+    String? message, // Prompt
   }) async {
     try {
       await supabaseDatabaseService.addMessage(
@@ -20,17 +21,15 @@ class MessagesCubit extends Cubit<MessagesState> {
         message: message,
         sender: AppStrings.user,
       );
-      emit(MessagesSuccess());
+      await getBotResponse(chatId: chatId, message: message);
     } catch (e) {
       emit(MessagesFailed());
     }
   }
 
-  Future<void> sendMessageFromBot({
-    required String chatId,
-    String? message,
-  }) async {
+  Future<void> getBotResponse({required String chatId, String? message}) async {
     emit(MessagesLoading());
+
     try {
       /// TODO: taking reponse from Gemini and add it to stream
       await Future.delayed(const Duration(seconds: 5), () async {

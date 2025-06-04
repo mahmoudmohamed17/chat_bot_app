@@ -18,7 +18,7 @@ Future<dynamic> showConfirmDeletionDialog(
 }) {
   return showDialog(
     context: context,
-    builder: (context_) {
+    builder: (_) {
       return Dialog(
         backgroundColor: Colors.white,
         elevation: 5,
