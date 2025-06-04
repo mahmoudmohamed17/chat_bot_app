@@ -83,9 +83,10 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             image: Assets.imagesGoogle,
             onPressed: () {
               final usersCubit = context.read<UsersCubit>();
-              context.read<AuthCubit>().signInWithGoogle(
+              final authCubit = context.read<AuthCubit>();
+              authCubit.signInWithGoogle(
                 addGoogleUser: usersCubit.addGoogleUser,
-                getUser: usersCubit.getUser, 
+                getUser: usersCubit.getUser,
               );
             },
           ),

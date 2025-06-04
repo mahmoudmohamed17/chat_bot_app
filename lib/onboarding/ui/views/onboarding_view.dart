@@ -1,4 +1,5 @@
 import 'package:chat_bot_app/core/constants/app_constants.dart';
+import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
@@ -78,9 +79,20 @@ class _OnboardingViewState extends State<OnboardingView> {
               children: [
                 Expanded(
                   child: CustomButton(
-                    label: 'Skip',
+                    label:
+                        activeIndex != 0
+                            ? AppStrings.previous
+                            : AppStrings.skip,
                     onPressed: () {
-                      context.go(Routes.initAuthView);
+                      if (activeIndex != 0) {
+                        _pageController.animateToPage(
+                          activeIndex - 1,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                      } else {
+                        context.go(Routes.initAuthView);
+                      }
                       SharedPrefs.setBool(isOnboardingSeen, true);
                     },
                     backgroundColor: Colors.white,
@@ -89,7 +101,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
                 Expanded(
                   child: CustomButton(
-                    label: 'Next',
+                    label: AppStrings.next,
                     onPressed: () {
                       if (activeIndex == 2) {
                         context.go(Routes.initAuthView);

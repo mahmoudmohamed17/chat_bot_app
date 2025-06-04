@@ -40,16 +40,14 @@ class _SigninViewState extends State<SigninView> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess || state is GoogleAuthSuccess) {
-            context.go(Routes.mainView);
             SharedPrefs.setBool(isUserAuthenticated, true);
             SharedPrefs.setInt(selectedLangIndex, 0);
+            context.go(Routes.mainView);
             clear();
           }
-
           if (state is AuthFailed) {
             snackBar(context, title: state.errorMsg);
           }
-
           if (state is GoogleAuthFailed) {
             snackBar(context, title: state.errorMsg);
           }

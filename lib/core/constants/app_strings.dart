@@ -11,6 +11,7 @@ class AppStrings {
       'Your safety is ours. But for this you need to set a good password.';
   static const String next = 'Next';
   static const String skip = 'Skip';
+  static const String previous = 'Previous';
   static const String confirm = 'Confirm';
   static const String textContinue = 'Continue';
   static const String edit = 'Edit';
