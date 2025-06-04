@@ -29,6 +29,9 @@ class ChatIntroView extends StatelessWidget {
               Routes.newConversationView,
               extra: context.read<ChatsCubit>().chatId,
             );
+            final chatId = context.read<ChatsCubit>().chatId;
+            final topicCubit = context.read<TopicsCubit>();
+            topicCubit.createTopic(chatId!);
           }
 
           if (state is ChatsFailed) {
@@ -37,7 +40,6 @@ class ChatIntroView extends StatelessWidget {
         },
         builder: (context, state) {
           final chatCubit = context.read<ChatsCubit>();
-          final topicsCubit = context.read<TopicsCubit>();
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -64,8 +66,7 @@ class ChatIntroView extends StatelessWidget {
                     backgroundColor: AppColors.primary,
                     labelColor: Colors.white,
                     onPressed: () async {
-                      final id = await chatCubit.createChat();
-                      await topicsCubit.addTopic(id ?? '');
+                      await chatCubit.createChat();
                     },
                   ),
                 ),

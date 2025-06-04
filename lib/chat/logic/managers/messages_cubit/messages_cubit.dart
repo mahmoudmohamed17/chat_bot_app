@@ -7,6 +7,7 @@ part 'messages_state.dart';
 class MessagesCubit extends Cubit<MessagesState> {
   MessagesCubit(this.supabaseDatabaseService) : super(MessagesInitial());
   final SupabaseDatabaseService supabaseDatabaseService;
+
   /// TODO: use Gemini Service here
 
   Future<void> sendMessageFromUser({

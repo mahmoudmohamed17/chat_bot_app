@@ -73,9 +73,8 @@ Future<dynamic> showConfirmDeletionDialog(
                         if (topic != null) {
                           final topicsCubit = context.read<TopicsCubit>();
                           final chatsCubit = context.read<ChatsCubit>();
-
-                          topicsCubit.deleteTopic(
-                            topic: topic,
+                          topicsCubit.deleteTopic(topic: topic);
+                          topicsCubit.freeUpTopicDats(
                             deleteChat: chatsCubit.deleteChat,
                             deleteMessages: chatsCubit.deleteAllMessages,
                           );

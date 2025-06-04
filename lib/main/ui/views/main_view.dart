@@ -43,7 +43,6 @@ class _MainViewState extends State<MainView> {
         },
         backgroundColor: Colors.white,
         indicatorColor: Colors.blue[80],
-
         elevation: 5,
         destinations: const [
           NavigationDestination(

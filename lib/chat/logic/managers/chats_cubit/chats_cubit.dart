@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:equatable/equatable.dart';
@@ -15,11 +16,12 @@ class ChatsCubit extends Cubit<ChatsState> {
 
   String? chatId;
 
+  /// Note: after creating chat, we create a topic for it
   Future<String?> createChat() async {
     emit(ChatLoading());
     try {
       final id = await supabaseDatabaseService.createChat(
-        supabeAuthService.currentUser!.id,
+        supabeAuthService.currentUser?.id ?? dummyUserId,
       );
       chatId = id;
       emit(ChatsSuccess());
