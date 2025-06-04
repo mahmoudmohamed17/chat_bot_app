@@ -24,6 +24,4 @@ const String messagesTable = 'messages';
 const String topicsTable = 'topics';
 
 /// Dummy data for testing
-const String dummyUserMessage = 'Hello GemiChat! How are you?';
-const String dummyBotMessage =
-    'I feel good! How are you too? How can I help you today?';
+

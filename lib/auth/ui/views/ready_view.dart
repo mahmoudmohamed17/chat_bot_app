@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
@@ -93,7 +94,7 @@ class _ReadyViewState extends State<ReadyView> {
                           labelColor: Colors.white,
                           onPressed: () {
                             cubit.logIn(
-                              email: cubit.currentUser.email!,
+                              email: cubit.currentUser?.email ?? dummyUserEmail,
                               password: '12345678',
                             );
                           },

@@ -98,19 +98,21 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               labelColor: Colors.white,
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  if (_isTermsAndPolicyApproved) {
-                    context.read<AuthCubit>().password =
-                        widget.passwordController.text;
-                    context.read<AuthCubit>().signUp(
-                      email: widget.emailController.text,
-                      password: widget.passwordController.text,
-                    );
-                  } else {
-                    snackBar(
-                      context,
-                      title: AppStrings.agreeToPolicyAlertMessage,
-                    );
-                  }
+                  final authCubit = context.read<AuthCubit>();
+                  _isTermsAndPolicyApproved
+                      ? {
+                        authCubit.password = widget.passwordController.text,
+                        authCubit.signUp(
+                          email: widget.emailController.text,
+                          password: widget.passwordController.text,
+                        ),
+                      }
+                      : {
+                        snackBar(
+                          context,
+                          title: AppStrings.agreeToPolicyAlertMessage,
+                        ),
+                      };
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }

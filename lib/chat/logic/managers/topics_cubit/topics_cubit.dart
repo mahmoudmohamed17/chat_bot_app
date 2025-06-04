@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
@@ -61,7 +62,7 @@ class TopicsCubit extends Cubit<TopicsState> {
   Future<void> loadTopics() async {
     try {
       final topics = await supabaseDatabaseService.getTopics(
-        supabaseAuthService.currentUser!.id,
+        supabaseAuthService.currentUser?.id ?? dummyUserId,
       );
       if (topics.isEmpty) {
         emit(TopicsEmpty());

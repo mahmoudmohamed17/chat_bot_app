@@ -42,11 +42,6 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<Failure, User>> signUp({
     required String email,
     required String password,
-    String? name,
-    String? profileImage,
-    String? phoneNumber,
-    String? gender,
-    String? dateOfBirth,
   }) async {
     try {
       var response = await supabaseAuthService.signUp(

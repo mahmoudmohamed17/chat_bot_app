@@ -15,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
   set code(String? value) => _code = value;
   String? get code => _code;
 
-  User get currentUser => authRepo.getCurrentUser()!;
+  User? get currentUser => authRepo.getCurrentUser();
 
   /// To save the current password entered by user for further processing
   String? _password;
@@ -61,16 +61,16 @@ class AuthCubit extends Cubit<AuthState> {
     Future<void> Function(GoogleSignInAccount user)? addGoogleUser,
     Future<void> Function()? getUser,
   }) async {
+    emit(GoogleAuthLoading());
     var result = await authRepo.signInWithGoogle();
     result.fold(
       (failed) {
-        emit(GoogleAuthLoading());
+        log('Google sign in failed: ${failed.errorMsg}');
         Future.delayed(const Duration(seconds: 3), () {
           emit(GoogleAuthFailed(errorMsg: failed.errorMsg));
         });
       },
       (user) async {
-        emit(GoogleAuthLoading());
         await addGoogleUser!(user!);
         await getUser!();
         emit(GoogleAuthSuccess());

@@ -3,9 +3,9 @@ import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.d
 import 'package:chat_bot_app/chat/ui/widgets/bot_message_bubble.dart';
 import 'package:chat_bot_app/chat/ui/widgets/custom_loading_comment.dart';
 import 'package:chat_bot_app/chat/ui/widgets/user_message_bubble.dart';
-import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:flutter/material.dart';

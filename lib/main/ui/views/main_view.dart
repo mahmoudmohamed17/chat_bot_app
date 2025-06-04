@@ -30,10 +30,10 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     super.initState();
-    if (SharedPrefs.getBool(isUserAuthenticated)) {
-      final usersCubit = context.read<UsersCubit>();
-      usersCubit.getUser();
-    }
+    // if (SharedPrefs.getBool(isUserAuthenticated)) {
+    //   final usersCubit = context.read<UsersCubit>();
+    //   usersCubit.getUser();
+    // }
   }
 
   @override
