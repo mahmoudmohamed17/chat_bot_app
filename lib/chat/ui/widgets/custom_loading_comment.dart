@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_loadingkit/flutter_animated_loadingkit.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomLoadingComment extends StatelessWidget {
   const CustomLoadingComment({super.key});
@@ -20,11 +21,10 @@ class CustomLoadingComment extends StatelessWidget {
         ),
         width: 100,
         padding: const EdgeInsets.all(16),
-        child: const AnimatedLoadingJumpingDots(
-          jumpingHeight: 10,
-          dotSize: 5,
-          speed: Duration(milliseconds: 200),
-          delayBetweenBounces: Duration(milliseconds: 30),
+        child: const SpinKitThreeBounce(
+          color: Colors.black,
+          size: 18,
+          duration: Duration(milliseconds: 600),
         ),
       ),
     );
