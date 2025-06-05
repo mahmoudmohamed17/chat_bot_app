@@ -27,6 +27,12 @@ class SupabaseDatabaseService {
     await _client.from(usersTable).delete().eq('user_id', userId);
   }
 
+  Future<bool> checkUserExists(String userId) async {
+    final user =
+        await _client.from(usersTable).select().eq('user_id', userId).single();
+    return user.isNotEmpty ? true : false;
+  }
+
   Future<String> createChat(String userId) async {
     final result =
         await _client

@@ -59,7 +59,7 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<Either<Failure, GoogleSignInAccount?>> signInWithGoogle() async {
     try {
-      var user = await supabaseAuthService.signInWithGoogle();
+      final user = await supabaseAuthService.signInWithGoogle();
       return right(user);
     } on AuthException catch (e) {
       return left(AuthFailure(errorMsg: e.message));
@@ -115,5 +115,10 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<void> updateUserDate(UserModel user) async {
     await supabaseDatabaseService.updateUser(user);
+  }
+
+  @override
+  Future<bool> checkUserExists(String userId) async {
+    return await supabaseDatabaseService.checkUserExists(userId);
   }
 }

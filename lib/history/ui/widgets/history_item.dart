@@ -18,12 +18,12 @@ class HistoryItem extends StatelessWidget {
       child: ListTile(
         horizontalTitleGap: 32,
         title: Text(
-          dummyListTitle,
+          dummyTopicTitle,
           overflow: TextOverflow.ellipsis,
           style: AppTextStyles.semiBold14.copyWith(color: Colors.black),
         ),
         subtitle: Text(
-          dummyListSubtitle,
+          dummyTopicDate,
           style: AppTextStyles.medium12.copyWith(
             color: AppColors.textContainer,
           ),

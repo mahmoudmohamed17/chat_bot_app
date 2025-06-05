@@ -1,13 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/auth/logic/repos/auth_repo.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/models/user_model.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
-  UsersCubit(this.authRepo) : super(UsersInitial());
+  UsersCubit(this.authRepo) : super(UsersInitial()) {
+    SharedPrefs.getBool(isUserAuthenticated) ? getUser() : null;
+  }
   final AuthRepo authRepo;
 
   String? _fullName;

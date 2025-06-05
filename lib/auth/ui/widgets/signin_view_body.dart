@@ -105,8 +105,8 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               labelColor: Colors.white,
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  var email = widget.emailController.text;
-                  var password = widget.passwordController.text;
+                  final email = widget.emailController.text;
+                  final password = widget.passwordController.text;
                   context.read<AuthCubit>().logIn(
                     email: email,
                     password: password,

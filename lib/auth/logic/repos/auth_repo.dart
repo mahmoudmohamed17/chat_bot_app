@@ -34,4 +34,6 @@ abstract class AuthRepo {
   Future<void> updateUserDate(UserModel user);
 
   Future<void> deleteUser(String userId);
+
+  Future<bool> checkUserExists(String userId);
 }

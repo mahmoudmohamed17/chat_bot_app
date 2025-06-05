@@ -71,7 +71,11 @@ class AuthCubit extends Cubit<AuthState> {
         });
       },
       (user) async {
-        await addGoogleUser!(user!);
+        final isFound = await authRepo.checkUserExists(user!.id);
+        if (!isFound) {
+          log('User not found in database, adding new user: ${user.email}');
+          await addGoogleUser!(user);
+        }
         await getUser!();
         emit(GoogleAuthSuccess());
       },

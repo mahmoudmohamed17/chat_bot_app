@@ -26,15 +26,6 @@ class _MainViewState extends State<MainView> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    // if (SharedPrefs.getBool(isUserAuthenticated)) {
-    //   final usersCubit = context.read<UsersCubit>();
-    //   usersCubit.getUser();
-    // }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MultiBlocProvider(
