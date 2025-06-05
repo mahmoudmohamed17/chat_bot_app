@@ -33,6 +33,8 @@ class _SigninViewBodyState extends State<SigninViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final usersCubit = context.read<UsersCubit>();
+    final authCubit = context.read<AuthCubit>();
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
@@ -82,8 +84,6 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             label: AppStrings.continueWithGoogle,
             image: Assets.imagesGoogle,
             onPressed: () {
-              final usersCubit = context.read<UsersCubit>();
-              final authCubit = context.read<AuthCubit>();
               authCubit.signInWithGoogle(
                 addGoogleUser: usersCubit.addGoogleUser,
                 getUser: usersCubit.getUser,
@@ -110,6 +110,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                   context.read<AuthCubit>().logIn(
                     email: email,
                     password: password,
+                    getUser: usersCubit.getUser,
                   );
                 } else {
                   autovalidateMode = AutovalidateMode.always;

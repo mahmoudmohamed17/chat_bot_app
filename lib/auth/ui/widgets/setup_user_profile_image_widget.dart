@@ -41,44 +41,43 @@ class _SetupUserProfileImageWidgetState
         Stack(
           clipBehavior: Clip.none,
           children: [
-            GestureDetector(
-              onTap: _pickImage,
-              child:
-                  _imageFile == null
-                      ? const CircleAvatar(
-                        radius: 55,
-                        backgroundColor: AppColors.container,
-                        child: Icon(
-                          FontAwesomeIcons.camera,
-                          color: AppColors.textContainer,
-                        ),
-                      )
-                      : CircleAvatar(
-                        radius: 55,
-                        backgroundImage: FileImage(_imageFile!),
-                      ),
-            ),
+            _imageFile == null
+                ? const CircleAvatar(
+                  radius: 55,
+                  backgroundColor: AppColors.container,
+                  child: Icon(
+                    FontAwesomeIcons.camera,
+                    color: AppColors.textContainer,
+                  ),
+                )
+                : CircleAvatar(
+                  radius: 55,
+                  backgroundImage: FileImage(_imageFile!),
+                ),
             Positioned(
               right: 0,
               bottom: 0,
-              child: Container(
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: Colors.white, width: 2),
+              child: GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: const BorderSide(color: Colors.white, width: 2),
+                    ),
+                    gradient: const LinearGradient(
+                      colors: [
+                        AppColors.primaryLight,
+                        AppColors.primaryExtraLight,
+                      ],
+                    ),
                   ),
-                  gradient: const LinearGradient(
-                    colors: [
-                      AppColors.primaryLight,
-                      AppColors.primaryExtraLight,
-                    ],
+                  padding: const EdgeInsets.all(6),
+                  child: const Icon(
+                    FontAwesomeIcons.pen,
+                    size: 12,
+                    color: Colors.white,
                   ),
-                ),
-                padding: const EdgeInsets.all(6),
-                child: const Icon(
-                  FontAwesomeIcons.pen,
-                  size: 12,
-                  color: Colors.white,
                 ),
               ),
             ),
