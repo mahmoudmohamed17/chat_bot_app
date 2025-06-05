@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<ModeCubit, bool>(
         builder: (context, state) {
-          var cubit = context.read<ModeCubit>();
+          final modeCubit = context.read<ModeCubit>();
           return MaterialApp.router(
             theme: ThemeData(
-              brightness: cubit.state ? Brightness.dark : Brightness.light,
+              brightness: modeCubit.state ? Brightness.dark : Brightness.light,
               useMaterial3: true,
             ),
             debugShowCheckedModeBanner: false,

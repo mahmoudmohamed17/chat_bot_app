@@ -13,7 +13,7 @@ class EmptyHistoryViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      spacing: 16,
+      spacing: 12,
       children: [
         SvgPicture.asset(Assets.imagesEmptyFolder, height: 150, width: 150),
         const Text(

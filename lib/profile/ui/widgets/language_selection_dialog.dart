@@ -16,8 +16,9 @@ class LanguageSelectionDialog extends StatefulWidget {
       _LanguageSelectionDialogState();
 }
 
+final List<String> translations = [AppStrings.english, AppStrings.arabic];
+
 class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
-  final List<String> _translations = [AppStrings.english, AppStrings.arabic];
   int _activeIndex = SharedPrefs.getInt(selectedLangIndex);
 
   @override
@@ -29,7 +30,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
         children: [
           Column(
             spacing: 16,
-            children: List.generate(_translations.length, (index) {
+            children: List.generate(translations.length, (index) {
               return GestureDetector(
                 onTap: () {
                   setState(() {
@@ -37,7 +38,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                   });
                 },
                 child: SelectLanguageItem(
-                  text: _translations[index],
+                  text: translations[index],
                   isActive: _activeIndex == index,
                 ),
               );
@@ -69,10 +70,6 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                   labelColor: Colors.white,
                   onPressed: () {
                     SharedPrefs.setInt(selectedLangIndex, _activeIndex);
-                    SharedPrefs.setString(
-                      selectedLangLabel,
-                      _translations[_activeIndex],
-                    );
                     widget.onClose?.call(true);
                     context.pop();
                   },

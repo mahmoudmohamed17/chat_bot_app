@@ -21,7 +21,7 @@ class MessagesCubit extends Cubit<MessagesState> {
         message: message,
         sender: AppStrings.user,
       );
-      await getBotResponse(chatId: chatId, message: message);
+      // await getBotResponse(chatId: chatId, message: message);
     } catch (e) {
       emit(MessagesFailed());
     }

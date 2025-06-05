@@ -16,7 +16,7 @@ class TopicsCubit extends Cubit<TopicsState> {
   final SupabaseDatabaseService supabaseDatabaseService;
   final SupabaseAuthService supabaseAuthService;
 
-  /// To save the current topic deleted that would be used with [freeUpTopicDats] method
+  /// To save the current topic deleted that would be used with [freeUpTopicData] method
   String? currentTopicChatId;
 
   /// Creating a topic related to a specific chat using its [Chat ID]
@@ -61,12 +61,12 @@ class TopicsCubit extends Cubit<TopicsState> {
     }
   }
 
-  Future<void> freeUpTopicDats({
+  Future<void> freeUpTopicData({
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
-    await deleteChat(currentTopicChatId!);
     await deleteMessages(currentTopicChatId!);
+    await deleteChat(currentTopicChatId!);
   }
 
   Future<void> loadTopics() async {

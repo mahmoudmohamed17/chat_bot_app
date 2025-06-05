@@ -35,7 +35,7 @@ class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
               children: [
                 const Icon(Icons.g_translate, color: Colors.black),
                 Text(
-                  SharedPrefs.getString(selectedLangLabel),
+                  translations[SharedPrefs.getInt(selectedLangIndex)],
                   style: AppTextStyles.semiBold16.copyWith(color: Colors.black),
                 ),
               ],

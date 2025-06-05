@@ -34,7 +34,7 @@ class HistoryView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 12),
                       child: Center(child: EmptyHistoryViewWidget()),
                     ),
-                    const Spacer(),
+                    const Spacer(flex: 2,),
                   ],
                   if (state is TopicsSuccess)
                     Expanded(child: HistoryList(topics: state.topics)),

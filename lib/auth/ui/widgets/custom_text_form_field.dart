@@ -30,6 +30,8 @@ class CustomTextFormField extends StatelessWidget {
           return null;
         }
       },
+      minLines: 1,
+      maxLines: 10,
       keyboardType: textInputType,
       decoration: InputDecoration(
         hintText: hintText,

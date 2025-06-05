@@ -46,6 +46,7 @@ class ChatIntroView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 8,
               children: [
+                const SizedBox(height: 48),
                 const Spacer(),
                 Image.asset(Assets.imagesAppLogo, scale: 3),
                 const Text(
@@ -70,7 +71,7 @@ class ChatIntroView extends StatelessWidget {
                     },
                   ),
                 ),
-                const Spacer(),
+                const Spacer(flex: 2),
               ],
             ),
           );

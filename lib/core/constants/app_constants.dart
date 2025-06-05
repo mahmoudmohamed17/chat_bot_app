@@ -15,7 +15,6 @@ const String isOnboardingSeen = 'isOnboardingSeen';
 const String isUserAuthenticated = 'isUserAuthenticated';
 const String isDarkMode = 'isDarkMode';
 const String selectedLangIndex = 'selectedLangIndex';
-const String selectedLangLabel = 'selectedLangLabel';
 
 /// Related to Database
 const String usersTable = 'users';
