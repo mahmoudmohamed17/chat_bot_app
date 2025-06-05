@@ -48,9 +48,9 @@ class _SignupViewState extends State<SignupView> {
           }
 
           if (state is GoogleAuthSuccess) {
-            context.go(Routes.mainView);
             SharedPrefs.setBool(isUserAuthenticated, true);
             SharedPrefs.setInt(selectedLangIndex, 0);
+            context.go(Routes.mainView);
           }
 
           if (state is AuthFailed) {

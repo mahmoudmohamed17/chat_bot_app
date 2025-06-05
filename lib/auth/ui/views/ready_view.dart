@@ -3,6 +3,7 @@ import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
@@ -35,8 +36,11 @@ class _ReadyViewState extends State<ReadyView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt.get<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt.get<AuthCubit>()),
+        BlocProvider.value(value: getIt.get<UsersCubit>()),
+      ],
       child: ConfettiWidget(
         confettiController: confettiController,
         blastDirectionality: BlastDirectionality.explosive,
@@ -47,16 +51,17 @@ class _ReadyViewState extends State<ReadyView> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              context.go(Routes.mainView);
               SharedPrefs.setBool(isUserAuthenticated, true);
               SharedPrefs.setInt(selectedLangIndex, 0);
+              context.go(Routes.mainView);
             }
             if (state is AuthFailed) {
               snackBar(context, title: state.errorMsg);
             }
           },
           builder: (context, state) {
-            final cubit = context.read<AuthCubit>();
+            final authCubit = context.read<AuthCubit>();
+            final usersCubit = context.read<UsersCubit>();
             return ModalProgressHUD(
               inAsyncCall: state is AuthLoading,
               child: Scaffold(
@@ -92,10 +97,13 @@ class _ReadyViewState extends State<ReadyView> {
                           label: 'Go to Home',
                           backgroundColor: AppColors.primary,
                           labelColor: Colors.white,
-                          onPressed: () {
-                            cubit.logIn(
-                              email: cubit.currentUser?.email ?? dummyUserEmail,
-                              password: '12345678',
+                          onPressed: () async {
+                            await authCubit.logIn(
+                              email:
+                                  authCubit.currentUser?.email ??
+                                  dummyUserEmail,
+                              password: authCubit.password ?? '',
+                              getUser: usersCubit.getUser,
                             );
                           },
                         ),

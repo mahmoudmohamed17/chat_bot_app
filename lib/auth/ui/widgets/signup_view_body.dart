@@ -33,6 +33,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = context.read<AuthCubit>();
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
@@ -96,23 +97,20 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               label: AppStrings.next,
               backgroundColor: AppColors.primary,
               labelColor: Colors.white,
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  final authCubit = context.read<AuthCubit>();
-                  _isTermsAndPolicyApproved
-                      ? {
-                        authCubit.password = widget.passwordController.text,
-                        authCubit.signUp(
-                          email: widget.emailController.text,
-                          password: widget.passwordController.text,
-                        ),
-                      }
-                      : {
-                        snackBar(
-                          context,
-                          title: AppStrings.agreeToPolicyAlertMessage,
-                        ),
-                      };
+                  if (_isTermsAndPolicyApproved) {
+                    authCubit.password = widget.passwordController.text;
+                    await authCubit.signUp(
+                      email: widget.emailController.text,
+                      password: widget.passwordController.text,
+                    );
+                  } else {
+                    snackBar(
+                      context,
+                      title: AppStrings.agreeToPolicyAlertMessage,
+                    );
+                  }
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }
