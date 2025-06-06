@@ -41,6 +41,7 @@ class _SigninViewState extends State<SigninView> {
         listener: (context, state) {
           if (state is AuthSuccess || state is GoogleAuthSuccess) {
             SharedPrefs.setBool(isUserAuthenticated, true);
+            SharedPrefs.setBool(isUserLoggedIn, true);
             SharedPrefs.setInt(selectedLangIndex, 0);
             context.go(Routes.mainView);
             clear();

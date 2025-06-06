@@ -1,9 +1,12 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
+import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
+import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
@@ -30,9 +33,11 @@ class _MainViewState extends State<MainView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (context.mounted) {
+      final isLogged = SharedPrefs.getBool(isUserLoggedIn);
+      if (context.mounted && isLogged) {
         snackBar(context, title: AppStrings.successfullyLoggedIn);
       }
+      SharedPrefs.setBool(isUserLoggedIn, false);
     });
   }
 
@@ -55,6 +60,7 @@ class _MainViewState extends State<MainView> {
         },
         backgroundColor: Colors.white,
         indicatorColor: Colors.blue[80],
+        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         elevation: 5,
         destinations: const [
           NavigationDestination(
