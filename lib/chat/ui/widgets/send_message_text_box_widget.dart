@@ -54,11 +54,13 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await cubit.sendMessage(
-                chatId: widget.chatId,
-                message: controller.text,
-              );
+              final prompt = controller.text;
+              await cubit.sendMessage(chatId: widget.chatId, message: prompt);
               controller.clear();
+              await cubit.getBotResponse(
+                chatId: widget.chatId,
+                message: prompt,
+              );
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),

@@ -1,4 +1,5 @@
 import 'package:chat_bot_app/core/constants/app_constants.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/models/user_model.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -48,7 +49,7 @@ class SupabaseDatabaseService {
   }
 
   Future<void> deleteAllChats() async {
-    await _client.from(chatsTable).delete().gt('id', 0);
+    await _client.from(chatsTable).delete().neq('id', dummyUuid);
   }
 
   Future<void> addMessage({
@@ -68,7 +69,7 @@ class SupabaseDatabaseService {
   }
 
   Future<void> deleteAllMessages() async {
-    await _client.from(messagesTable).delete().gt('id', 0);
+    await _client.from(messagesTable).delete().neq('id', dummyUuid);
   }
 
   Stream messagesStream(String chatId) {
@@ -95,7 +96,7 @@ class SupabaseDatabaseService {
   }
 
   Future<void> deleteAllTopics() async {
-    await _client.from(topicsTable).delete().gt('id', 0);
+    await _client.from(topicsTable).delete().neq('id', dummyUuid);
   }
 
   Future<List<TopicModel>> getTopics(String userId) async {

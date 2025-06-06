@@ -7,3 +7,4 @@ const String dummyUserEmail = 'example@gmail.com';
 const String dummyUserMessage = 'Hello GemiChat! How are you?';
 const String dummyBotMessage =
     'I feel good! How are you too? How can I help you today?';
+const String dummyUuid = '00000000-0000-0000-0000-000000000000';

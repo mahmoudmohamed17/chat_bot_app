@@ -25,12 +25,11 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
             if (state is AuthSuccess) {
               context.go(Routes.initAuthView);
               SharedPrefs.setBool(isUserAuthenticated, false);
-              context.pop();
             }
             if (state is AuthFailed) {
               snackBar(context, title: state.errorMsg);
-              context.pop();
             }
+            context.pop();
           },
           builder: (context, state) {
             final cubit = context.read<AuthCubit>();

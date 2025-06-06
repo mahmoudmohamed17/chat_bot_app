@@ -84,8 +84,8 @@ class TopicsCubit extends Cubit<TopicsState> {
     required Future<void> Function() deleteAllChats,
     required Future<void> Function() deleteAllMessages,
   }) async {
-    await deleteAllChats();
     await deleteAllMessages();
+    await deleteAllChats();
   }
 
   Future<void> loadTopics() async {

@@ -4,6 +4,7 @@ import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
@@ -13,8 +14,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-/// Error with deleteAllTopics: PostgrestException(message: DELETE requires a WHERE clause, code: 21000, details: Bad Request, hint: null)
-
 Future<dynamic> showConfirmDeletionDialog(
   BuildContext context, {
   TopicModel? topic,
@@ -22,27 +21,30 @@ Future<dynamic> showConfirmDeletionDialog(
 }) {
   return showDialog(
     context: context,
-    builder: (_) {
-      return Dialog(
-        backgroundColor: Colors.white,
-        elevation: 5,
-        insetAnimationDuration: const Duration(milliseconds: 500),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: getIt.get<TopicsCubit>()),
-            BlocProvider.value(value: getIt.get<ChatsCubit>()),
-          ],
-          child: BlocConsumer<TopicsCubit, TopicsState>(
-            listener: (context, state) {
-              if (state is TopicsSuccess) {
-                context.pop();
-              }
-            },
-            builder: (context, state) {
-              final topicsCubit = context.read<TopicsCubit>();
-              final chatsCubit = context.read<ChatsCubit>();
-              return ModalProgressHUD(
-                inAsyncCall: state is TopicsLoading,
+    builder: (dialogCtx) {
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: getIt.get<TopicsCubit>()),
+          BlocProvider.value(value: getIt.get<ChatsCubit>()),
+        ],
+        child: BlocConsumer<TopicsCubit, TopicsState>(
+          listener: (context, state) {
+            if (state is TopicsSuccess) {
+              dialogCtx.pop();
+            }
+            if (state is TopicsFailed) {
+              dialogCtx.pop();
+              snackBar(context, title: state.errorMsg);
+            }
+          },
+          builder: (context, state) {
+            final topicsCubit = context.read<TopicsCubit>();
+            final chatsCubit = context.read<ChatsCubit>();
+            return ModalProgressHUD(
+              inAsyncCall: state is TopicsLoading,
+              child: Dialog(
+                backgroundColor: Colors.white,
+                elevation: 5,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8,
@@ -82,7 +84,7 @@ Future<dynamic> showConfirmDeletionDialog(
                               backgroundColor: Colors.white,
                               labelColor: Colors.black,
                               onPressed: () {
-                                context.pop();
+                                dialogCtx.pop();
                               },
                             ),
                           ),
@@ -116,9 +118,9 @@ Future<dynamic> showConfirmDeletionDialog(
                     ],
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       );
     },

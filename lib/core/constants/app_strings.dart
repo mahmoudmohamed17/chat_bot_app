@@ -10,6 +10,7 @@ class AppStrings {
   static const String onboardingSubtext3 =
       'Your safety is ours. But for this you need to set a good password.';
   static const String next = 'Next';
+  static const String ok = 'Ok';
   static const String skip = 'Skip';
   static const String previous = 'Previous';
   static const String confirm = 'Confirm';

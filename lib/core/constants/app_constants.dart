@@ -22,6 +22,3 @@ const String usersTable = 'users';
 const String chatsTable = 'chats';
 const String messagesTable = 'messages';
 const String topicsTable = 'topics';
-
-/// Dummy data for testing
-

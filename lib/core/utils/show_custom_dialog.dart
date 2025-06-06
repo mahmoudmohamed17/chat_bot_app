@@ -47,7 +47,7 @@ Future<dynamic> showCustomDialog(BuildContext context) {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      label: 'Ok',
+                      label: AppStrings.ok,
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,
                       onPressed: () {
