@@ -4,6 +4,7 @@ import 'package:chat_bot_app/auth/logic/repos/auth_repo_impl.dart';
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
+import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
@@ -18,6 +19,7 @@ void setupLocator() {
   getIt.registerLazySingleton<SupabaseDatabaseService>(
     () => SupabaseDatabaseService(),
   );
+  getIt.registerLazySingleton<GeminiService>(() => GeminiService());
 
   /// Repos
   getIt.registerLazySingleton<AuthRepo>(
@@ -31,7 +33,7 @@ void setupLocator() {
   getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt()));
   getIt.registerLazySingleton<UsersCubit>(() => UsersCubit(getIt()));
   getIt.registerSingleton<ModeCubit>(ModeCubit());
-  getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt()));
+  getIt.registerFactory<MessagesCubit>(() => MessagesCubit(getIt(), getIt()));
   getIt.registerLazySingleton<ChatsCubit>(() => ChatsCubit(getIt(), getIt()));
   getIt.registerLazySingleton<TopicsCubit>(() => TopicsCubit(getIt(), getIt()));
 }

@@ -1,7 +1,6 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
-import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +17,15 @@ class SendMessageTextBoxWidget extends StatefulWidget {
 
 class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
   TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -46,7 +54,7 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await cubit.sendMessageFromUser(
+              await cubit.sendMessage(
                 chatId: widget.chatId,
                 message: controller.text,
               );
@@ -54,24 +62,10 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
-              backgroundColor: AppColors.primary,
-              shadowColor: Colors.transparent,
-              elevation: 0,
-              shape: const CircleBorder(),
-              iconColor: Colors.white,
-            ),
-            child: const Icon(FontAwesomeIcons.solidPaperPlane),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await cubit.getBotResponse(
-                chatId: widget.chatId,
-                message: dummyBotMessage,
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(16),
-              backgroundColor: AppColors.itemButtonAction,
+              backgroundColor:
+                  controller.text.isEmpty
+                      ? AppColors.primaryExtraLight
+                      : AppColors.primary,
               shadowColor: Colors.transparent,
               elevation: 0,
               shape: const CircleBorder(),

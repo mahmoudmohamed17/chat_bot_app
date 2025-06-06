@@ -1,17 +1,18 @@
 import 'package:bloc/bloc.dart';
+import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
-import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:equatable/equatable.dart';
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
-  MessagesCubit(this.supabaseDatabaseService) : super(MessagesInitial());
+  MessagesCubit(this.supabaseDatabaseService, this.geminiService)
+    : super(MessagesInitial());
+
   final SupabaseDatabaseService supabaseDatabaseService;
+  final GeminiService geminiService;
 
-  /// TODO: use Gemini Service here
-
-  Future<void> sendMessageFromUser({
+  Future<void> sendMessage({
     required String chatId,
     String? message, // Prompt
   }) async {
@@ -21,7 +22,7 @@ class MessagesCubit extends Cubit<MessagesState> {
         message: message,
         sender: AppStrings.user,
       );
-      // await getBotResponse(chatId: chatId, message: message);
+      await getBotResponse(chatId: chatId, message: message);
     } catch (e) {
       emit(MessagesFailed());
     }
@@ -29,16 +30,13 @@ class MessagesCubit extends Cubit<MessagesState> {
 
   Future<void> getBotResponse({required String chatId, String? message}) async {
     emit(MessagesLoading());
-
     try {
-      /// TODO: taking reponse from Gemini and add it to stream
-      await Future.delayed(const Duration(seconds: 5), () async {
-        await supabaseDatabaseService.addMessage(
-          chatId: chatId,
-          message: message,
-          sender: AppStrings.bot,
-        );
-      });
+      final botResponse = await geminiService.askGemini(prompt: message!);
+      await supabaseDatabaseService.addMessage(
+        chatId: chatId,
+        message: botResponse,
+        sender: AppStrings.bot,
+      );
       emit(MessagesSuccess());
     } catch (e) {
       emit(MessagesFailed());
