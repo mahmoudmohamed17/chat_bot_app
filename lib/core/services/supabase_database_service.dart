@@ -43,9 +43,12 @@ class SupabaseDatabaseService {
     return result['id'];
   }
 
-  /// Delete a chat with chatId got from Topic Model
   Future<void> deleteChat(String chatId) async {
     await _client.from(chatsTable).delete().eq('id', chatId);
+  }
+
+  Future<void> deleteAllChats() async {
+    await _client.from(chatsTable).delete().gt('id', 0);
   }
 
   Future<void> addMessage({
@@ -60,9 +63,12 @@ class SupabaseDatabaseService {
     });
   }
 
-  /// Delete all messages with chatId got from Topic Model
-  Future<void> deleteAllMessages(String chatId) async {
+  Future<void> deleteChatMessages(String chatId) async {
     await _client.from(messagesTable).delete().eq('for_chat', chatId);
+  }
+
+  Future<void> deleteAllMessages() async {
+    await _client.from(messagesTable).delete().gt('id', 0);
   }
 
   Stream messagesStream(String chatId) {
@@ -86,6 +92,10 @@ class SupabaseDatabaseService {
 
   Future<void> deleteTopic(String topicId) async {
     await _client.from(topicsTable).delete().eq('id', topicId);
+  }
+
+  Future<void> deleteAllTopics() async {
+    await _client.from(topicsTable).delete().gt('id', 0);
   }
 
   Future<List<TopicModel>> getTopics(String userId) async {

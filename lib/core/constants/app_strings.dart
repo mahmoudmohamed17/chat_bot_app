@@ -35,6 +35,7 @@ class AppStrings {
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithApple = 'Continue with Apple';
   static const String hadVeryLittle = 'Had very little!';
+  static const String successfullyLoggedIn = 'Successfully logged in!';
   static const String redirectToHomePageMessage =
       'You will be redirected to home page shortly.';
   static const String resetPassword = 'Reset password';
@@ -96,7 +97,7 @@ class AppStrings {
   static const String privacyPolicy = 'Privacy policy';
   static const String agreeToPolicyAlertMessage =
       'You have to approve Terms & Policy to continue.';
-  
+
   static const String goodJob = 'Good job!';
   static const String timeToSetSomeUserPrefs =
       'Now, time to make your profile looks shine!';

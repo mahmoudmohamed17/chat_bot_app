@@ -36,9 +36,19 @@ class ChatsCubit extends Cubit<ChatsState> {
     await _safeExcute(action: () => supabaseDatabaseService.deleteChat(chatId));
   }
 
-  Future<void> deleteAllMessages(String chatId) async {
+  Future<void> deleteAllChats() async {
+    await _safeExcute(action: () => supabaseDatabaseService.deleteAllChats());
+  }
+
+  Future<void> deleteChatMessages(String chatId) async {
     await _safeExcute(
-      action: () => supabaseDatabaseService.deleteAllMessages(chatId),
+      action: () => supabaseDatabaseService.deleteChatMessages(chatId),
+    );
+  }
+
+  Future<void> deleteAllMessages() async {
+    await _safeExcute(
+      action: () => supabaseDatabaseService.deleteAllMessages(),
     );
   }
 

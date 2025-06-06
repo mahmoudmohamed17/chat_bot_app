@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';

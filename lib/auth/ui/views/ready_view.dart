@@ -44,10 +44,9 @@ class _ReadyViewState extends State<ReadyView> {
       child: ConfettiWidget(
         confettiController: confettiController,
         blastDirectionality: BlastDirectionality.explosive,
-        maxBlastForce: 30,
-        minBlastForce: 20,
+        maxBlastForce: 15,
         emissionFrequency: 0.6,
-        numberOfParticles: 20,
+        numberOfParticles: 15,
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {

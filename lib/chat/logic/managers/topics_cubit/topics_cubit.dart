@@ -16,7 +16,7 @@ class TopicsCubit extends Cubit<TopicsState> {
   final SupabaseDatabaseService supabaseDatabaseService;
   final SupabaseAuthService supabaseAuthService;
 
-  /// To save the current topic deleted that would be used with [freeUpTopicData] method
+  /// To save the current topic deleted that would be used with [deleteTopicChatAndMessages] method
   String? currentTopicChatId;
 
   /// Creating a topic related to a specific chat using its [Chat ID]
@@ -61,12 +61,31 @@ class TopicsCubit extends Cubit<TopicsState> {
     }
   }
 
-  Future<void> freeUpTopicData({
+  Future<void> deleteAllTopics() async {
+    emit(TopicsLoading());
+    try {
+      await supabaseDatabaseService.deleteAllTopics();
+      emit(TopicsEmpty());
+    } catch (e) {
+      log('Error with deleteAllTopics: ${e.toString()}');
+      emit(TopicsFailed(errorMsg: e.toString()));
+    }
+  }
+
+  Future<void> deleteTopicChatAndMessages({
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
     await deleteMessages(currentTopicChatId!);
     await deleteChat(currentTopicChatId!);
+  }
+
+  Future<void> deleteAllTopicsWithRelatedData({
+    required Future<void> Function() deleteAllChats,
+    required Future<void> Function() deleteAllMessages,
+  }) async {
+    await deleteAllChats();
+    await deleteAllMessages();
   }
 
   Future<void> loadTopics() async {

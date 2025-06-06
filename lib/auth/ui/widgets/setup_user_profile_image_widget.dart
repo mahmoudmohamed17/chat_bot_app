@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SetupUserProfileImageWidget extends StatefulWidget {
   const SetupUserProfileImageWidget({super.key, this.onImagePicked});
@@ -25,10 +26,14 @@ class _SetupUserProfileImageWidgetState
       source: ImageSource.gallery,
     );
     if (image != null) {
+      /// To save the profile picture in a permanent path
+      final directory = await getApplicationDocumentsDirectory();
+      final newPath = '${directory.path}/${image.name}';
+      final newImage = await File(image.path).copy(newPath);
       setState(() {
-        _imageFile = File(image.path);
+        _imageFile = newImage;
       });
-      widget.onImagePicked?.call(_imageFile!.path);
+      widget.onImagePicked?.call(newPath);
     }
   }
 

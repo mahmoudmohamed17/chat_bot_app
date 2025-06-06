@@ -4,6 +4,7 @@ import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
+import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,16 @@ class _MainViewState extends State<MainView> {
     const HistoryView(),
     const ProfileView(),
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (context.mounted) {
+        snackBar(context, title: AppStrings.successfullyLoggedIn);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
