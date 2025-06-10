@@ -21,10 +21,8 @@ class ChatIntroView extends StatelessWidget {
       child: BlocConsumer<ChatsCubit, ChatsState>(
         listener: (context, state) {
           if (state is ChatsSuccess) {
-            context.push(
-              Routes.newConversationView,
-              extra: context.read<ChatsCubit>().chatId,
-            );
+            final chatId = context.read<ChatsCubit>().chatId;
+            context.push(Routes.newConversationView, extra: chatId);
           }
           if (state is ChatsFailed) {
             snackBar(context, title: state.errorMsg);

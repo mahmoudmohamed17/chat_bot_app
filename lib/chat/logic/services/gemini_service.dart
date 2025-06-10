@@ -1,3 +1,4 @@
+import 'package:chat_bot_app/chat/logic/utils/customize_bot_response.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/networking/dio_service.dart';
 import 'package:chat_bot_app/core/secret/api_strings.dart';
@@ -21,11 +22,7 @@ class GeminiService {
               queryParameters: {"key": ApiStrings.geminiApiKey},
             )
             as Map<String, dynamic>;
-    final response =
-        data['candidates'][0]['content']['parts'][0]['text'] as String;
-    final responseParts = response.split('\n\n${AppStrings.title}: ');
-    final botAnswer = responseParts[0].trim();
-    final chatTitle = responseParts[1].trim();
-    return [botAnswer, chatTitle];
+    final response = customizeBotResponse(data);
+    return [response[0], response[1]];
   }
 }

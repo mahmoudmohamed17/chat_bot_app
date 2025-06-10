@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
@@ -65,6 +67,7 @@ class MessagesCubit extends Cubit<MessagesState> {
           createdAt: time,
         );
         isTopicCreated = true;
+        log('Topic created with date: $time');
       }
       emit(MessagesSuccess());
     } catch (e) {
