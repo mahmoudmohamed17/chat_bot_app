@@ -1,5 +1,6 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,8 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<MessagesCubit>();
+    final messagesCubit = context.read<MessagesCubit>();
+    final topicsCubit = context.read<TopicsCubit>();
     return Container(
       color: Colors.white,
       width: double.infinity,
@@ -55,11 +57,15 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
           ElevatedButton(
             onPressed: () async {
               final prompt = controller.text;
-              await cubit.sendMessage(chatId: widget.chatId, message: prompt);
-              controller.clear();
-              await cubit.getBotResponse(
+              await messagesCubit.sendMessage(
                 chatId: widget.chatId,
                 message: prompt,
+              );
+              controller.clear();
+              await messagesCubit.getBotResponse(
+                chatId: widget.chatId,
+                message: prompt,
+                createTopic: topicsCubit.createTopic,
               );
             },
             style: ElevatedButton.styleFrom(

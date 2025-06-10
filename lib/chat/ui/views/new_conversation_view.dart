@@ -1,5 +1,6 @@
 import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
+import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/chat/ui/widgets/messages_list.dart';
 import 'package:chat_bot_app/chat/ui/widgets/send_message_text_box_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
@@ -13,8 +14,11 @@ class NewConversationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt.get<MessagesCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt.get<TopicsCubit>()),
+        BlocProvider(create: (context) => getIt.get<MessagesCubit>()),
+      ],
       child: Scaffold(
         appBar: customAppBar(context, title: AppStrings.appName),
         body: Column(

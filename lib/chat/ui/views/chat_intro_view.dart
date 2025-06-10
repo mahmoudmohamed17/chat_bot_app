@@ -1,5 +1,4 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
-import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
@@ -17,11 +16,8 @@ class ChatIntroView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: getIt.get<ChatsCubit>()),
-        BlocProvider.value(value: getIt.get<TopicsCubit>()),
-      ],
+    return BlocProvider.value(
+      value: getIt.get<ChatsCubit>(),
       child: BlocConsumer<ChatsCubit, ChatsState>(
         listener: (context, state) {
           if (state is ChatsSuccess) {
@@ -29,11 +25,7 @@ class ChatIntroView extends StatelessWidget {
               Routes.newConversationView,
               extra: context.read<ChatsCubit>().chatId,
             );
-            final chatId = context.read<ChatsCubit>().chatId;
-            final topicCubit = context.read<TopicsCubit>();
-            topicCubit.createTopic(chatId!);
           }
-
           if (state is ChatsFailed) {
             snackBar(context, title: state.errorMsg);
           }

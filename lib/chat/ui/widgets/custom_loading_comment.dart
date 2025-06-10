@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_loadingkit/flutter_animated_loadingkit.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomLoadingComment extends StatelessWidget {

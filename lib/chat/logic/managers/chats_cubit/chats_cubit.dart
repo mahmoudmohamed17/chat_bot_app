@@ -16,7 +16,6 @@ class ChatsCubit extends Cubit<ChatsState> {
 
   String? chatId;
 
-  /// Note: after creating chat, we create a topic for it
   Future<String?> createChat() async {
     emit(ChatLoading());
     try {

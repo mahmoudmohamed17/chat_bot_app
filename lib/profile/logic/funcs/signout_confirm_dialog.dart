@@ -23,13 +23,14 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
+              context.pop();
               context.go(Routes.initAuthView);
               SharedPrefs.setBool(isUserAuthenticated, false);
             }
             if (state is AuthFailed) {
+              context.pop();
               snackBar(context, title: state.errorMsg);
             }
-            context.pop();
           },
           builder: (context, state) {
             final cubit = context.read<AuthCubit>();

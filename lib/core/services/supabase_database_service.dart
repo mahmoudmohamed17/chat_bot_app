@@ -80,15 +80,36 @@ class SupabaseDatabaseService {
         .order('created_at', ascending: true);
   }
 
-  Future<TopicModel> addTopic(String chatId, String userId) async {
+  Future<TopicModel> addTopic({
+    String? chatId,
+    String? userId,
+    String? title,
+    String? createdAt,
+  }) async {
     final data =
         await _client
             .from(topicsTable)
-            .upsert({'for_chat': chatId, 'for_user': userId})
+            .upsert({
+              'for_chat': chatId,
+              'for_user': userId,
+              'title': title,
+              'created_at': createdAt,
+            })
             .select()
             .single();
     final topic = TopicModel.fromJson(data);
     return topic;
+  }
+
+  Future<void> updateTopic({
+    required String chatId,
+    String? topicTitle,
+    String? createdAt,
+  }) async {
+    await _client
+        .from(topicsTable)
+        .update({'title': topicTitle, 'created_at': createdAt})
+        .eq('for_chat', chatId);
   }
 
   Future<void> deleteTopic(String topicId) async {

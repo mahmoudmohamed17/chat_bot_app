@@ -16,18 +16,25 @@ class TopicsCubit extends Cubit<TopicsState> {
   final SupabaseDatabaseService supabaseDatabaseService;
   final SupabaseAuthService supabaseAuthService;
 
-  /// To save the current topic deleted that would be used with [deleteTopicChatAndMessages] method
-  String? currentTopicChatId;
+  /// To save the current topic deleted that would be used with [deleteTopicData] method
+  String? currentTopicId;
 
   /// Creating a topic related to a specific chat using its [Chat ID]
   /// Note: we need to check the current state in case we do not
   /// have to load the topics from database each time we create new one.
   /// Instead of this, we use the current state to save the topics.
-  Future<void> createTopic(String chatId) async {
+  Future<void> createTopic({
+    String? chatId,
+    String? userId,
+    String? title,
+    String? createdAt,
+  }) async {
     try {
-      var newTopic = await supabaseDatabaseService.addTopic(
-        chatId,
-        supabaseAuthService.currentUser?.id ?? dummyUserId,
+      final newTopic = await supabaseDatabaseService.addTopic(
+        chatId: chatId,
+        userId: supabaseAuthService.currentUser?.id ?? dummyUserId,
+        title: title,
+        createdAt: createdAt,
       );
       if (state is TopicsSuccess) {
         final current = (state as TopicsSuccess).topics;
@@ -42,10 +49,9 @@ class TopicsCubit extends Cubit<TopicsState> {
 
   /// Deleting topic means deleting the chat related to it and also the messages
   Future<void> deleteTopic({required TopicModel topic}) async {
-    currentTopicChatId = topic.forChat;
+    currentTopicId = topic.id;
     emit(TopicsLoading());
     try {
-      await supabaseDatabaseService.deleteTopic(topic.id!);
       if (state is TopicsSuccess) {
         final updated =
             (state as TopicsSuccess).topics
@@ -72,15 +78,16 @@ class TopicsCubit extends Cubit<TopicsState> {
     }
   }
 
-  Future<void> deleteTopicChatAndMessages({
+  Future<void> deleteTopicData({
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
-    await deleteMessages(currentTopicChatId!);
-    await deleteChat(currentTopicChatId!);
+    await supabaseDatabaseService.deleteTopic(currentTopicId!);
+    await deleteMessages(currentTopicId!);
+    await deleteChat(currentTopicId!);
   }
 
-  Future<void> deleteAllTopicsWithRelatedData({
+  Future<void> deleteAllTopicsData({
     required Future<void> Function() deleteAllChats,
     required Future<void> Function() deleteAllMessages,
   }) async {

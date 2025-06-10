@@ -1,8 +1,6 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
-import 'package:chat_bot_app/core/widgets/loading_dialog_body.dart';
-import 'package:chat_bot_app/core/widgets/loading_overlay_widget.dart';
 import 'package:chat_bot_app/history/ui/widgets/empty_history_view_widget.dart';
 import 'package:chat_bot_app/history/ui/widgets/history_list.dart';
 import 'package:chat_bot_app/history/ui/widgets/history_view_app_bar.dart';
@@ -21,25 +19,21 @@ class HistoryView extends StatelessWidget {
       ],
       child: BlocBuilder<TopicsCubit, TopicsState>(
         builder: (context, state) {
-          return LoadingOverlayWidget(
-            isLoading: state is TopicsLoading,
-            dialogBody: const LoadingDialogBody(),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  const HistoryViewAppBar(),
-                  if (state is TopicsEmpty) ...[
-                    const Spacer(),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Center(child: EmptyHistoryViewWidget()),
-                    ),
-                    const Spacer(flex: 2,),
-                  ],
-                  if (state is TopicsSuccess)
-                    Expanded(child: HistoryList(topics: state.topics)),
+          return SafeArea(
+            child: Column(
+              children: [
+                const HistoryViewAppBar(),
+                if (state is TopicsEmpty) ...[
+                  const Spacer(),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Center(child: EmptyHistoryViewWidget()),
+                  ),
+                  const Spacer(flex: 2),
                 ],
-              ),
+                if (state is TopicsSuccess)
+                  Expanded(child: HistoryList(topics: state.topics)),
+              ],
             ),
           );
         },

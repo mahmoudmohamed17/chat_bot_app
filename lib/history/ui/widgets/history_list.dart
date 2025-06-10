@@ -38,7 +38,7 @@ class HistoryList extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: HistoryItem(index: index),
+            child: HistoryItem(model: topics[index]),
           ),
         );
       },

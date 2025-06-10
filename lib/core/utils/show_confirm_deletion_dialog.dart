@@ -21,7 +21,7 @@ Future<dynamic> showConfirmDeletionDialog(
 }) {
   return showDialog(
     context: context,
-    builder: (dialogCtx) {
+    builder: (_) {
       return MultiBlocProvider(
         providers: [
           BlocProvider.value(value: getIt.get<TopicsCubit>()),
@@ -30,10 +30,9 @@ Future<dynamic> showConfirmDeletionDialog(
         child: BlocConsumer<TopicsCubit, TopicsState>(
           listener: (context, state) {
             if (state is TopicsSuccess) {
-              dialogCtx.pop();
+              context.pop();
             }
             if (state is TopicsFailed) {
-              dialogCtx.pop();
               snackBar(context, title: state.errorMsg);
             }
           },
@@ -84,7 +83,7 @@ Future<dynamic> showConfirmDeletionDialog(
                               backgroundColor: Colors.white,
                               labelColor: Colors.black,
                               onPressed: () {
-                                dialogCtx.pop();
+                                context.pop();
                               },
                             ),
                           ),
@@ -96,7 +95,7 @@ Future<dynamic> showConfirmDeletionDialog(
                               onPressed: () {
                                 if (isDeletingAll != null && isDeletingAll) {
                                   topicsCubit.deleteAllTopics();
-                                  topicsCubit.deleteAllTopicsWithRelatedData(
+                                  topicsCubit.deleteAllTopicsData(
                                     deleteAllChats: chatsCubit.deleteAllChats,
                                     deleteAllMessages:
                                         chatsCubit.deleteAllMessages,
@@ -104,7 +103,7 @@ Future<dynamic> showConfirmDeletionDialog(
                                 }
                                 if (topic != null) {
                                   topicsCubit.deleteTopic(topic: topic);
-                                  topicsCubit.deleteTopicChatAndMessages(
+                                  topicsCubit.deleteTopicData(
                                     deleteChat: chatsCubit.deleteChat,
                                     deleteMessages:
                                         chatsCubit.deleteChatMessages,
