@@ -1,8 +1,12 @@
+import 'dart:developer';
+
+import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/show_confirm_deletion_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HistoryViewAppBar extends StatelessWidget {
@@ -24,7 +28,9 @@ class HistoryViewAppBar extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  log('Chat id: ${context.read<ChatsCubit>().currentChatId}');
+                },
                 icon: const Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   color: Colors.black,

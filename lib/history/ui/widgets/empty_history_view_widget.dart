@@ -28,7 +28,7 @@ class EmptyHistoryViewWidget extends StatelessWidget {
           if (state is ChatsSuccess) {
             context.push(
               Routes.newConversationView,
-              extra: context.read<ChatsCubit>().chatId,
+              extra: context.read<ChatsCubit>().currentChatId,
             );
           }
           if (state is ChatsFailed) {

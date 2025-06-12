@@ -14,7 +14,7 @@ class ChatsCubit extends Cubit<ChatsState> {
   final SupabaseAuthService supabeAuthService;
   final SupabaseDatabaseService supabaseDatabaseService;
 
-  String? chatId;
+  String? currentChatId;
 
   Future<String?> createChat() async {
     emit(ChatLoading());
@@ -22,7 +22,8 @@ class ChatsCubit extends Cubit<ChatsState> {
       final id = await supabaseDatabaseService.createChat(
         supabeAuthService.currentUser?.id ?? dummyUserId,
       );
-      chatId = id;
+      currentChatId = id;
+      log('Chat created with ID: $id');
       emit(ChatsSuccess());
       return id;
     } catch (e) {

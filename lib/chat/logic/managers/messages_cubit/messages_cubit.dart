@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
@@ -36,6 +38,7 @@ class MessagesCubit extends Cubit<MessagesState> {
       currentMessage = message;
       emit(MessagesSuccess());
     } catch (e) {
+      log('Error sending message: ${e.toString()}');
       emit(MessagesFailed());
     }
   }
@@ -57,6 +60,7 @@ class MessagesCubit extends Cubit<MessagesState> {
       }
       emit(MessagesSuccess());
     } catch (e) {
+      log('Error getting bot response: ${e.toString()}');
       emit(MessagesFailed());
     }
   }

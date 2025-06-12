@@ -24,10 +24,7 @@ class TopicsCubit extends Cubit<TopicsState> {
   /// Note: we need to check the current state in case we do not
   /// have to load the topics from database each time we create new one.
   /// Instead of this, we use the current state to save the topics.
-  Future<void> createTopic({
-    String? chatId,
-    String? title,
-  }) async {
+  Future<void> createTopic({String? chatId, String? title}) async {
     try {
       final now = DateTime.now();
       final time = DateFormat('EEEE, MMM d, yyyy').format(now);
@@ -51,16 +48,16 @@ class TopicsCubit extends Cubit<TopicsState> {
   /// Deleting topic means deleting the chat related to it and also the messages
   Future<void> deleteTopic({required TopicModel topic}) async {
     currentTopicId = topic.id;
+    log('Deleting topic with ID: ${topic.id}');
     emit(TopicsLoading());
     try {
-      if (state is TopicsSuccess) {
-        final updated =
-            (state as TopicsSuccess).topics
-                .where((t) => t.id != topic.id)
-                .toList();
-        emit(updated.isEmpty ? TopicsEmpty() : TopicsSuccess(topics: updated));
+      final updated = await supabaseDatabaseService.getTopics(
+        supabaseAuthService.currentUser?.id ?? dummyUserId,
+      );
+      if (updated.isEmpty) {
+        emit(TopicsEmpty());
       } else {
-        await loadTopics();
+        emit(TopicsSuccess(topics: updated));
       }
     } catch (e) {
       log('Error with deleteTopic: ${e.toString()}');
@@ -80,12 +77,13 @@ class TopicsCubit extends Cubit<TopicsState> {
   }
 
   Future<void> deleteTopicData({
+    required TopicModel topic,
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
-    await supabaseDatabaseService.deleteTopic(currentTopicId!);
-    await deleteMessages(currentTopicId!);
-    await deleteChat(currentTopicId!);
+    await supabaseDatabaseService.deleteTopic(topic.id!);
+    await deleteMessages(topic.id!);
+    await deleteChat(topic.forChat!);
   }
 
   Future<void> deleteAllTopicsData({

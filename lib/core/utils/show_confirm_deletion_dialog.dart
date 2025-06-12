@@ -21,7 +21,7 @@ Future<dynamic> showConfirmDeletionDialog(
 }) {
   return showDialog(
     context: context,
-    builder: (_) {
+    builder: (cxt) {
       return MultiBlocProvider(
         providers: [
           BlocProvider.value(value: getIt.get<TopicsCubit>()),
@@ -92,22 +92,23 @@ Future<dynamic> showConfirmDeletionDialog(
                               label: AppStrings.delete,
                               backgroundColor: AppColors.primary,
                               labelColor: Colors.white,
-                              onPressed: () {
+                              onPressed: () async {
                                 if (isDeletingAll != null && isDeletingAll) {
-                                  topicsCubit.deleteAllTopics();
-                                  topicsCubit.deleteAllTopicsData(
+                                  await topicsCubit.deleteAllTopicsData(
                                     deleteAllChats: chatsCubit.deleteAllChats,
                                     deleteAllMessages:
                                         chatsCubit.deleteAllMessages,
                                   );
+                                  await topicsCubit.deleteAllTopics();
                                 }
                                 if (topic != null) {
-                                  topicsCubit.deleteTopic(topic: topic);
-                                  topicsCubit.deleteTopicData(
+                                  await topicsCubit.deleteTopicData(
+                                    topic: topic,
                                     deleteChat: chatsCubit.deleteChat,
                                     deleteMessages:
                                         chatsCubit.deleteChatMessages,
                                   );
+                                  await topicsCubit.deleteTopic(topic: topic);
                                 }
                               },
                             ),

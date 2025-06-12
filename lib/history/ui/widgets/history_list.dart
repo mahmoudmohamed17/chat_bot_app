@@ -15,7 +15,7 @@ class HistoryList extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.all(12),
       itemCount: topics.length,
-      itemBuilder: (context_, index) {
+      itemBuilder: (cxt, index) {
         return Slidable(
           endActionPane: ActionPane(
             motion: const DrawerMotion(),
