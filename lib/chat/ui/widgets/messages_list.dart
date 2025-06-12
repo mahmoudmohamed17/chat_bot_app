@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/chat/ui/widgets/bot_message_bubble.dart';
@@ -6,6 +8,7 @@ import 'package:chat_bot_app/chat/ui/widgets/user_message_bubble.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/constants/dummy.dart';
+import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +26,19 @@ class _MessagesListState extends State<MessagesList> {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.ease,
-      );
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        try {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        } catch (e) {
+          log('Error scrolling to bottom: $e');
+        }
+      }
+    });
   }
 
   @override
@@ -41,7 +50,9 @@ class _MessagesListState extends State<MessagesList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: SupabaseDatabaseService().messagesStream(widget.chatId),
+      stream: getIt.get<SupabaseDatabaseService>().messagesStream(
+        widget.chatId,
+      ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           snackBar(context, title: AppStrings.fetchingMessagesErrorAlert);
@@ -67,9 +78,7 @@ class _MessagesListState extends State<MessagesList> {
 
         return BlocBuilder<MessagesCubit, MessagesState>(
           builder: (context, state) {
-            WidgetsBinding.instance.addPostFrameCallback(
-              (v) => _scrollToBottom(),
-            );
+            _scrollToBottom();
             return ListView.builder(
               padding: const EdgeInsets.all(12),
               controller: _scrollController,

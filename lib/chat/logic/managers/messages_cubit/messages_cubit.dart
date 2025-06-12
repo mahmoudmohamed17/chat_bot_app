@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:equatable/equatable.dart';
-import 'package:intl/intl.dart';
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
@@ -20,18 +17,23 @@ class MessagesCubit extends Cubit<MessagesState> {
   final SupabaseAuthService supabaseAuthService;
   final GeminiService geminiService;
 
+  bool isFirstMessageSent = false;
   bool isTopicCreated = false;
+  String? currentChatId;
+  String? currentMessage;
 
-  Future<void> sendMessage({
-    required String chatId,
-    String? message, // Prompt
-  }) async {
+  Future<void> sendMessage({required String chatId, String? message}) async {
     try {
       await supabaseDatabaseService.addMessage(
         chatId: chatId,
         message: message,
         sender: AppStrings.user,
       );
+      if (!isFirstMessageSent) {
+        currentChatId = chatId;
+        isFirstMessageSent = true;
+      }
+      currentMessage = message;
       emit(MessagesSuccess());
     } catch (e) {
       emit(MessagesFailed());
@@ -39,35 +41,19 @@ class MessagesCubit extends Cubit<MessagesState> {
   }
 
   Future<void> getBotResponse({
-    required String chatId,
-    String? message,
-    Future<void> Function({
-      String? chatId,
-      String? userId,
-      String? title,
-      String? createdAt,
-    })?
-    createTopic,
+    Future<void> Function({String? chatId, String? title})? createTopic,
   }) async {
     emit(MessagesLoading());
     try {
-      final response = await geminiService.askGemini(prompt: message!);
+      final response = await geminiService.askGemini(prompt: currentMessage!);
       await supabaseDatabaseService.addMessage(
-        chatId: chatId,
+        chatId: currentChatId!,
         message: response[0],
         sender: AppStrings.bot,
       );
       if (!isTopicCreated) {
-        final now = DateTime.now();
-        final time = DateFormat('EEEE, MMM d, yyyy').format(now);
-        await createTopic?.call(
-          chatId: chatId,
-          userId: supabaseAuthService.currentUser!.id,
-          title: response[1],
-          createdAt: time,
-        );
+        await createTopic?.call(chatId: currentChatId, title: response[1]);
         isTopicCreated = true;
-        log('Topic created with date: $time');
       }
       emit(MessagesSuccess());
     } catch (e) {

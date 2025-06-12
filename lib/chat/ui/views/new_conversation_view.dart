@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NewConversationView extends StatelessWidget {
   const NewConversationView({super.key, required this.chatId});
   final String chatId;
-
+  
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

@@ -5,6 +5,7 @@ import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 part 'topics_state.dart';
 
 class TopicsCubit extends Cubit<TopicsState> {
@@ -25,16 +26,16 @@ class TopicsCubit extends Cubit<TopicsState> {
   /// Instead of this, we use the current state to save the topics.
   Future<void> createTopic({
     String? chatId,
-    String? userId,
     String? title,
-    String? createdAt,
   }) async {
     try {
+      final now = DateTime.now();
+      final time = DateFormat('EEEE, MMM d, yyyy').format(now);
       final newTopic = await supabaseDatabaseService.addTopic(
         chatId: chatId,
         userId: supabaseAuthService.currentUser?.id ?? dummyUserId,
         title: title,
-        createdAt: createdAt,
+        createdAt: time,
       );
       if (state is TopicsSuccess) {
         final current = (state as TopicsSuccess).topics;

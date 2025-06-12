@@ -30,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
           return null;
         }
       },
+      textInputAction: TextInputAction.send,
       minLines: 1,
       maxLines: 10,
       keyboardType: textInputType,

@@ -51,22 +51,15 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
               child: CustomTextFormField(
                 hintText: AppStrings.sendMessage,
                 controller: controller,
+                onFieldSubmitted: (value) async {
+                  await execute(messagesCubit, topicsCubit);
+                },
               ),
             ),
           ),
           ElevatedButton(
             onPressed: () async {
-              final prompt = controller.text;
-              await messagesCubit.sendMessage(
-                chatId: widget.chatId,
-                message: prompt,
-              );
-              controller.clear();
-              await messagesCubit.getBotResponse(
-                chatId: widget.chatId,
-                message: prompt,
-                createTopic: topicsCubit.createTopic,
-              );
+              await execute(messagesCubit, topicsCubit);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
@@ -84,5 +77,17 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
         ],
       ),
     );
+  }
+
+  Future<void> execute(
+    MessagesCubit messagesCubit,
+    TopicsCubit topicsCubit,
+  ) async {
+    await messagesCubit.sendMessage(
+      chatId: widget.chatId,
+      message: controller.text,
+    );
+    controller.clear();
+    await messagesCubit.getBotResponse(createTopic: topicsCubit.createTopic);
   }
 }
