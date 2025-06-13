@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,18 +15,18 @@ class OnboardingThirdBody extends StatelessWidget {
       spacing: 4,
       children: [
         SvgPicture.asset(Assets.imagesOnboarding3),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            AppStrings.onboardingText3,
+            context.tr(AppStrings.onboardingText3),
             style: AppTextStyles.bold28,
             textAlign: TextAlign.center,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            AppStrings.onboardingSubtext3,
+            context.tr(AppStrings.onboardingSubtext3),
             style: AppTextStyles.regular16,
             textAlign: TextAlign.center,
           ),

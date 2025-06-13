@@ -8,6 +8,7 @@ import 'package:chat_bot_app/onboarding/ui/widgets/onboarding_third_body.dart';
 import 'package:chat_bot_app/onboarding/ui/widgets/onboarding_first_body.dart';
 import 'package:chat_bot_app/onboarding/ui/widgets/onboarding_second_body.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -81,8 +82,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                   child: CustomButton(
                     label:
                         activeIndex != 0
-                            ? AppStrings.previous
-                            : AppStrings.skip,
+                            ? context.tr(AppStrings.previous)
+                            : context.tr(AppStrings.skip),
                     onPressed: () {
                       if (activeIndex != 0) {
                         _pageController.animateToPage(
@@ -101,7 +102,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
                 Expanded(
                   child: CustomButton(
-                    label: AppStrings.next,
+                    label: context.tr(AppStrings.next),
                     onPressed: () {
                       if (activeIndex == 2) {
                         context.go(Routes.initAuthView);
