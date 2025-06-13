@@ -18,9 +18,9 @@ void main() async {
   await loadUserData();
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en', 'US'), Locale('ar', 'SA')],
+      supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translation',
-      fallbackLocale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en'),
       child: const MyApp(),
     ),
   );
