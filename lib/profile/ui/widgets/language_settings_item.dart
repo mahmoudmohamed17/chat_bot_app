@@ -1,8 +1,8 @@
-import 'package:chat_bot_app/core/constants/app_constants.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
-import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/profile/ui/widgets/language_selection_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,6 +15,7 @@ class LanguageSettignsItem extends StatefulWidget {
 
 class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
   bool _isDialogOpen = false;
+  String _langSelected = LocalizationKeys.english;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
               children: [
                 const Icon(Icons.g_translate, color: Colors.black),
                 Text(
-                  translations[SharedPrefs.getInt(selectedLangIndex)],
+                  context.tr(_langSelected),
                   style: AppTextStyles.semiBold16.copyWith(color: Colors.black),
                 ),
               ],
@@ -57,6 +58,9 @@ class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
                           _isDialogOpen = false;
                         });
                       }
+                    },
+                    langSelected: (value) {
+                      _langSelected = value;
                     },
                   );
                 },

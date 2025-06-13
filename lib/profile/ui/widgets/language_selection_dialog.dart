@@ -1,15 +1,18 @@
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/profile/ui/widgets/select_language_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LanguageSelectionDialog extends StatefulWidget {
-  const LanguageSelectionDialog({super.key, this.onClose});
+  const LanguageSelectionDialog({super.key, this.onClose, this.langSelected});
   final void Function(bool)? onClose;
+  final void Function(String)? langSelected;
 
   @override
   State<LanguageSelectionDialog> createState() =>
@@ -51,7 +54,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
             children: [
               Expanded(
                 child: CustomButton(
-                  label: AppStrings.close,
+                  label: context.tr(LocalizationKeys.close),
                   backgroundColor: Colors.white,
                   labelColor: Colors.black,
                   onPressed: () {
@@ -62,7 +65,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
               ),
               Expanded(
                 child: CustomButton(
-                  label: AppStrings.save,
+                  label: context.tr(LocalizationKeys.save),
                   backgroundColor:
                       _activeIndex == SharedPrefs.getInt(selectedLangIndex)
                           ? AppColors.primaryExtraLight
@@ -71,6 +74,14 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                   onPressed: () {
                     SharedPrefs.setInt(selectedLangIndex, _activeIndex);
                     widget.onClose?.call(true);
+                    final local = translations[_activeIndex];
+                    if (local == AppStrings.english) {
+                      widget.langSelected?.call(LocalizationKeys.english);
+                      context.setLocale(const Locale(LocalizationKeys.en));
+                    } else {
+                      widget.langSelected?.call(LocalizationKeys.arabic);
+                      context.setLocale(const Locale(LocalizationKeys.ar));
+                    }
                     context.pop();
                   },
                 ),

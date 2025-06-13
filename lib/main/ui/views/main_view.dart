@@ -3,12 +3,14 @@ import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart'
 import 'package:chat_bot_app/chat/ui/views/chat_intro_view.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -61,39 +63,39 @@ class _MainViewState extends State<MainView> {
         indicatorColor: Colors.blue[80],
         overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         elevation: 5,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.solidComments,
               color: AppColors.primaryExtraLight,
             ),
-            selectedIcon: Icon(
+            selectedIcon: const Icon(
               FontAwesomeIcons.solidComments,
               color: AppColors.primary,
             ),
-            label: AppStrings.chat,
+            label: context.tr(LocalizationKeys.chat),
           ),
           NavigationDestination(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.solidFolder,
               color: AppColors.primaryExtraLight,
             ),
-            selectedIcon: Icon(
+            selectedIcon: const Icon(
               FontAwesomeIcons.solidFolder,
               color: AppColors.primary,
             ),
-            label: AppStrings.myTopics,
+            label: context.tr(LocalizationKeys.myTopics),
           ),
           NavigationDestination(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.solidUser,
               color: AppColors.primaryExtraLight,
             ),
-            selectedIcon: Icon(
+            selectedIcon: const Icon(
               FontAwesomeIcons.solidUser,
               color: AppColors.primary,
             ),
-            label: AppStrings.myProfile,
+            label: context.tr(LocalizationKeys.myProfile),
           ),
         ],
       ),

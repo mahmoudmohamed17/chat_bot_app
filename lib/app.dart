@@ -6,6 +6,7 @@ import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:ui' as ui;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,6 +30,12 @@ class MyApp extends StatelessWidget {
               brightness: modeCubit.state ? Brightness.dark : Brightness.light,
               useMaterial3: true,
             ),
+            builder: (context, child) {
+              return Directionality(
+                textDirection: ui.TextDirection.ltr,
+                child: child!,
+              );
+            },
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouting.router,
           );

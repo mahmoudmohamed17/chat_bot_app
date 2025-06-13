@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/app.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/networking/init_supabase.dart';
 import 'package:chat_bot_app/core/utils/custom_bloc_observer.dart';
@@ -18,9 +19,9 @@ void main() async {
   await loadUserData();
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('ar')],
+      supportedLocales: const [Locale(LocalizationKeys.en), Locale(LocalizationKeys.ar)],
       path: 'assets/translation',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale(LocalizationKeys.en),
       child: const MyApp(),
     ),
   );
