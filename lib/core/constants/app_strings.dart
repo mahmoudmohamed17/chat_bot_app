@@ -24,7 +24,9 @@ class AppStrings {
   static const String save = 'Save';
   static const String signOut = 'Sign out';
   static const String signIn = 'Sign in';
+  static const String signUp = 'Sign up';
   static const String welcome = 'Welcome';
+  static const String second = 's.';
   static const String signInHint =
       'Please enter your email and password to sign in.';
   static const String emailAddress = 'Email address';

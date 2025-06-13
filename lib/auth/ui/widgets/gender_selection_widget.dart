@@ -1,4 +1,5 @@
 import 'package:chat_bot_app/auth/ui/widgets/gender_item_widget.dart';
+import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelectionWidget extends StatefulWidget {
@@ -10,7 +11,11 @@ class GenderSelectionWidget extends StatefulWidget {
 }
 
 class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
-  final List<String> _genders = ['Male', 'Female', 'Other'];
+  final List<String> _genders = [
+    AppStrings.male,
+    AppStrings.female,
+    AppStrings.other,
+  ];
   int _activeIndex = 0;
 
   @override

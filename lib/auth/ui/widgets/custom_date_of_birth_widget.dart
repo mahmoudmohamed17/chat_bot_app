@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -29,7 +30,7 @@ class _CustomDateOfBirthWidgetState extends State<CustomDateOfBirthWidget> {
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: Text(
-              date ?? AppStrings.dateOfBirth,
+              date ?? context.tr(AppStrings.dateOfBirth),
               style: AppTextStyles.regular16.copyWith(
                 color: date == null ? AppColors.textContainer : Colors.black,
               ),

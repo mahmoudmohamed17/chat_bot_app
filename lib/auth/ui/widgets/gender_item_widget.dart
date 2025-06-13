@@ -1,5 +1,6 @@
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenderItemWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class GenderItemWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: AppTextStyles.semiBold16),
+          Text(context.tr(text), style: AppTextStyles.semiBold16),
           Visibility(
             visible: isActive,
             child: const Icon(Icons.check, color: Colors.black),

@@ -1,6 +1,7 @@
 import 'package:chat_bot_app/auth/ui/widgets/country_dropdown.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SetupUserPhoneNumberWidget extends StatefulWidget {
@@ -36,7 +37,7 @@ class _SetupUserPhoneNumberWidgetState
               number = value;
               widget.onEditingFinished?.call('$countryCode$number');
             },
-            hintText: AppStrings.phoneNumber,
+            hintText: context.tr(AppStrings.phoneNumber),
             textInputType: TextInputType.number,
           ),
         ),

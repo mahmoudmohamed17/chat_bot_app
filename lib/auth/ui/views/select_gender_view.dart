@@ -9,6 +9,7 @@ import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/show_custom_dialog.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -59,18 +60,18 @@ class _SelectGenderViewState extends State<SelectGenderView> {
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppStrings.yourGender,
+                      context.tr(AppStrings.yourGender),
                       style: AppTextStyles.bold28,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppStrings.yourGenderHint,
+                      context.tr(AppStrings.yourGenderHint),
                       style: AppTextStyles.regular16,
                     ),
                   ),
@@ -82,7 +83,7 @@ class _SelectGenderViewState extends State<SelectGenderView> {
                   ),
                   const Expanded(child: SizedBox(height: 350)),
                   CustomButton(
-                    label: AppStrings.next,
+                    label: context.tr(AppStrings.next),
                     backgroundColor: AppColors.primary,
                     labelColor: Colors.white,
                     onPressed: () {

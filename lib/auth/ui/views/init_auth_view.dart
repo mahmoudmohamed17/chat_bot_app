@@ -4,6 +4,7 @@ import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +26,10 @@ class InitAuthView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(Assets.imagesAppLogo, scale: 3),
-                  const Text(AppStrings.appName, style: AppTextStyles.bold28),
+                  Text(
+                    context.tr(AppStrings.appName),
+                    style: AppTextStyles.bold28,
+                  ),
                 ],
               ),
               const Spacer(),
@@ -35,7 +39,7 @@ class InitAuthView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      label: 'Sign up',
+                      label: context.tr(AppStrings.signUp),
                       onPressed: () {
                         context.push(Routes.signupView);
                       },
@@ -45,7 +49,7 @@ class InitAuthView extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomButton(
-                      label: 'Sign in',
+                      label: context.tr(AppStrings.signIn),
                       onPressed: () {
                         context.push(Routes.signinView);
                       },

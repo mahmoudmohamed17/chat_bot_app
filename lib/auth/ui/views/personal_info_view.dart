@@ -10,6 +10,7 @@ import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -50,7 +51,7 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
             inAsyncCall: state is UsersLoading,
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: customAppBar(context, title: AppStrings.personalInfo),
+              appBar: customAppBar(context, title: context.tr(AppStrings.personalInfo)),
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
@@ -61,7 +62,7 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                   ),
                   const SizedBox(height: 32),
                   CustomTextFormField(
-                    hintText: AppStrings.fullName,
+                    hintText: context.tr(AppStrings.fullName),
                     controller: nameController,
                   ),
                   const SizedBox(height: 12),
@@ -80,7 +81,7 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                   SizedBox(
                     width: double.infinity,
                     child: CustomButton(
-                      label: AppStrings.next,
+                      label: context.tr(AppStrings.next),
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,
                       onPressed: () async {

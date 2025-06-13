@@ -12,6 +12,7 @@ import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/loading_dialog_body.dart';
 import 'package:chat_bot_app/core/widgets/loading_overlay_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -67,36 +68,36 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   children: [
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.createNewPassword,
+                        context.tr(AppStrings.createNewPassword),
                         style: AppTextStyles.bold28,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.createNewPasswordHint,
+                        context.tr(AppStrings.createNewPasswordHint),
                         style: AppTextStyles.regular16,
                       ),
                     ),
                     const SizedBox(height: 32),
                     CustomPasswordFormField(
-                      hintText: AppStrings.newPassword,
+                      hintText: context.tr(AppStrings.newPassword),
                       controller: passwordController,
                     ),
                     const SizedBox(height: 12),
                     CustomPasswordFormField(
                       controller: confirmPasswordController,
-                      hintText: AppStrings.confirmNewPassword,
+                      hintText: context.tr(AppStrings.confirmNewPassword),
                     ),
                     const Expanded(child: SizedBox(height: 400)),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(
-                        label: AppStrings.textContinue,
+                        label: context.tr(AppStrings.textContinue),
                         backgroundColor: AppColors.primary,
                         labelColor: Colors.white,
                         onPressed: () {

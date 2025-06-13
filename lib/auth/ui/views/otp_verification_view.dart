@@ -9,6 +9,7 @@ import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -42,18 +43,18 @@ class OtpVerificationView extends StatelessWidget {
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
-                  const Align(
+                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppStrings.otpCodeVerification,
+                      context.tr(AppStrings.otpCodeVerification),
                       style: AppTextStyles.bold28,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Align(
+                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppStrings.otpCodeVerificationHint,
+                      context.tr(AppStrings.otpCodeVerificationHint),
                       style: AppTextStyles.regular16,
                     ),
                   ),
@@ -66,9 +67,9 @@ class OtpVerificationView extends StatelessWidget {
                     isForPIN: false,
                   ),
                   const SizedBox(height: 32),
-                  const Align(
+                   Align(
                     child: Text(
-                      AppStrings.dontReceiveMail,
+                     context.tr( AppStrings.dontReceiveMail),
                       style: AppTextStyles.medium14,
                     ),
                   ),
@@ -78,7 +79,7 @@ class OtpVerificationView extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: CustomButton(
-                      label: AppStrings.next,
+                      label: context.tr(AppStrings.next),
                       backgroundColor: AppColors.primary,
                       labelColor: Colors.white,
                       onPressed: () {

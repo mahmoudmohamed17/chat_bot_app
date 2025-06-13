@@ -10,6 +10,7 @@ import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,36 +42,36 @@ class _SignupViewBodyState extends State<SignupViewBody> {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                AppStrings.createAccount,
+                context.tr(AppStrings.createAccount),
                 style: AppTextStyles.bold28,
               ),
             ),
             const SizedBox(height: 8),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                AppStrings.createAccountHint,
+                context.tr(AppStrings.createAccountHint),
                 style: AppTextStyles.regular16,
               ),
             ),
             const SizedBox(height: 24),
             CustomTextFormField(
-              hintText: AppStrings.emailAddress,
+              hintText: context.tr(AppStrings.emailAddress),
               controller: widget.emailController,
             ),
             const SizedBox(height: 12),
             CustomPasswordFormField(
-              hintText: AppStrings.password,
+              hintText: context.tr(AppStrings.password),
               controller: widget.passwordController,
             ),
             const SizedBox(height: 16),
             Align(
               alignment: Alignment.centerLeft,
               child: CustomCheckoutHintWidget(
-                hint: AppStrings.confirmToPolicy,
+                hint: context.tr(AppStrings.confirmToPolicy),
                 onSelected: (value) {
                   _isTermsAndPolicyApproved = value;
                 },
@@ -78,7 +79,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             ),
             const SizedBox(height: 32),
             CustomSocialButton(
-              label: AppStrings.continueWithGoogle,
+              label: context.tr(AppStrings.continueWithGoogle),
               image: Assets.imagesGoogle,
               onPressed: () {
                 final usersCubit = context.read<UsersCubit>();
@@ -90,7 +91,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             ),
             const SizedBox(height: 12),
             CustomSocialButton(
-              label: AppStrings.continueWithApple,
+              label: context.tr(AppStrings.continueWithApple),
               image: Assets.imagesApple,
               onPressed: () {},
             ),
@@ -98,7 +99,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             SizedBox(
               width: double.infinity,
               child: CustomButton(
-                label: AppStrings.next,
+                label: context.tr(AppStrings.next),
                 backgroundColor: AppColors.primary,
                 labelColor: Colors.white,
                 onPressed: () async {

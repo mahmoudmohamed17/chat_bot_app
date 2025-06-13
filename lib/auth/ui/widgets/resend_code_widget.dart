@@ -3,6 +3,7 @@ import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +70,7 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget> {
         children: [
           _canResend
               ? TextSpan(
-                text: 'Resend code.',
+                text: context.tr(AppStrings.resendCode),
                 recognizer: _tapGestureRecognizer,
                 style: AppTextStyles.medium12.copyWith(
                   color: AppColors.primary,
@@ -77,17 +78,17 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget> {
               )
               : TextSpan(
                 children: [
-                  const TextSpan(
-                    text: AppStrings.resendCode,
-                    style: AppTextStyles.medium14,
-                  ),
+                  const TextSpan(style: AppTextStyles.medium14),
                   TextSpan(
                     text: _seconds.toString(),
                     style: AppTextStyles.medium14.copyWith(
                       color: AppColors.primary,
                     ),
                   ),
-                  const TextSpan(text: ' s.', style: AppTextStyles.medium14),
+                  TextSpan(
+                    text: ' ${context.tr(AppStrings.second)}',
+                    style: AppTextStyles.medium14,
+                  ),
                 ],
               ),
         ],

@@ -10,6 +10,7 @@ import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -42,32 +43,37 @@ class _SigninViewBodyState extends State<SigninViewBody> {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(AppStrings.welcome, style: AppTextStyles.bold28),
-            ),
-            const SizedBox(height: 8),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                AppStrings.signInHint,
+                context.tr(AppStrings.welcome),
+                style: AppTextStyles.bold28,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                context.tr(AppStrings.signInHint),
                 style: AppTextStyles.regular16,
               ),
             ),
             const SizedBox(height: 24),
             CustomTextFormField(
-              hintText: AppStrings.emailAddress,
+              hintText: context.tr(AppStrings.emailAddress),
               controller: widget.emailController,
             ),
             const SizedBox(height: 12),
             CustomPasswordFormField(
-              hintText: AppStrings.password,
+              hintText: context.tr(AppStrings.password),
               controller: widget.passwordController,
             ),
             const SizedBox(height: 16),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
-              child: CustomCheckoutHintWidget(hint: AppStrings.rememberMe),
+              child: CustomCheckoutHintWidget(
+                hint: context.tr(AppStrings.rememberMe),
+              ),
             ),
             const SizedBox(height: 24),
             Align(
@@ -85,7 +91,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             ),
             const Spacer(),
             CustomSocialButton(
-              label: AppStrings.continueWithGoogle,
+              label: context.tr(AppStrings.continueWithGoogle),
               image: Assets.imagesGoogle,
               onPressed: () {
                 authCubit.signInWithGoogle(
@@ -96,7 +102,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             ),
             const SizedBox(height: 12),
             CustomSocialButton(
-              label: AppStrings.continueWithApple,
+              label: context.tr(AppStrings.continueWithApple),
               image: Assets.imagesApple,
               onPressed: () {},
             ),
@@ -104,7 +110,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
             SizedBox(
               width: double.infinity,
               child: CustomButton(
-                label: AppStrings.signIn,
+                label: context.tr(AppStrings.signIn),
                 backgroundColor: AppColors.primary,
                 labelColor: Colors.white,
                 onPressed: () {

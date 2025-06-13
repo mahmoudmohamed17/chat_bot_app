@@ -12,6 +12,7 @@ import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:confetti/confetti.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -72,18 +73,18 @@ class _ReadyViewState extends State<ReadyView> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Spacer(),
-                      const Column(
+                      Column(
                         mainAxisSize: MainAxisSize.min,
                         spacing: 8,
                         children: [
-                          CustomDialogBadge(icon: Icons.check),
+                          const CustomDialogBadge(icon: Icons.check),
                           Text(
-                            AppStrings.youAreReady,
+                            context.tr(AppStrings.youAreReady),
                             style: AppTextStyles.bold28,
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            AppStrings.youAreReadyHint,
+                            context.tr(AppStrings.youAreReadyHint),
                             style: AppTextStyles.regular18,
                             textAlign: TextAlign.center,
                           ),
