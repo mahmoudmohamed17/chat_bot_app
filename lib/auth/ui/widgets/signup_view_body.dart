@@ -37,88 +37,93 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: ListView(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(AppStrings.createAccount, style: AppTextStyles.bold28),
-          ),
-          const SizedBox(height: 8),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppStrings.createAccountHint,
-              style: AppTextStyles.regular16,
+        child: Column(
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppStrings.createAccount,
+                style: AppTextStyles.bold28,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          CustomTextFormField(
-            hintText: AppStrings.emailAddress,
-            controller: widget.emailController,
-          ),
-          const SizedBox(height: 12),
-          CustomPasswordFormField(
-            hintText: AppStrings.password,
-            controller: widget.passwordController,
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: CustomCheckoutHintWidget(
-              hint: AppStrings.confirmToPolicy,
-              onSelected: (value) {
-                _isTermsAndPolicyApproved = value;
+            const SizedBox(height: 8),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppStrings.createAccountHint,
+                style: AppTextStyles.regular16,
+              ),
+            ),
+            const SizedBox(height: 24),
+            CustomTextFormField(
+              hintText: AppStrings.emailAddress,
+              controller: widget.emailController,
+            ),
+            const SizedBox(height: 12),
+            CustomPasswordFormField(
+              hintText: AppStrings.password,
+              controller: widget.passwordController,
+            ),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: CustomCheckoutHintWidget(
+                hint: AppStrings.confirmToPolicy,
+                onSelected: (value) {
+                  _isTermsAndPolicyApproved = value;
+                },
+              ),
+            ),
+            const SizedBox(height: 32),
+            CustomSocialButton(
+              label: AppStrings.continueWithGoogle,
+              image: Assets.imagesGoogle,
+              onPressed: () {
+                final usersCubit = context.read<UsersCubit>();
+                context.read<AuthCubit>().signInWithGoogle(
+                  addGoogleUser: usersCubit.addGoogleUser,
+                  getUser: usersCubit.getUser,
+                );
               },
             ),
-          ),
-          const SizedBox(height: 32),
-          CustomSocialButton(
-            label: AppStrings.continueWithGoogle,
-            image: Assets.imagesGoogle,
-            onPressed: () {
-              final usersCubit = context.read<UsersCubit>();
-              context.read<AuthCubit>().signInWithGoogle(
-                addGoogleUser: usersCubit.addGoogleUser,
-                getUser: usersCubit.getUser,
-              );
-            },
-          ),
-          const SizedBox(height: 12),
-          CustomSocialButton(
-            label: AppStrings.continueWithApple,
-            image: Assets.imagesApple,
-            onPressed: () {},
-          ),
-          const Expanded(child: SizedBox(height: 210)),
-          SizedBox(
-            width: double.infinity,
-            child: CustomButton(
-              label: AppStrings.next,
-              backgroundColor: AppColors.primary,
-              labelColor: Colors.white,
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  if (_isTermsAndPolicyApproved) {
-                    authCubit.password = widget.passwordController.text;
-                    await authCubit.signUp(
-                      email: widget.emailController.text,
-                      password: widget.passwordController.text,
-                    );
+            const SizedBox(height: 12),
+            CustomSocialButton(
+              label: AppStrings.continueWithApple,
+              image: Assets.imagesApple,
+              onPressed: () {},
+            ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: CustomButton(
+                label: AppStrings.next,
+                backgroundColor: AppColors.primary,
+                labelColor: Colors.white,
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    if (_isTermsAndPolicyApproved) {
+                      authCubit.password = widget.passwordController.text;
+                      await authCubit.signUp(
+                        email: widget.emailController.text,
+                        password: widget.passwordController.text,
+                      );
+                    } else {
+                      snackBar(
+                        context,
+                        title: AppStrings.agreeToPolicyAlertMessage,
+                      );
+                    }
                   } else {
-                    snackBar(
-                      context,
-                      title: AppStrings.agreeToPolicyAlertMessage,
-                    );
+                    autovalidateMode = AutovalidateMode.always;
                   }
-                } else {
-                  autovalidateMode = AutovalidateMode.always;
-                }
-              },
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-        ],
+            const SizedBox(height: 48),
+          ],
+        ),
       ),
     );
   }

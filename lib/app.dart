@@ -3,6 +3,7 @@ import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/app_routing.dart';
 import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           final modeCubit = context.read<ModeCubit>();
           return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             theme: ThemeData(
               brightness: modeCubit.state ? Brightness.dark : Brightness.light,
               useMaterial3: true,

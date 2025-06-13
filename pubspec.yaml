@@ -14,6 +14,7 @@ dependencies:
   dio: ^5.8.0+1
   dots_indicator: ^4.0.1
   dotted_border: ^2.1.0
+  easy_localization: ^3.0.7+1
   equatable: ^2.0.7
   flutter:
     sdk: flutter
@@ -43,6 +44,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/translation/
   fonts:
     - family: Poppins
       fonts:

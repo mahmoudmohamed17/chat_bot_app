@@ -5,14 +5,23 @@ import 'package:chat_bot_app/core/networking/init_supabase.dart';
 import 'package:chat_bot_app/core/utils/custom_bloc_observer.dart';
 import 'package:chat_bot_app/core/utils/load_user_data.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await initSupabase();
   await SharedPrefs.init();
   setupLocator();
   Bloc.observer = CustomBlocObserver();
   await loadUserData();
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en', 'US'), Locale('ar', 'SA')],
+      path: 'assets/translation',
+      fallbackLocale: const Locale('en', 'US'),
+      child: const MyApp(),
+    ),
+  );
 }

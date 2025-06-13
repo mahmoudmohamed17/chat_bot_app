@@ -38,88 +38,93 @@ class _SigninViewBodyState extends State<SigninViewBody> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: ListView(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(AppStrings.welcome, style: AppTextStyles.bold28),
-          ),
-          const SizedBox(height: 8),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(AppStrings.signInHint, style: AppTextStyles.regular16),
-          ),
-          const SizedBox(height: 24),
-          CustomTextFormField(
-            hintText: AppStrings.emailAddress,
-            controller: widget.emailController,
-          ),
-          const SizedBox(height: 12),
-          CustomPasswordFormField(
-            hintText: AppStrings.password,
-            controller: widget.passwordController,
-          ),
-          const SizedBox(height: 16),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: CustomCheckoutHintWidget(hint: AppStrings.rememberMe),
-          ),
-          const SizedBox(height: 24),
-          Align(
-            child: TextButton(
-              onPressed: () {
-                context.push(Routes.resetPasswordView);
-              },
+        child: Column(
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(AppStrings.welcome, style: AppTextStyles.bold28),
+            ),
+            const SizedBox(height: 8),
+            const Align(
+              alignment: Alignment.centerLeft,
               child: Text(
-                AppStrings.forgotPassword,
-                style: AppTextStyles.semiBold14.copyWith(
-                  color: AppColors.primary,
+                AppStrings.signInHint,
+                style: AppTextStyles.regular16,
+              ),
+            ),
+            const SizedBox(height: 24),
+            CustomTextFormField(
+              hintText: AppStrings.emailAddress,
+              controller: widget.emailController,
+            ),
+            const SizedBox(height: 12),
+            CustomPasswordFormField(
+              hintText: AppStrings.password,
+              controller: widget.passwordController,
+            ),
+            const SizedBox(height: 16),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: CustomCheckoutHintWidget(hint: AppStrings.rememberMe),
+            ),
+            const SizedBox(height: 24),
+            Align(
+              child: TextButton(
+                onPressed: () {
+                  context.push(Routes.resetPasswordView);
+                },
+                child: Text(
+                  AppStrings.forgotPassword,
+                  style: AppTextStyles.semiBold14.copyWith(
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
             ),
-          ),
-          const Expanded(child: SizedBox(height: 140)),
-          CustomSocialButton(
-            label: AppStrings.continueWithGoogle,
-            image: Assets.imagesGoogle,
-            onPressed: () {
-              authCubit.signInWithGoogle(
-                addGoogleUser: usersCubit.addGoogleUser,
-                getUser: usersCubit.getUser,
-              );
-            },
-          ),
-          const SizedBox(height: 12),
-          CustomSocialButton(
-            label: AppStrings.continueWithApple,
-            image: Assets.imagesApple,
-            onPressed: () {},
-          ),
-          const SizedBox(height: 32),
-          SizedBox(
-            width: double.infinity,
-            child: CustomButton(
-              label: AppStrings.signIn,
-              backgroundColor: AppColors.primary,
-              labelColor: Colors.white,
+            const Spacer(),
+            CustomSocialButton(
+              label: AppStrings.continueWithGoogle,
+              image: Assets.imagesGoogle,
               onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  final email = widget.emailController.text;
-                  final password = widget.passwordController.text;
-                  context.read<AuthCubit>().logIn(
-                    email: email,
-                    password: password,
-                    getUser: usersCubit.getUser,
-                  );
-                } else {
-                  autovalidateMode = AutovalidateMode.always;
-                }
+                authCubit.signInWithGoogle(
+                  addGoogleUser: usersCubit.addGoogleUser,
+                  getUser: usersCubit.getUser,
+                );
               },
             ),
-          ),
-          const SizedBox(height: 24),
-        ],
+            const SizedBox(height: 12),
+            CustomSocialButton(
+              label: AppStrings.continueWithApple,
+              image: Assets.imagesApple,
+              onPressed: () {},
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              child: CustomButton(
+                label: AppStrings.signIn,
+                backgroundColor: AppColors.primary,
+                labelColor: Colors.white,
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    final email = widget.emailController.text;
+                    final password = widget.passwordController.text;
+                    context.read<AuthCubit>().logIn(
+                      email: email,
+                      password: password,
+                      getUser: usersCubit.getUser,
+                    );
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                  }
+                },
+              ),
+            ),
+            const SizedBox(height: 48),
+          ],
+        ),
       ),
     );
   }
