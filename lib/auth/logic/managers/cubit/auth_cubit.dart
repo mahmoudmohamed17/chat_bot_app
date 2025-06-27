@@ -29,12 +29,16 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     var result = await authRepo.logIn(email: email, password: password);
-    result.fold((failed) => emit(AuthFailed(errorMsg: failed.errorMsg)), (
-      user,
-    ) async {
-      await getUser!();
-      emit(AuthSuccess());
-    });
+    result.fold(
+      (failed) {
+        log('Error with AuthFailed: ${failed.errorMsg}');
+        emit(AuthFailed(errorMsg: failed.errorMsg));
+      },
+      (user) async {
+        await getUser!();
+        emit(AuthSuccess());
+      },
+    );
   }
 
   Future<void> signUp({required String email, required String password}) async {

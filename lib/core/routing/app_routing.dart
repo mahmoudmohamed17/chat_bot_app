@@ -15,6 +15,7 @@ import 'package:chat_bot_app/onboarding/ui/views/onboarding_view.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/profile/ui/views/about_app_view.dart';
 import 'package:chat_bot_app/profile/ui/views/privacy_policy_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,94 +26,139 @@ class AppRouting {
       GoRoute(
         path: Routes.onboardingView,
         builder: (BuildContext context, GoRouterState state) {
-          return const OnboardingView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const OnboardingView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.initAuthView,
         builder: (BuildContext context, GoRouterState state) {
-          return const InitAuthView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const InitAuthView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.signinView,
         builder: (BuildContext context, GoRouterState state) {
-          return const SigninView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const SigninView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.signupView,
         builder: (BuildContext context, GoRouterState state) {
-          return const SignupView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const SignupView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.resetPasswordView,
         builder: (BuildContext context, GoRouterState state) {
-          return const ResetPasswordView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const ResetPasswordView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.otpVerificationView,
         builder: (BuildContext context, GoRouterState state) {
           final email = state.extra as String;
-          return OtpVerificationView(email: email);
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: OtpVerificationView(email: email),
+          );
         },
       ),
       GoRoute(
         path: Routes.createNewPasswordView,
         builder: (BuildContext context, GoRouterState state) {
           final email = state.extra as String;
-          return CreateNewPasswordView(email: email);
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: CreateNewPasswordView(email: email),
+          );
         },
       ),
       GoRoute(
         path: Routes.selectGenderView,
         builder: (BuildContext context, GoRouterState state) {
-          return const SelectGenderView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const SelectGenderView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.personalInfoView,
         builder: (BuildContext context, GoRouterState state) {
-          return const PersonalInfoView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const PersonalInfoView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.pinCodeView,
         builder: (BuildContext context, GoRouterState state) {
-          return const PinCodeView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const PinCodeView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.readyView,
         builder: (BuildContext context, GoRouterState state) {
-          return const ReadyView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const ReadyView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.mainView,
         builder: (BuildContext context, GoRouterState state) {
-          return const MainView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const MainView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.newConversationView,
         builder: (BuildContext context, GoRouterState state) {
           final chatId = state.extra as String;
-          return NewConversationView(chatId: chatId);
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: NewConversationView(chatId: chatId),
+          );
         },
       ),
       GoRoute(
         path: Routes.privacyPolicyView,
         builder: (BuildContext context, GoRouterState state) {
-          return const PrivacyPolicyView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const PrivacyPolicyView(),
+          );
         },
       ),
       GoRoute(
         path: Routes.aboutAppView,
         builder: (BuildContext context, GoRouterState state) {
-          return const AboutAppView();
+          return KeyedSubtree(
+            key: ValueKey(context.locale.toString()),
+            child: const AboutAppView(),
+          );
         },
       ),
     ],
