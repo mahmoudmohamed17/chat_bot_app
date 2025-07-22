@@ -19,6 +19,7 @@ Future<dynamic> showConfirmDeletionDialog(
   TopicModel? topic,
   bool? isDeletingAll,
 }) {
+  final newTopic = topic;
   return showDialog(
     context: context,
     builder: (cxt) {
@@ -29,7 +30,7 @@ Future<dynamic> showConfirmDeletionDialog(
         ],
         child: BlocConsumer<TopicsCubit, TopicsState>(
           listener: (context, state) {
-            if (state is TopicsSuccess) {
+            if (state is TopicsSuccess || state is TopicsEmpty) {
               context.pop();
             }
             if (state is TopicsFailed) {
@@ -94,21 +95,23 @@ Future<dynamic> showConfirmDeletionDialog(
                               labelColor: Colors.white,
                               onPressed: () async {
                                 if (isDeletingAll != null && isDeletingAll) {
+                                  await topicsCubit.deleteAllTopics();
                                   await topicsCubit.deleteAllTopicsData(
                                     deleteAllChats: chatsCubit.deleteAllChats,
                                     deleteAllMessages:
                                         chatsCubit.deleteAllMessages,
                                   );
-                                  await topicsCubit.deleteAllTopics();
                                 }
                                 if (topic != null) {
+                                  await topicsCubit.deleteTopic(
+                                    topic: newTopic!,
+                                  );
                                   await topicsCubit.deleteTopicData(
-                                    topic: topic,
+                                    topic: newTopic,
                                     deleteChat: chatsCubit.deleteChat,
                                     deleteMessages:
                                         chatsCubit.deleteChatMessages,
                                   );
-                                  await topicsCubit.deleteTopic(topic: topic);
                                 }
                               },
                             ),

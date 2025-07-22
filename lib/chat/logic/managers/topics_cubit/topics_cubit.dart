@@ -50,19 +50,8 @@ class TopicsCubit extends Cubit<TopicsState> {
     currentTopicId = topic.id;
     log('Deleting topic with ID: ${topic.id}');
     emit(TopicsLoading());
-    try {
-      final updated = await supabaseDatabaseService.getTopics(
-        supabaseAuthService.currentUser?.id ?? dummyUserId,
-      );
-      if (updated.isEmpty) {
-        emit(TopicsEmpty());
-      } else {
-        emit(TopicsSuccess(topics: updated));
-      }
-    } catch (e) {
-      log('Error with deleteTopic: ${e.toString()}');
-      emit(TopicsFailed(errorMsg: e.toString()));
-    }
+    await supabaseDatabaseService.deleteTopic(topic.id!);
+    loadTopics();
   }
 
   Future<void> deleteAllTopics() async {
@@ -81,7 +70,6 @@ class TopicsCubit extends Cubit<TopicsState> {
     required Future<void> Function(String chatId) deleteChat,
     required Future<void> Function(String chatId) deleteMessages,
   }) async {
-    await supabaseDatabaseService.deleteTopic(topic.id!);
     await deleteMessages(topic.id!);
     await deleteChat(topic.forChat!);
   }
