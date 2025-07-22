@@ -5,6 +5,7 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_social_button.dart';
 import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/extensions/context_extension.dart';
 import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
@@ -41,7 +42,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
       autovalidateMode: autovalidateMode,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
+        child: ListView(
           children: [
             Align(
               alignment: Alignment.centerLeft,
@@ -89,7 +90,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 ),
               ),
             ),
-            const Spacer(),
+            SizedBox(height: context.height * 0.14),
             CustomSocialButton(
               label: context.tr(AppStrings.continueWithGoogle),
               image: Assets.imagesGoogle,

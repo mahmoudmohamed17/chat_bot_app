@@ -87,7 +87,6 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                       onPressed: () async {
                         cubit.fullName = nameController.text;
                         await cubit.addUser();
-                        await cubit.getUser();
                       },
                     ),
                   ),

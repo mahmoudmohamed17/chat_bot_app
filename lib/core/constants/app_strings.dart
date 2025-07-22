@@ -85,6 +85,7 @@ class AppStrings {
       "Respond to the user's message normally, and then suggest a short, clear title for the conversation starting with 'Title:'.\n\nMessage: $prompt";
   static const String myTopics = 'Topics';
   static const String myProfile = 'Profile';
+  static const String goBackSignin = 'Go back Sign in!';
   static const String history = 'History';
   static const String title = 'Title';
   static const String recent = 'Recent';
