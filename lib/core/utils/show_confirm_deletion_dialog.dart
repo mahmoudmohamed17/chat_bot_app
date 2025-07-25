@@ -11,7 +11,6 @@ import 'package:chat_bot_app/history/logic/models/topic_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 Future<dynamic> showConfirmDeletionDialog(
@@ -31,7 +30,7 @@ Future<dynamic> showConfirmDeletionDialog(
         child: BlocConsumer<TopicsCubit, TopicsState>(
           listener: (context, state) {
             if (state is TopicsSuccess || state is TopicsEmpty) {
-              context.pop();
+              Navigator.pop(context);
             }
             if (state is TopicsFailed) {
               snackBar(context, title: state.errorMsg);
@@ -84,7 +83,7 @@ Future<dynamic> showConfirmDeletionDialog(
                               backgroundColor: Colors.white,
                               labelColor: Colors.black,
                               onPressed: () {
-                                context.pop();
+                                Navigator.pop(context);
                               },
                             ),
                           ),
@@ -96,21 +95,12 @@ Future<dynamic> showConfirmDeletionDialog(
                               onPressed: () async {
                                 if (isDeletingAll != null && isDeletingAll) {
                                   await topicsCubit.deleteAllTopics();
-                                  await topicsCubit.deleteAllTopicsData(
-                                    deleteAllChats: chatsCubit.deleteAllChats,
-                                    deleteAllMessages:
-                                        chatsCubit.deleteAllMessages,
-                                  );
+                                  await chatsCubit.deleteAllChats();
                                 }
                                 if (topic != null) {
+                                  // This delete topic with related chat and messages
                                   await topicsCubit.deleteTopic(
                                     topic: newTopic!,
-                                  );
-                                  await topicsCubit.deleteTopicData(
-                                    topic: newTopic,
-                                    deleteChat: chatsCubit.deleteChat,
-                                    deleteMessages:
-                                        chatsCubit.deleteChatMessages,
                                   );
                                 }
                               },

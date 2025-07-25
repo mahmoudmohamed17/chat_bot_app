@@ -45,41 +45,44 @@ class TopicsCubit extends Cubit<TopicsState> {
     }
   }
 
-  /// Deleting topic means deleting the chat related to it and also the messages
   Future<void> deleteTopic({required TopicModel topic}) async {
     currentTopicId = topic.id;
     log('Deleting topic with ID: ${topic.id}');
     emit(TopicsLoading());
-    await supabaseDatabaseService.deleteTopic(topic.id!);
-    loadTopics();
+    try {
+      // Delete topic with its chat and messages as well
+      await supabaseDatabaseService.deleteTopicWithRelatedData(
+        topicId: topic.id!,
+        chatId: topic.forChat!,
+      );
+      if (state is TopicsSuccess) {
+        final current = (state as TopicsSuccess).topics;
+        final updatedTopics = current.where((t) => t.id != topic.id).toList();
+        if (updatedTopics.isEmpty) {
+          emit(TopicsEmpty());
+        } else {
+          emit(TopicsSuccess(topics: updatedTopics));
+        }
+      } else {
+        loadTopics();
+      }
+    } catch (e) {
+      emit(TopicsFailed(errorMsg: e.toString()));
+    }
   }
 
   Future<void> deleteAllTopics() async {
     emit(TopicsLoading());
     try {
-      await supabaseDatabaseService.deleteAllTopics();
+      // Delele all topics with the with all messages
+      await supabaseDatabaseService.deleteAllTopicsWithRelatedData(
+        userId: supabaseAuthService.currentUser?.id ?? dummyUserId,
+      );
       emit(TopicsEmpty());
     } catch (e) {
       log('Error with deleteAllTopics: ${e.toString()}');
       emit(TopicsFailed(errorMsg: e.toString()));
     }
-  }
-
-  Future<void> deleteTopicData({
-    required TopicModel topic,
-    required Future<void> Function(String chatId) deleteChat,
-    required Future<void> Function(String chatId) deleteMessages,
-  }) async {
-    await deleteMessages(topic.id!);
-    await deleteChat(topic.forChat!);
-  }
-
-  Future<void> deleteAllTopicsData({
-    required Future<void> Function() deleteAllChats,
-    required Future<void> Function() deleteAllMessages,
-  }) async {
-    await deleteAllMessages();
-    await deleteAllChats();
   }
 
   Future<void> loadTopics() async {

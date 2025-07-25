@@ -48,28 +48,37 @@ class SupabaseDatabaseService {
     await _client.from(chatsTable).delete().eq('id', chatId);
   }
 
-  Future<void> deleteAllChats() async {
-    await _client.from(chatsTable).delete().neq('id', dummyUuid);
+  Future<void> deleteAllChats({required String userId}) async {
+    await _client.from(chatsTable).delete().neq('for_user', userId);
   }
 
   Future<void> addMessage({
     required String chatId,
     String? message,
     String? sender,
+    String? userId,
   }) async {
     await _client.from(messagesTable).upsert({
       'for_chat': chatId,
       'message': message,
       'sender': sender,
+      'for_user': userId,
     });
   }
 
-  Future<void> deleteChatMessages(String chatId) async {
-    await _client.from(messagesTable).delete().eq('for_chat', chatId);
+  Future<void> deleteTopicWithRelatedData({
+    required String topicId,
+    required String chatId,
+  }) async {
+    await _client.rpc(
+      'delete_topic_with_related_data',
+      params: {'topic_id': topicId, 'chat_id': chatId},
+    );
   }
 
-  Future<void> deleteAllMessages() async {
-    await _client.from(messagesTable).delete().neq('id', dummyUuid);
+  Future<void> deleteAllTopicsWithRelatedData({required String userId}) async {
+    await _client.from(topicsTable).delete().eq('for_user', userId);
+    await _client.from(messagesTable).delete().eq('for_user', userId);
   }
 
   Stream messagesStream(String chatId) {

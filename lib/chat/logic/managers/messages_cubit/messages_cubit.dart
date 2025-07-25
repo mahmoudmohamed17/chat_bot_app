@@ -1,8 +1,8 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/chat/logic/services/gemini_service.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:equatable/equatable.dart';
@@ -30,6 +30,7 @@ class MessagesCubit extends Cubit<MessagesState> {
         chatId: chatId,
         message: message,
         sender: AppStrings.user,
+        userId: supabaseAuthService.currentUser?.id ?? dummyUserId,
       );
       if (!isFirstMessageSent) {
         currentChatId = chatId;

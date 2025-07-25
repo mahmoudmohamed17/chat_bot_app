@@ -59,6 +59,7 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
           ),
           ElevatedButton(
             onPressed: () async {
+              if (controller.text.isEmpty) return;
               await execute(messagesCubit, topicsCubit);
             },
             style: ElevatedButton.styleFrom(

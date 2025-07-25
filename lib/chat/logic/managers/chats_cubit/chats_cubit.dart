@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
@@ -37,18 +36,11 @@ class ChatsCubit extends Cubit<ChatsState> {
   }
 
   Future<void> deleteAllChats() async {
-    await _safeExcute(action: () => supabaseDatabaseService.deleteAllChats());
-  }
-
-  Future<void> deleteChatMessages(String chatId) async {
     await _safeExcute(
-      action: () => supabaseDatabaseService.deleteChatMessages(chatId),
-    );
-  }
-
-  Future<void> deleteAllMessages() async {
-    await _safeExcute(
-      action: () => supabaseDatabaseService.deleteAllMessages(),
+      action:
+          () => supabaseDatabaseService.deleteAllChats(
+            userId: supabeAuthService.currentUser?.id ?? dummyUserId,
+          ),
     );
   }
 

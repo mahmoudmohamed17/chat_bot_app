@@ -16,8 +16,8 @@ class NewConversationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: getIt.get<TopicsCubit>()),
         BlocProvider(create: (context) => getIt.get<MessagesCubit>()),
+        BlocProvider.value(value: getIt.get<TopicsCubit>()),
       ],
       child: Scaffold(
         appBar: customAppBar(context, title: AppStrings.appName),
