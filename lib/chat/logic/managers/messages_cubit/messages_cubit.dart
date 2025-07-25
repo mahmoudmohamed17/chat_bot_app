@@ -47,8 +47,10 @@ class MessagesCubit extends Cubit<MessagesState> {
     Future<void> Function({String? chatId, String? title})? createTopic,
   }) async {
     emit(MessagesLoading());
+    var apiResponse = [];
     try {
       final response = await geminiService.askGemini(prompt: currentMessage!);
+      apiResponse = response;
       await supabaseDatabaseService.addMessage(
         chatId: currentChatId!,
         message: response[0],
@@ -60,7 +62,9 @@ class MessagesCubit extends Cubit<MessagesState> {
       }
       emit(MessagesSuccess());
     } catch (e) {
-      log('Error getting bot response: ${e.toString()}');
+      log(
+        'Error getting bot response: ${e.toString()}\nApi Response: $apiResponse',
+      );
       emit(MessagesFailed());
     }
   }
