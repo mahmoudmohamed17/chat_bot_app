@@ -1,8 +1,9 @@
-import 'package:chat_bot_app/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
+import 'package:chat_bot_app/core/widgets/custom_text_field.dart';
+import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,46 +38,54 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
   Widget build(BuildContext context) {
     final messagesCubit = context.read<MessagesCubit>();
     final topicsCubit = context.read<TopicsCubit>();
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        spacing: 8,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: CustomTextFormField(
-                hintText: AppStrings.sendMessage,
-                controller: controller,
-                onFieldSubmitted: (value) async {
+    return BlocBuilder<ModeCubit, bool>(
+      builder: (context, state) {
+        return Container(
+          color:
+              context.read<ModeCubit>().state
+                  ? AppColors.darkModeGeneralColor
+                  : Colors.white,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: 8,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: CustomTextField(
+                    hintText: AppStrings.sendMessage,
+                    controller: controller,
+                    onSubmitted: (v) async {
+                      if (controller.text.isEmpty) return;
+                      await execute(messagesCubit, topicsCubit);
+                    },
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (controller.text.isEmpty) return;
                   await execute(messagesCubit, topicsCubit);
                 },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                  backgroundColor:
+                      controller.text.isEmpty
+                          ? AppColors.primaryExtraLight
+                          : AppColors.primary,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  shape: const CircleBorder(),
+                  iconColor: Colors.white,
+                ),
+                child: const Icon(FontAwesomeIcons.solidPaperPlane),
               ),
-            ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () async {
-              if (controller.text.isEmpty) return;
-              await execute(messagesCubit, topicsCubit);
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(16),
-              backgroundColor:
-                  controller.text.isEmpty
-                      ? AppColors.primaryExtraLight
-                      : AppColors.primary,
-              shadowColor: Colors.transparent,
-              elevation: 0,
-              shape: const CircleBorder(),
-              iconColor: Colors.white,
-            ),
-            child: const Icon(FontAwesomeIcons.solidPaperPlane),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -84,11 +93,13 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
     MessagesCubit messagesCubit,
     TopicsCubit topicsCubit,
   ) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.clear();
+    });
     await messagesCubit.sendMessage(
       chatId: widget.chatId,
       message: controller.text,
     );
-    controller.clear();
     await messagesCubit.getBotResponse(createTopic: topicsCubit.createTopic);
   }
 }

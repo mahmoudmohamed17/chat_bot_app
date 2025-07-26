@@ -42,7 +42,6 @@ Future<dynamic> showConfirmDeletionDialog(
             return ModalProgressHUD(
               inAsyncCall: state is TopicsLoading,
               child: Dialog(
-                backgroundColor: Colors.white,
                 elevation: 5,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -51,7 +50,6 @@ Future<dynamic> showConfirmDeletionDialog(
                   ),
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(

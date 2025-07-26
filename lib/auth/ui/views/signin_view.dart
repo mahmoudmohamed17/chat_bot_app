@@ -58,7 +58,6 @@ class _SigninViewState extends State<SigninView> {
             isLoading: state is AuthLoading || state is GoogleAuthLoading,
             dialogBody: const LoadingDialogBody(),
             child: Scaffold(
-              backgroundColor: Colors.white,
               appBar: customAppBar(context),
               body: SigninViewBody(
                 emailController: emailController,

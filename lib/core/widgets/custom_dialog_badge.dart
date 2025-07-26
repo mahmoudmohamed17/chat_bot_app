@@ -15,7 +15,7 @@ class CustomDialogBadge extends StatelessWidget {
         ),
       ),
       padding: const EdgeInsets.all(18),
-      child: Icon(icon, size: 32, color: Colors.white),
+      child: Icon(icon, size: 32),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/profile/logic/funcs/build_settings_items.dart';
 import 'package:chat_bot_app/profile/ui/widgets/language_settings_item.dart';
+import 'package:chat_bot_app/profile/ui/widgets/logout_settings_item.dart';
 import 'package:chat_bot_app/profile/ui/widgets/mode_setting_item.dart';
 import 'package:chat_bot_app/profile/ui/widgets/profile_view_app_bar.dart';
 import 'package:chat_bot_app/profile/ui/widgets/settings_item.dart';
@@ -47,6 +48,7 @@ class ProfileView extends StatelessWidget {
                       );
                     }),
                   ),
+                  const LogoutSettingsItem(),
                 ],
               ),
             ],

@@ -12,16 +12,12 @@ Future<dynamic> showCustomDialog(BuildContext context) {
     context: context,
     builder: (contex) {
       return Dialog(
-        backgroundColor: Colors.white,
         elevation: 5,
         insetAnimationDuration: const Duration(milliseconds: 500),
         child: Container(
           padding: const EdgeInsets.all(24),
           margin: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             spacing: 16,

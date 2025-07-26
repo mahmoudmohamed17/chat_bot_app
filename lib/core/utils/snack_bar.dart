@@ -6,10 +6,7 @@ snackBar(BuildContext context, {required String title, int timeInSeconds = 4}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       duration: Duration(seconds: timeInSeconds),
-      content: Text(
-        context.tr(title),
-        style: AppTextStyles.regular16.copyWith(color: Colors.white),
-      ),
+      content: Text(context.tr(title), style: AppTextStyles.regular16),
     ),
   );
 }

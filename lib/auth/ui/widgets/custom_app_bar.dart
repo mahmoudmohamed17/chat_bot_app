@@ -12,7 +12,7 @@ AppBar customAppBar(BuildContext context, {String? title}) {
       onPressed: () {
         context.pop();
       },
-      icon: const Icon(FontAwesomeIcons.arrowLeftLong, color: Colors.black),
+      icon: const Icon(FontAwesomeIcons.arrowLeftLong),
     ),
     forceMaterialTransparency: true,
   );

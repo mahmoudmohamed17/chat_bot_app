@@ -1,26 +1,28 @@
-import 'package:chat_bot_app/core/constants/app_constants.dart';
+import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
-import 'package:chat_bot_app/core/utils/shared_prefs.dart';
+import 'package:chat_bot_app/profile/logic/funcs/signout_confirm_dialog.dart';
 import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
-import 'package:chat_bot_app/profile/logic/models/settings_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SettingsItem extends StatelessWidget {
-  const SettingsItem({super.key, required this.model});
-  final SettingsModel model;
+class LogoutSettingsItem extends StatelessWidget {
+  const LogoutSettingsItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: model.onTap,
+      onTap: () async {
+        await signoutConfirmDialog(context);
+      },
       child: BlocBuilder<ModeCubit, bool>(
         builder: (context, state) {
+          final cubit = context.read<ModeCubit>();
           return Container(
             decoration: BoxDecoration(
               color:
-                  context.read<ModeCubit>().state
+                  cubit.state
                       ? AppColors.darkModeGeneralColor
                       : AppColors.container,
               borderRadius: BorderRadius.circular(16),
@@ -30,19 +32,13 @@ class SettingsItem extends StatelessWidget {
               spacing: 12,
               children: [
                 Icon(
-                  model.icon,
-                  color:
-                      SharedPrefs.getBool(isDarkMode)
-                          ? Colors.white
-                          : Colors.black,
+                  FontAwesomeIcons.rightFromBracket,
+                  color: cubit.state ? null : Colors.red,
                 ),
                 Text(
-                  model.title,
+                  AppStrings.logout,
                   style: AppTextStyles.semiBold16.copyWith(
-                    color:
-                        SharedPrefs.getBool(isDarkMode)
-                            ? Colors.white
-                            : Colors.black,
+                    color: cubit.state ? null : Colors.red,
                   ),
                 ),
               ],

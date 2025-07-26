@@ -31,21 +31,13 @@ class HistoryViewAppBar extends StatelessWidget {
                 onPressed: () {
                   log('Chat id: ${context.read<ChatsCubit>().currentChatId}');
                 },
-                icon: const Icon(
-                  FontAwesomeIcons.magnifyingGlass,
-                  color: Colors.black,
-                  size: 18,
-                ),
+                icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 18),
               ),
               IconButton(
                 onPressed: () {
                   showConfirmDeletionDialog(context, isDeletingAll: true);
                 },
-                icon: const Icon(
-                  FontAwesomeIcons.trashCan,
-                  color: Colors.black,
-                  size: 18,
-                ),
+                icon: const Icon(FontAwesomeIcons.trashCan, size: 18),
               ),
             ],
           ),

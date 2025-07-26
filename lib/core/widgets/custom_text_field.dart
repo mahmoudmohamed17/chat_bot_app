@@ -5,52 +5,33 @@ import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     required this.hintText,
-    this.onFieldSubmitted,
-    this.onChanged,
-    this.textInputType = TextInputType.text,
-    this.controller,
+    this.onSubmitted,
+    required this.controller,
   });
   final String hintText;
-  final void Function(String)? onFieldSubmitted;
-  final void Function(String)? onChanged;
-  final TextInputType? textInputType;
-  final TextEditingController? controller;
+  final void Function(String)? onSubmitted;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ModeCubit, bool>(
       builder: (context, state) {
-        return TextFormField(
+        return TextField(
           controller: controller,
           style: AppTextStyles.regular16,
-          onFieldSubmitted: onFieldSubmitted,
-          onChanged: onChanged,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return '$hintText is required';
-            } else {
-              return null;
-            }
-          },
+          onSubmitted: onSubmitted,
           textInputAction: TextInputAction.send,
-          minLines: 1,
-          maxLines: 10,
-          keyboardType: textInputType,
+          maxLines: null,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: AppTextStyles.regular16.copyWith(
-              color:
-                  context.read<ModeCubit>().state
-                      ? null
-                      : AppColors.textContainer,
-            ),
+            hintStyle: AppTextStyles.regular16,
             fillColor:
                 context.read<ModeCubit>().state
-                    ? AppColors.darkModeGeneralColor
+                    ? AppColors.darkModeSecondaryColor
                     : AppColors.container,
             contentPadding: const EdgeInsets.all(16),
             filled: true,

@@ -16,7 +16,10 @@ class ModeSettignsItem extends StatelessWidget {
         var cubit = context.read<ModeCubit>();
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.container,
+            color:
+                cubit.state
+                    ? AppColors.darkModeGeneralColor
+                    : AppColors.container,
             borderRadius: BorderRadius.circular(16),
           ),
           padding: const EdgeInsets.all(4),
@@ -29,12 +32,10 @@ class ModeSettignsItem extends StatelessWidget {
                   spacing: 12,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(FontAwesomeIcons.eye, color: Colors.black),
+                    const Icon(FontAwesomeIcons.eye),
                     Text(
                       cubit.state ? AppStrings.darkMode : AppStrings.lightMode,
-                      style: AppTextStyles.semiBold16.copyWith(
-                        color: Colors.black,
-                      ),
+                      style: AppTextStyles.semiBold16.copyWith(),
                     ),
                   ],
                 ),

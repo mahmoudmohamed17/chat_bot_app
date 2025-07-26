@@ -37,13 +37,11 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
             return ModalProgressHUD(
               inAsyncCall: state is AuthLoading,
               child: Dialog(
-                backgroundColor: Colors.white,
                 elevation: 5,
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(

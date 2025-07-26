@@ -9,6 +9,7 @@ import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/history/ui/views/history_view.dart';
+import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:chat_bot_app/profile/ui/views/profile_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -52,52 +53,59 @@ class _MainViewState extends State<MainView> {
         ],
         child: IndexedStack(index: _activeIndex, children: _screens),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _activeIndex,
-        onDestinationSelected: (index) {
-          setState(() {
-            _activeIndex = index;
-          });
+      bottomNavigationBar: BlocBuilder<ModeCubit, bool>(
+        builder: (context, state) {
+          return NavigationBar(
+            selectedIndex: _activeIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                _activeIndex = index;
+              });
+            },
+            backgroundColor:
+                context.read<ModeCubit>().state
+                    ? AppColors.darkModeGeneralColor
+                    : Colors.white,
+            indicatorColor: Colors.blue[80],
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+            elevation: 5,
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(
+                  FontAwesomeIcons.solidComments,
+                  color: AppColors.primaryExtraLight,
+                ),
+                selectedIcon: const Icon(
+                  FontAwesomeIcons.solidComments,
+                  color: AppColors.primary,
+                ),
+                label: context.tr(LocalizationKeys.chat),
+              ),
+              NavigationDestination(
+                icon: const Icon(
+                  FontAwesomeIcons.solidFolder,
+                  color: AppColors.primaryExtraLight,
+                ),
+                selectedIcon: const Icon(
+                  FontAwesomeIcons.solidFolder,
+                  color: AppColors.primary,
+                ),
+                label: context.tr(LocalizationKeys.myTopics),
+              ),
+              NavigationDestination(
+                icon: const Icon(
+                  FontAwesomeIcons.solidUser,
+                  color: AppColors.primaryExtraLight,
+                ),
+                selectedIcon: const Icon(
+                  FontAwesomeIcons.solidUser,
+                  color: AppColors.primary,
+                ),
+                label: context.tr(LocalizationKeys.myProfile),
+              ),
+            ],
+          );
         },
-        backgroundColor: Colors.white,
-        indicatorColor: Colors.blue[80],
-        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-        elevation: 5,
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(
-              FontAwesomeIcons.solidComments,
-              color: AppColors.primaryExtraLight,
-            ),
-            selectedIcon: const Icon(
-              FontAwesomeIcons.solidComments,
-              color: AppColors.primary,
-            ),
-            label: context.tr(LocalizationKeys.chat),
-          ),
-          NavigationDestination(
-            icon: const Icon(
-              FontAwesomeIcons.solidFolder,
-              color: AppColors.primaryExtraLight,
-            ),
-            selectedIcon: const Icon(
-              FontAwesomeIcons.solidFolder,
-              color: AppColors.primary,
-            ),
-            label: context.tr(LocalizationKeys.myTopics),
-          ),
-          NavigationDestination(
-            icon: const Icon(
-              FontAwesomeIcons.solidUser,
-              color: AppColors.primaryExtraLight,
-            ),
-            selectedIcon: const Icon(
-              FontAwesomeIcons.solidUser,
-              color: AppColors.primary,
-            ),
-            label: context.tr(LocalizationKeys.myProfile),
-          ),
-        ],
       ),
     );
   }

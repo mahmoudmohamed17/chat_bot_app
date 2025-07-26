@@ -8,4 +8,6 @@ class AppColors {
   static const Color container = Color(0xFFF3F3F3);
   static const Color textContainer = Color(0xFFB6B2C1);
   static const Color itemButtonAction = Color(0xFFDA385B);
+  static const Color darkModeGeneralColor = Color(0xff3A4249);
+  static const Color darkModeSecondaryColor = Color.fromARGB(255, 87, 99, 109);
 }

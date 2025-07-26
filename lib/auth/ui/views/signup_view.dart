@@ -61,7 +61,6 @@ class _SignupViewState extends State<SignupView> {
           return ModalProgressHUD(
             inAsyncCall: state is AuthLoading || state is GoogleAuthLoading,
             child: Scaffold(
-              backgroundColor: Colors.white,
               appBar: customAppBar(context),
               body: SignupViewBody(
                 emailController: emailController,
