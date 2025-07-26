@@ -1,11 +1,12 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/history/ui/widgets/changing_empty_topics_picture.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,13 +35,13 @@ class EmptyHistoryViewWidget extends StatelessWidget {
           spacing: 12,
           children: [
             const ChangingEmptyTopicsPicture(),
-            const Text(
-              AppStrings.historyIsEmpty,
+            Text(
+              context.tr(LocalizationKeys.historyIsEmpty),
               style: AppTextStyles.bold18,
               textAlign: TextAlign.center,
             ),
-            const Text(
-              AppStrings.historyIsEmptyHint,
+            Text(
+              context.tr(LocalizationKeys.historyIsEmptyHint),
               style: AppTextStyles.regular16,
               textAlign: TextAlign.center,
             ),
@@ -48,7 +49,7 @@ class EmptyHistoryViewWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: CustomButton(
-                label: 'Start chat',
+                label: context.tr(LocalizationKeys.startChat),
                 backgroundColor: AppColors.primary,
                 labelColor: Colors.white,
                 onPressed: () async {

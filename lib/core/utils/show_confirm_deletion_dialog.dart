@@ -1,6 +1,6 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
@@ -8,6 +8,7 @@ import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -59,13 +60,13 @@ Future<dynamic> showConfirmDeletionDialog(
                       const CustomDialogBadge(
                         icon: FontAwesomeIcons.circleQuestion,
                       ),
-                      const Text(
-                        AppStrings.areYouSureToDelete,
+                      Text(
+                        context.tr(LocalizationKeys.areYouSureToDelete),
                         textAlign: TextAlign.center,
                         style: AppTextStyles.bold16,
                       ),
                       Text(
-                        AppStrings.areYouSureToDeleteHint,
+                        context.tr(LocalizationKeys.areYouSureToDeleteHint),
                         textAlign: TextAlign.center,
                         style: AppTextStyles.semiBold14.copyWith(
                           color: AppColors.textContainer,
@@ -77,7 +78,7 @@ Future<dynamic> showConfirmDeletionDialog(
                         children: [
                           Expanded(
                             child: CustomButton(
-                              label: AppStrings.close,
+                              label: context.tr(LocalizationKeys.close),
                               backgroundColor: Colors.white,
                               labelColor: Colors.black,
                               onPressed: () {
@@ -87,7 +88,7 @@ Future<dynamic> showConfirmDeletionDialog(
                           ),
                           Expanded(
                             child: CustomButton(
-                              label: AppStrings.delete,
+                              label: context.tr(LocalizationKeys.delete),
                               backgroundColor: AppColors.primary,
                               labelColor: Colors.white,
                               onPressed: () async {

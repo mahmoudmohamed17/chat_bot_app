@@ -19,10 +19,7 @@ class SelectLanguageItem extends StatelessWidget {
           text,
           style: isActive ? AppTextStyles.bold16 : AppTextStyles.regular16,
         ),
-        Visibility(
-          visible: isActive,
-          child: const Icon(Icons.check, color: Colors.black),
-        ),
+        Visibility(visible: isActive, child: const Icon(Icons.check)),
       ],
     );
   }

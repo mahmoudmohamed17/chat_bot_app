@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
   final Color? backgroundColor;
   final Color? labelColor;
-  
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         elevation: 1,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
       ),
       child: Text(
         label,

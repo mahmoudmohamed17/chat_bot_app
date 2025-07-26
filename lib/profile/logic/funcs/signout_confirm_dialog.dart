@@ -1,6 +1,6 @@
 import 'package:chat_bot_app/auth/logic/managers/cubit/auth_cubit.dart';
 import 'package:chat_bot_app/core/constants/app_constants.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
@@ -9,6 +9,7 @@ import 'package:chat_bot_app/core/utils/shared_prefs.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
 import 'package:chat_bot_app/core/widgets/custom_dialog_badge.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -49,8 +50,8 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
                     spacing: 16,
                     children: [
                       const CustomDialogBadge(icon: Icons.error_outline),
-                      const Text(
-                        AppStrings.areYouSureToSignout,
+                      Text(
+                        context.tr(LocalizationKeys.areYouSureToSignout),
                         textAlign: TextAlign.center,
                         style: AppTextStyles.bold16,
                       ),
@@ -60,7 +61,7 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
                         children: [
                           Expanded(
                             child: CustomButton(
-                              label: AppStrings.cancel,
+                              label: context.tr(LocalizationKeys.cancel),
                               backgroundColor: Colors.white,
                               labelColor: Colors.black,
                               onPressed: () {
@@ -70,7 +71,7 @@ Future<dynamic> signoutConfirmDialog(BuildContext context) {
                           ),
                           Expanded(
                             child: CustomButton(
-                              label: AppStrings.signOut,
+                              label: context.tr(LocalizationKeys.signOut),
                               backgroundColor: AppColors.primary,
                               labelColor: Colors.white,
                               onPressed: () {

@@ -1,12 +1,13 @@
 import 'package:chat_bot_app/chat/logic/managers/chats_cubit/chats_cubit.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/assets.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/snack_bar.dart';
 import 'package:chat_bot_app/core/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -39,13 +40,13 @@ class ChatIntroView extends StatelessWidget {
                 const SizedBox(height: 48),
                 const Spacer(),
                 Image.asset(Assets.imagesAppLogo, scale: 3),
-                const Text(
-                  AppStrings.appName,
+                Text(
+                  context.tr(LocalizationKeys.appName),
                   style: AppTextStyles.bold24,
                   textAlign: TextAlign.center,
                 ),
-                const Text(
-                  AppStrings.startChatHint,
+                Text(
+                  context.tr(LocalizationKeys.startChatHint),
                   style: AppTextStyles.regular18,
                   textAlign: TextAlign.center,
                 ),
@@ -53,7 +54,7 @@ class ChatIntroView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: CustomButton(
-                    label: AppStrings.startChat,
+                    label: context.tr(LocalizationKeys.startChat),
                     backgroundColor: AppColors.primary,
                     labelColor: Colors.white,
                     onPressed: () async {

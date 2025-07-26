@@ -3,8 +3,9 @@ import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.d
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/chat/ui/widgets/messages_list.dart';
 import 'package:chat_bot_app/chat/ui/widgets/send_message_text_box_widget.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,10 @@ class NewConversationView extends StatelessWidget {
         BlocProvider.value(value: getIt.get<TopicsCubit>()),
       ],
       child: Scaffold(
-        appBar: customAppBar(context, title: AppStrings.appName),
+        appBar: customAppBar(
+          context,
+          title: context.tr(LocalizationKeys.appName),
+        ),
         body: Column(
           children: [
             Expanded(child: MessagesList(chatId: chatId)),

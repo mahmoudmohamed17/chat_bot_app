@@ -1,9 +1,10 @@
 import 'package:chat_bot_app/chat/logic/managers/messages_cubit/messages_cubit.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
+import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/widgets/custom_text_field.dart';
 import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -55,7 +56,7 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: CustomTextField(
-                    hintText: AppStrings.sendMessage,
+                    hintText: context.tr(LocalizationKeys.sendMessage),
                     controller: controller,
                     onSubmitted: (v) async {
                       if (controller.text.isEmpty) return;

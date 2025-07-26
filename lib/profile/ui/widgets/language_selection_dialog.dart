@@ -1,5 +1,4 @@
 import 'package:chat_bot_app/core/constants/app_constants.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/utils/shared_prefs.dart';
@@ -19,7 +18,10 @@ class LanguageSelectionDialog extends StatefulWidget {
       _LanguageSelectionDialogState();
 }
 
-final List<String> translations = [AppStrings.english, AppStrings.arabic];
+final List<String> translations = [
+  LocalizationKeys.english,
+  LocalizationKeys.arabic,
+];
 
 class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
   int _activeIndex = SharedPrefs.getInt(selectedLangIndex);
@@ -41,7 +43,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                   });
                 },
                 child: SelectLanguageItem(
-                  text: translations[index],
+                  text: context.tr(translations[index]),
                   isActive: _activeIndex == index,
                 ),
               );
@@ -75,7 +77,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                     SharedPrefs.setInt(selectedLangIndex, _activeIndex);
                     widget.onClose?.call(true);
                     final local = translations[_activeIndex];
-                    if (local == AppStrings.english) {
+                    if (local == 'english') {
                       widget.langSelected?.call(LocalizationKeys.english);
                       context.setLocale(const Locale(LocalizationKeys.en));
                     } else {

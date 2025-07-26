@@ -56,7 +56,6 @@ class _LanguageSettignsItemState extends State<LanguageSettignsItem> {
                   });
                   showModalBottomSheet(
                     context: context,
-                    isDismissible: false,
                     builder: (context) {
                       return LanguageSelectionDialog(
                         onClose: (value) {
