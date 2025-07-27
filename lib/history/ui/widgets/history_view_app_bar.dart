@@ -2,12 +2,15 @@ import 'package:chat_bot_app/core/constants/assets.dart';
 import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/core/utils/show_confirm_deletion_dialog.dart';
+import 'package:chat_bot_app/history/logic/models/topic_model.dart';
+import 'package:chat_bot_app/history/ui/widgets/custom_search_delegate.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HistoryViewAppBar extends StatelessWidget {
-  const HistoryViewAppBar({super.key});
+  const HistoryViewAppBar({super.key, required this.topics});
+  final List<TopicModel> topics;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,10 @@ class HistoryViewAppBar extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(topics: topics),
+                  );
                 },
                 icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 18),
               ),

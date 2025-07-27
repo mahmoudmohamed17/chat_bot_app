@@ -60,6 +60,7 @@ class _SendMessageTextBoxWidgetState extends State<SendMessageTextBoxWidget> {
                     controller: controller,
                     onSubmitted: (v) async {
                       if (controller.text.isEmpty) return;
+                      FocusScope.of(context).unfocus();
                       await execute(messagesCubit, topicsCubit);
                     },
                   ),

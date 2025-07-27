@@ -22,7 +22,9 @@ class HistoryView extends StatelessWidget {
           return SafeArea(
             child: Column(
               children: [
-                const HistoryViewAppBar(),
+                HistoryViewAppBar(
+                  topics: state is TopicsSuccess ? state.topics : [],
+                ),
                 if (state is TopicsEmpty) ...[
                   const Spacer(),
                   const Padding(
