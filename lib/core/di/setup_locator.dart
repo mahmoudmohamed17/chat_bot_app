@@ -36,6 +36,30 @@ void setupLocator() {
   getIt.registerFactory<MessagesCubit>(
     () => MessagesCubit(getIt(), getIt(), getIt()),
   );
+
   getIt.registerLazySingleton<ChatsCubit>(() => ChatsCubit(getIt(), getIt()));
   getIt.registerLazySingleton<TopicsCubit>(() => TopicsCubit(getIt(), getIt()));
+}
+
+void registerMessageCubitForChat(String chatId) {
+  if (!getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
+    getIt.registerLazySingleton(() => MessagesCubit(getIt(), getIt(), getIt()));
+  }
+}
+
+MessagesCubit getMessageCubitForChat(String chatId) {
+  if (getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
+    return getIt<MessagesCubit>(instanceName: chatId);
+  }
+  getIt.registerLazySingleton<MessagesCubit>(
+    () => MessagesCubit(getIt(), getIt(), getIt()),
+    instanceName: chatId,
+  );
+  return getIt<MessagesCubit>(instanceName: chatId);
+}
+
+void disposeMessageCubirForChat(String chatId) {
+  if (getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
+    getIt.unregister<MessagesCubit>(instanceName: chatId);
+  }
 }
