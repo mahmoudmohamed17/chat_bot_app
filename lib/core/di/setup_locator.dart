@@ -47,15 +47,17 @@ void registerMessageCubitForChat(String chatId) {
   }
 }
 
-MessagesCubit getMessageCubitForChat(String chatId) {
+Future<MessagesCubit> getMessageCubitForChat(String chatId) async {
   if (getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
     return getIt<MessagesCubit>(instanceName: chatId);
   }
+  final cubit = MessagesCubit(getIt(), getIt(), getIt());
+  await cubit.initializeForChat(chatId);
   getIt.registerLazySingleton<MessagesCubit>(
-    () => MessagesCubit(getIt(), getIt(), getIt()),
+    () => cubit,
     instanceName: chatId,
   );
-  return getIt<MessagesCubit>(instanceName: chatId);
+  return cubit;
 }
 
 void disposeMessageCubirForChat(String chatId) {

@@ -6,6 +6,7 @@ import 'package:chat_bot_app/core/constants/dummy.dart';
 import 'package:chat_bot_app/core/services/supabase_auth_service.dart';
 import 'package:chat_bot_app/core/services/supabase_database_service.dart';
 import 'package:equatable/equatable.dart';
+
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
@@ -24,6 +25,26 @@ class MessagesCubit extends Cubit<MessagesState> {
   String? currentChatId;
   String? currentMessage;
 
+  // Initialize the cubit for a specific chat
+  Future<void> initializeForChat(String chatId) async {
+    try {
+      currentChatId = chatId;
+
+      // Check if this chat already has messages
+      final hasMessages = await supabaseDatabaseService.chatHasMessages(chatId);
+      isFirstMessageSent = hasMessages;
+
+      // Check if this chat already has a topic
+      final hasTopic = await supabaseDatabaseService.chatHasTopic(chatId);
+      isTopicCreated = hasTopic;
+    } catch (e) {
+      log('Error initializing chat: ${e.toString()}');
+      // Fallback to default values
+      isFirstMessageSent = false;
+      isTopicCreated = false;
+    }
+  }
+
   Future<void> sendMessage({required String chatId, String? message}) async {
     try {
       await supabaseDatabaseService.addMessage(
@@ -32,6 +53,7 @@ class MessagesCubit extends Cubit<MessagesState> {
         sender: AppStrings.user,
         userId: supabaseAuthService.currentUser?.id ?? dummyUserId,
       );
+
       if (!isFirstMessageSent) {
         currentChatId = chatId;
         isFirstMessageSent = true;
@@ -57,6 +79,7 @@ class MessagesCubit extends Cubit<MessagesState> {
         message: response[0],
         sender: AppStrings.bot,
       );
+
       if (!isTopicCreated) {
         await createTopic?.call(chatId: currentChatId, title: response[1]);
         isTopicCreated = true;
@@ -68,5 +91,13 @@ class MessagesCubit extends Cubit<MessagesState> {
       );
       emit(MessagesFailed());
     }
+  }
+
+  // Reset the cubit state (call this when switching to a different chat)
+  void reset() {
+    isFirstMessageSent = false;
+    isTopicCreated = false;
+    currentChatId = null;
+    currentMessage = null;
   }
 }

@@ -52,6 +52,32 @@ class SupabaseDatabaseService {
     await _client.from(chatsTable).delete().neq('for_user', userId);
   }
 
+  Future<bool> chatHasMessages(String chatId) async {
+    try {
+      final response = await _client
+          .from(messagesTable)
+          .select()
+          .eq('for_chat', chatId)
+          .limit(1);
+      return response.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> chatHasTopic(String chatId) async {
+    try {
+      final response = await _client
+          .from(topicsTable) // Replace with your actual topics table name
+          .select()
+          .eq('for_chat', chatId)
+          .limit(1);
+      return response.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> addMessage({
     required String chatId,
     String? message,
