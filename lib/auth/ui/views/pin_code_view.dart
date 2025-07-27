@@ -36,44 +36,46 @@ class PinCodeView extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: customAppBar(context),
-                body: ListView(
+                body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        context.tr(AppStrings.setYourPINCode),
-                        style: AppTextStyles.bold28,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          context.tr(AppStrings.setYourPINCode),
+                          style: AppTextStyles.bold28,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        context.tr(AppStrings.setYourPINCodeHint),
-                        style: AppTextStyles.regular16,
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          context.tr(AppStrings.setYourPINCodeHint),
+                          style: AppTextStyles.regular16,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    CustomOtpAndPinWidget(
-                      onCompleted: (code) {},
-                      length: 4,
-                      isForPIN: true,
-                    ),
-                    const Expanded(child: SizedBox(height: 470)),
-                    SizedBox(
-                      width: double.infinity,
-                      child: CustomButton(
-                        label: context.tr(AppStrings.confirm),
-                        backgroundColor: AppColors.primary,
-                        labelColor: Colors.white,
-                        onPressed: () async {
-                          await cubit.getUser();
-                        },
+                      const SizedBox(height: 24),
+                      CustomOtpAndPinWidget(
+                        onCompleted: (code) {},
+                        length: 4,
+                        isForPIN: true,
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
+                      const Spacer(),
+                      SizedBox(
+                        width: double.infinity,
+                        child: CustomButton(
+                          label: context.tr(AppStrings.confirm),
+                          backgroundColor: AppColors.primary,
+                          labelColor: Colors.white,
+                          onPressed: () async {
+                            await cubit.getUser();
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 38),
+                    ],
+                  ),
                 ),
               ),
             );

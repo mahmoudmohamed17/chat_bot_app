@@ -1,6 +1,6 @@
-import 'package:chat_bot_app/auth/ui/widgets/custom_password_form_field.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
+import 'package:chat_bot_app/core/widgets/build_border.dart';
 import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,15 +43,9 @@ class CustomTextFormField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: AppTextStyles.regular16.copyWith(
-              color:
-                  context.read<ModeCubit>().state
-                      ? null
-                      : AppColors.textContainer,
+              color: state ? null : AppColors.textContainer,
             ),
-            fillColor:
-                context.read<ModeCubit>().state
-                    ? AppColors.darkModeGeneralColor
-                    : AppColors.container,
+            fillColor: AppColors.container,
             contentPadding: const EdgeInsets.all(16),
             filled: true,
             enabledBorder: buildBorder(),

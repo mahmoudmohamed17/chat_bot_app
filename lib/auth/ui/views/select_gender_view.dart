@@ -57,41 +57,46 @@ class _SelectGenderViewState extends State<SelectGenderView> {
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: customAppBar(context),
-              body: ListView(
+              body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      context.tr(AppStrings.yourGender),
-                      style: AppTextStyles.bold28,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        context.tr(AppStrings.yourGender),
+                        style: AppTextStyles.bold28,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      context.tr(AppStrings.yourGenderHint),
-                      style: AppTextStyles.regular16,
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        context.tr(AppStrings.yourGenderHint),
+                        style: AppTextStyles.regular16,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  GenderSelectionWidget(
-                    onSelectedGender: (gender) {
-                      cubit.gender = gender;
-                    },
-                  ),
-                  const Expanded(child: SizedBox(height: 350)),
-                  CustomButton(
-                    label: context.tr(AppStrings.next),
-                    backgroundColor: AppColors.primary,
-                    labelColor: Colors.white,
-                    onPressed: () {
-                      cubit.addUser();
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                ],
+                    const SizedBox(height: 24),
+                    GenderSelectionWidget(
+                      onSelectedGender: (gender) {
+                        cubit.gender = gender;
+                      },
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        label: context.tr(AppStrings.next),
+                        backgroundColor: AppColors.primary,
+                        labelColor: Colors.white,
+                        onPressed: () {
+                          cubit.addUser();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
           );

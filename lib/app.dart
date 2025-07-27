@@ -21,13 +21,12 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<ModeCubit, bool>(
         builder: (context, state) {
-          final modeCubit = context.read<ModeCubit>();
           return MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: ThemeData(
-              brightness: modeCubit.state ? Brightness.dark : Brightness.light,
+              brightness: state ? Brightness.dark : Brightness.light,
               useMaterial3: true,
             ),
             builder: (context, child) {

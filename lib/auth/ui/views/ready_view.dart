@@ -34,7 +34,6 @@ class _ReadyViewState extends State<ReadyView> {
       blastDirectionality: BlastDirectionality.explosive,
       maxBlastForce: 15,
       emissionFrequency: 0.6,
-      numberOfParticles: 15,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(

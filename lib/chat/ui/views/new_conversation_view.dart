@@ -2,7 +2,6 @@ import 'package:chat_bot_app/auth/ui/widgets/custom_app_bar.dart';
 import 'package:chat_bot_app/chat/logic/managers/topics_cubit/topics_cubit.dart';
 import 'package:chat_bot_app/chat/ui/widgets/messages_list.dart';
 import 'package:chat_bot_app/chat/ui/widgets/send_message_text_box_widget.dart';
-import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';

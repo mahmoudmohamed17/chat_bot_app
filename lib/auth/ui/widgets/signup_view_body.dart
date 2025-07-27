@@ -96,7 +96,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               image: Assets.imagesApple,
               onPressed: () {},
             ),
-            SizedBox(height: context.height * 0.22),
+            SizedBox(height: context.height * 0.25),
             SizedBox(
               width: double.infinity,
               child: CustomButton(

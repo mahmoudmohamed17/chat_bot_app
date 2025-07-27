@@ -14,13 +14,9 @@ class ModeSettignsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ModeCubit, bool>(
       builder: (context, state) {
-        var cubit = context.read<ModeCubit>();
         return Container(
           decoration: BoxDecoration(
-            color:
-                cubit.state
-                    ? AppColors.darkModeGeneralColor
-                    : AppColors.container,
+            color: state ? AppColors.darkModeGeneralColor : AppColors.container,
             borderRadius: BorderRadius.circular(16),
           ),
           padding: const EdgeInsets.all(4),
@@ -35,7 +31,7 @@ class ModeSettignsItem extends StatelessWidget {
                   children: [
                     const Icon(FontAwesomeIcons.eye),
                     Text(
-                      cubit.state
+                      state
                           ? context.tr(LocalizationKeys.darkMode)
                           : context.tr(LocalizationKeys.lightMode),
                       style: AppTextStyles.semiBold16.copyWith(),
@@ -44,9 +40,9 @@ class ModeSettignsItem extends StatelessWidget {
                 ),
               ),
               Switch(
-                value: cubit.state,
+                value: state,
                 onChanged: (value) {
-                  cubit.toggleMode(value);
+                  context.read<ModeCubit>().toggleMode(value);
                 },
               ),
             ],

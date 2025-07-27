@@ -5,6 +5,7 @@ import 'package:chat_bot_app/auth/ui/widgets/setup_user_phone_number_widget.dart
 import 'package:chat_bot_app/auth/ui/widgets/setup_user_profile_image_widget.dart';
 import 'package:chat_bot_app/core/constants/app_strings.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/extensions/context_extension.dart';
 import 'package:chat_bot_app/core/managers/users_cubit/users_cubit.dart';
 import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
@@ -51,47 +52,56 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
             inAsyncCall: state is UsersLoading,
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: customAppBar(context, title: context.tr(AppStrings.personalInfo)),
-              body: ListView(
+              appBar: customAppBar(
+                context,
+                title: context.tr(AppStrings.personalInfo),
+              ),
+              body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                children: [
-                  SetupUserProfileImageWidget(
-                    onImagePicked: (image) {
-                      cubit.profilePicture = image;
-                    },
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: Column(
+                    children: [
+                      SetupUserProfileImageWidget(
+                        onImagePicked: (image) {
+                          cubit.profilePicture = image;
+                        },
+                      ),
+                      const SizedBox(height: 32),
+                      CustomTextFormField(
+                        hintText: context.tr(AppStrings.fullName),
+                        controller: nameController,
+                      ),
+                      const SizedBox(height: 12),
+                      SetupUserPhoneNumberWidget(
+                        onEditingFinished: (number) {
+                          cubit.phoneNumber = number;
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      CustomDateOfBirthWidget(
+                        onDateSelected: (date) {
+                          cubit.dateOfBirth = date;
+                        },
+                      ),
+                      SizedBox(height: context.height * 0.33),
+                      SizedBox(
+                        width: double.infinity,
+                        child: CustomButton(
+                          label: context.tr(AppStrings.next),
+                          backgroundColor: AppColors.primary,
+                          labelColor: Colors.white,
+                          onPressed: () async {
+                            cubit.fullName = nameController.text;
+                            await cubit.addUser();
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 48),
+                    ],
                   ),
-                  const SizedBox(height: 32),
-                  CustomTextFormField(
-                    hintText: context.tr(AppStrings.fullName),
-                    controller: nameController,
-                  ),
-                  const SizedBox(height: 12),
-                  SetupUserPhoneNumberWidget(
-                    onEditingFinished: (number) {
-                      cubit.phoneNumber = number;
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  CustomDateOfBirthWidget(
-                    onDateSelected: (date) {
-                      cubit.dateOfBirth = date;
-                    },
-                  ),
-                  const Expanded(child: SizedBox(height: 280)),
-                  SizedBox(
-                    width: double.infinity,
-                    child: CustomButton(
-                      label: context.tr(AppStrings.next),
-                      backgroundColor: AppColors.primary,
-                      labelColor: Colors.white,
-                      onPressed: () async {
-                        cubit.fullName = nameController.text;
-                        await cubit.addUser();
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                ],
+                ),
               ),
             ),
           );
