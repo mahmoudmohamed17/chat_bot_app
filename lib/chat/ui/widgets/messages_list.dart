@@ -122,10 +122,6 @@ class _MessagesListState extends State<MessagesList> {
               return _buildErrorState();
             }
 
-            // if (snapshot.connectionState == ConnectionState.waiting) {
-            //   return const Center(child: CircularProgressIndicator());
-            // }
-
             final messages = snapshot.data ?? [];
 
             if (messages.isEmpty && state is! MessagesLoading) {

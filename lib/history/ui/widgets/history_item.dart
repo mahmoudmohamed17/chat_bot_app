@@ -1,4 +1,6 @@
 import 'package:chat_bot_app/core/constants/dummy.dart';
+import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_colors.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:chat_bot_app/history/logic/models/topic_model.dart';
@@ -6,6 +8,7 @@ import 'package:chat_bot_app/profile/logic/managers/mode_cubit/mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class HistoryItem extends StatelessWidget {
   const HistoryItem({super.key, required this.model});
@@ -25,6 +28,10 @@ class HistoryItem extends StatelessWidget {
           ),
           child: ListTile(
             horizontalTitleGap: 32,
+            onTap: () {
+              getMessageCubitForChat(model.forChat!);
+              context.push(Routes.newConversationView, extra: model.forChat!);
+            },
             title: Text(
               model.title ?? dummyTopicTitle,
               overflow: TextOverflow.ellipsis,

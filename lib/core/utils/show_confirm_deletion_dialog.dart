@@ -40,10 +40,10 @@ Future<dynamic> showConfirmDeletionDialog(
           builder: (context, state) {
             final topicsCubit = context.read<TopicsCubit>();
             final chatsCubit = context.read<ChatsCubit>();
-            return Dialog(
-              elevation: 5,
-              child: ModalProgressHUD(
-                inAsyncCall: state is TopicsLoading,
+            return ModalProgressHUD(
+              inAsyncCall: state is TopicsLoading,
+              child: Dialog(
+                elevation: 5,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8,
