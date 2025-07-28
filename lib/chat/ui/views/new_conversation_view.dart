@@ -4,6 +4,7 @@ import 'package:chat_bot_app/chat/ui/widgets/messages_list.dart';
 import 'package:chat_bot_app/chat/ui/widgets/send_message_text_box_widget.dart';
 import 'package:chat_bot_app/core/constants/localization_keys.dart';
 import 'package:chat_bot_app/core/di/setup_locator.dart';
+import 'package:chat_bot_app/core/routing/routes.dart';
 import 'package:chat_bot_app/core/theme/app_text_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +43,18 @@ class NewConversationView extends StatelessWidget {
                 children: [
                   const Icon(Icons.error, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
-                  Text(
-                    'Error loading chat: ${snapshot.error}',
+                  const Text(
+                    'Error loading chat please try again.',
+                    style: AppTextStyles.regular18,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Go Back'),
+                    child: const Text(
+                      'Go Back',
+                      style: AppTextStyles.regular14,
+                    ),
                   ),
                 ],
               ),
@@ -84,7 +89,7 @@ class NewConversationView extends StatelessWidget {
               leading: IconButton(
                 onPressed: () {
                   snapshot.data!.reset();
-                  context.pop();
+                  context.go(Routes.mainView);
                 },
                 icon: const Icon(FontAwesomeIcons.arrowLeftLong),
               ),

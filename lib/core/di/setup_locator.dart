@@ -41,18 +41,11 @@ void setupLocator() {
   getIt.registerLazySingleton<TopicsCubit>(() => TopicsCubit(getIt(), getIt()));
 }
 
-void registerMessageCubitForChat(String chatId) {
-  if (!getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
-    getIt.registerLazySingleton(() => MessagesCubit(getIt(), getIt(), getIt()));
-  }
-}
-
 Future<MessagesCubit> getMessageCubitForChat(String chatId) async {
   if (getIt.isRegistered<MessagesCubit>(instanceName: chatId)) {
     return getIt<MessagesCubit>(instanceName: chatId);
   }
   final cubit = MessagesCubit(getIt(), getIt(), getIt());
-  await cubit.initializeForChat(chatId);
   getIt.registerLazySingleton<MessagesCubit>(
     () => cubit,
     instanceName: chatId,

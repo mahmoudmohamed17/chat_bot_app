@@ -72,12 +72,7 @@ class _MessagesListState extends State<MessagesList> {
   }
 
   Widget _buildErrorState() {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [CustomErrorCommentIcon()],
-      ),
-    );
+    return const CustomErrorCommentIcon();
   }
 
   Widget _buildMessageItem(Map<String, dynamic> message, int index) {
