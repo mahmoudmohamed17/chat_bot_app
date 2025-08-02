@@ -1,16 +1,15 @@
-# chat_bot_app
+# GemiChat (Chat Bot App)
 
-A new Flutter project.
+🧠 GemiChat – Chat with AI
+GemiChat is a chat app that uses Gemini AI to talk with you. You can ask it questions, get help, or just have a friendly chat anytime.
 
-## Getting Started
+## 📱 Screenshots
 
-This project is a starting point for a Flutter application.
+### 🏠 Onboarding
+![Home Screen](assets/demo/pic2.png)
 
-A few resources to get you started if this is your first Flutter project:
+### 🏠 Login
+![Home Screen](assets/demo/pic4.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 👤 Profile Screen
+![Profile Screen](assets/demo/pic8.png)
