@@ -6,9 +6,9 @@ GemiChat is a chat app that uses Gemini AI to talk with you. You can ask it ques
 ## 📱 Screenshots
 
 <p float="left">
-  <img src="assets/demo/pic2.png" width="300" />
-  <img src="assets/demo/pic4.png" width="300" />
-  <img src="assets/demo/pic8.png" width="300" />
+  <img src="assets/demo/pic2.png" width="240" />
+  <img src="assets/demo/pic4.png" width="240" />
+  <img src="assets/demo/pic8.png" width="240" />
 </p>
 
 <!-- ### 🏠 Onboarding
